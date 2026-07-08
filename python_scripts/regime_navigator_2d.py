@@ -35,6 +35,7 @@ import zarr
 import xarray as xr
 
 from utils import write_to_s3
+from smart_open import open as smart_open
 
 
 
@@ -194,11 +195,7 @@ if __name__ == "__main__":
     
     df_folds = pd.read_parquet('strategy/folds.parquet')
     
-    with open('sim_results/all_by_regime.joblib', 'rb') as fp:
-        df_by_regime = joblib.load(fp)['annualized_return']
-
-    s_max = df_by_regime.max(axis = 0).rename('max_annualized_return')
-    df_folds = pd.concat([df_folds.set_index('description'), s_max], axis = 1)
+ 
     
     df_train_folds = df_folds.loc[df_folds.fold_index.isin([1,2,3])]
     df_val_folds = df_folds.loc[df_folds.fold_index == 0]
@@ -208,13 +205,7 @@ if __name__ == "__main__":
     end_date = max(df_folds.end_date)
     agg_func = functools.partial(mean_annualized_return, start_date, end_date)
 
-    df_holdings = pd.read_parquet('sim_results/total_values_median_17_year.parquet')
-
     
-
-    regret_applyer = WeightedRegretApplyer(df_folds, agg_func, weighting_func_quantile, regret_col = 'max_annualized_return', sense =  'max')
-    result = regret_applyer(df_holdings.iloc[0])
-
   
 
     objective_functions_dict = {
@@ -231,7 +222,7 @@ if __name__ == "__main__":
             'mean': WeightedRegimeApplyer(df_val_folds, agg_func, weighted_mean)
         }
     }
-    df = apply_objectives(objective_functions_dict, df_holdings.iloc[0])
+   
 
     
     objective_sense = {'regret_quantile': 'min', 'mean_regret': 'min'}
@@ -252,11 +243,11 @@ if __name__ == "__main__":
     
     problem_args = get_rn_problem_params(
         periods,
-        momentum_file = "simulation_data/momentum.nc", 
-        quality_file = "simulation_data/quality.nc",
-        gic_file = "simulation_data/gic_data.nc",
-        macro_file = "simulation_data/macro_signals.parquet",
-        manifold_file = "sim_results/manifold_triple_threat.csv",
+        momentum_file = "s3://jdinvestment/simulation_data/momentum.nc", 
+        quality_file = "s3://jdinvestment/simulation_data/quality.nc",
+        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
+        macro_file = "s3://jdinvestment/simulation_data/macro_signals.parquet",
+        manifold_file = "s3://jdinvestment/sim_results/manifold_triple_threat.csv",
         output_folder = None,
         params = params,
         holdings = holdings

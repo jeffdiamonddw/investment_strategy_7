@@ -14,12 +14,9 @@ COPY . .
 ENV PYTHONPATH="/app"
 ENV PYTHONUNBUFFERED=1
 
-# 5. Optimization for high-core Graviton4 (Spot Instances)
-# Prevents libraries like OpenBLAS from creating too many threads
-ENV OMP_NUM_THREADS=1
-ENV OPENBLAS_NUM_THREADS=1
+
 
 RUN pip install psutil
 
 # 6. Execute your specific parallel dry run
-CMD ["python3", "python_scripts/manifold_dry_run_parallel.py"]
+CMD ["python3", "python_scripts/regime_navigator_2d.py"]

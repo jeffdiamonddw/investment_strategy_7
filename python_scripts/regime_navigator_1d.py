@@ -273,11 +273,11 @@ def align_dataframe_to_dates(df, target_dates, max_days=7):
 
 def get_rn_problem_params(
         periods,
-        momentum_file = "simulation_data/momentum.nc", 
-        quality_file = "simulation_data/quality.nc",
-        gic_file = "simulation_data/gic_data.nc",
-        macro_file = "simulation_data/macro_signals.parquet",
-        manifold_file = "sim_results/manifold_triple_threat.csv",
+        momentum_file = "s3://jdinvestment//momentum.nc", 
+        quality_file = "s3://jdinvestment/simulation_data/quality.nc",
+        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
+        macro_file = "s3://jdinvestment/simulation_data/macro_signals.parquet",
+        manifold_file = "s3://jdinvestment/sim_results/manifold_triple_threat.csv",
         output_folder = None,
         params = None,
         holdings = None
@@ -375,11 +375,11 @@ if __name__ == '__main__':
     
     problem_args = get_rn_problem_params(
         periods,
-        momentum_file = "simulation_data/momentum.nc", 
-        quality_file = "simulation_data/quality.nc",
-        gic_file = "simulation_data/gic_data.nc",
-        macro_file = "simulation_data/macro_signals.parquet",
-        manifold_file = "sim_results/manifold_triple_threat.csv",
+        momentum_file = "s3://jdinvestment/simulation_data/momentum.nc", 
+        quality_file = "s3://jdinvestment/simulation_data/quality.nc",
+        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
+        macro_file = "s3://jdinvestment/simulation_data/macro_signals.parquet",
+        manifold_file = "s3://jdinvestment/sim_results/manifold_triple_threat.csv",
         output_folder = None,
         params = params,
         holdings = holdings

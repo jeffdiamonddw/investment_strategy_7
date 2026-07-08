@@ -50,6 +50,7 @@ import boto3
 import signal
 import time
 import random
+from smart_open import open as smart_open
 
 
 os.environ["OMP_NUM_THREADS"] = "1"
@@ -309,10 +310,13 @@ def get_sr_problem_params(
 
 ):
    
-    da_mom = xr.open_dataset(momentum_file).to_array().squeeze()
-    da_qual = xr.open_dataset(quality_file).to_array().squeeze()
+    with smart_open(momentum_file, 'rb') as fp:
+        da_mom = xr.open_dataset(fp).to_array().squeeze()
+    with smart_open(quality_file, 'rb') as fp:
+        da_qual = xr.open_dataset(fp).to_array().squeeze()
     _data_features = xr.concat([da_mom, da_qual], dim='band')
-    da_mom_gic = xr.open_dataarray(gic_file)
+    with smart_open(gic_file, 'rb') as fp:
+        da_mom_gic = xr.open_dataarray(fp)
     da_qual_gic = get_gic_eps(da_mom_gic)
     data_features = xr.concat([_data_features, xr.concat([da_mom_gic, da_qual_gic], dim='band')], dim='symbol').drop_sel(band = 'price_end')
     

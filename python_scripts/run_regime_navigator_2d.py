@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
    
     
-    df_initial = pd.read_parquet('../investment_strategy_5/sim_results/pareto_initial_pop_for_2d.parquet').iloc[:, 6:]
+    df_initial = pd.read_parquet('s3://jdinvestment/investment_strategy_5/sim_results/pareto_initial_pop_for_2d.parquet').iloc[:, 6:]
     df_initial.columns = [col.replace('macro_weights', 'risk_macro_weights') for col in df_initial.columns]
     df_new_weights = df_initial[[col for col in df_initial.columns if 'macro' in col]]\
         .rename(columns = {col: col.replace('risk', 'temporal') for col in df_initial.columns if 'macro' in col})
