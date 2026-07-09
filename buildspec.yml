@@ -8,7 +8,7 @@ env:
     IMAGE_TAG: "latest"
     DOCKERFILE_PATH: "docker/simulation.dockerfile"
     # Added this variable to point to your custom base image
-    BASE_IMAGE_URI: "129861351772.dkr.ecr.us-west-2.amazonaws.com/my-base-image:latest"
+    BASE_IMAGE_URI: "129861351772.dkr.ecr.us-east-1.amazonaws.com/investment-base-image:latest"
 
 phases:
   pre_build:
