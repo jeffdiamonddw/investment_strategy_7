@@ -1,10 +1,22 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-west-2"
+    AWS_ACCOUNT_ID: "129861351772"
+    REPO_NAME: "simulation"
+    IMAGE_TAG: "latest"
+    DOCKERFILE_PATH: "docker/simulation.dockerfile"
+    # Added this variable to point to your custom base image
+    BASE_IMAGE_URI: "129861351772.dkr.ecr.us-west-2.amazonaws.com/my-base-image:latest"
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - echo Pulling base image to ensure latest version...
+      - docker pull $BASE_IMAGE_URI
       - REPO_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO_NAME
   build:
     commands:
@@ -16,11 +28,3 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPO_URL:$IMAGE_TAG
       - echo Build completed on `date`
-
-env:
-  variables:
-    AWS_DEFAULT_REGION: "us-west-2"
-    AWS_ACCOUNT_ID: "129861351772"
-    REPO_NAME: "simulation"
-    IMAGE_TAG: "latest"
-    DOCKERFILE_PATH: "docker/simulation.dockerfile"
