@@ -2,21 +2,25 @@ version: 0.2
 
 env:
   variables:
-    AWS_DEFAULT_REGION: "us-west-2"
+    # Changed region to us-east-1 to match the ECR repository location
+    AWS_DEFAULT_REGION: "us-east-1"
     AWS_ACCOUNT_ID: "129861351772"
     REPO_NAME: "simulation"
     IMAGE_TAG: "latest"
     DOCKERFILE_PATH: "docker/simulation.dockerfile"
-    # Added this variable to point to your custom base image
+    # Note: Ensure REPO_URL is defined in your CodeBuild project environment variables 
+    # or uncomment and set it here to avoid errors in the build/post_build steps.
+    # REPO_URL: "129861351772.dkr.ecr.us-east-1.amazonaws.com/simulation"
     BASE_IMAGE_URI: "129861351772.dkr.ecr.us-east-1.amazonaws.com/investment-base-image:latest"
 
 phases:
+  install:
+    runtime-versions:
+      docker: 20
   pre_build:
-    pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      # Add this check to confirm login worked before the pull
       - echo "Checking login status..."
       - docker info
       - echo Pulling base image...
@@ -25,9 +29,9 @@ phases:
     commands:
       - echo Building the Docker image...
       - docker build -t $REPO_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH .
-      - docker tag $REPO_NAME:$IMAGE_TAG $REPO_URL:$IMAGE_TAG
+      - docker tag $REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $REPO_URL:$IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
       - echo Build completed on `date`
