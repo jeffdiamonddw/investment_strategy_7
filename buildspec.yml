@@ -25,13 +25,14 @@ phases:
       - docker info
       - echo Pulling base image...
       - docker pull $BASE_IMAGE_URI
-  build:
+ build:
     commands:
       - echo Building the Docker image...
       - docker build -t $REPO_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH .
+      # Tagging with the fully qualified ECR URL
       - docker tag $REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
       - echo Pushing the Docker image...
+      # Pushing using the fully qualified ECR URL
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
-      - echo Build completed on `date`
