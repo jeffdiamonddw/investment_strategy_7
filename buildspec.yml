@@ -25,7 +25,7 @@ phases:
       - docker info
       - echo Pulling base image...
       - docker pull $BASE_IMAGE_URI
- build:
+  build:
     commands:
       - echo Building the Docker image...
       - docker build -t $REPO_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH .
