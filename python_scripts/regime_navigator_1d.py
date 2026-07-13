@@ -4,6 +4,7 @@ import logging
 import os
 import time
 import functools
+import joblib
 
 # --- 3rd Party ---
 import numpy as np
@@ -25,7 +26,7 @@ from utils import get_dna_hash
 
 
 from optimization_manager import OptimizationManager
-from simulate_stock_rotation import simulate
+from simulate_stock_rotation import simulate #jeff
 from objective_functions import mean_annualized_return
 from perturbation_executor import PerturbationExecutor
 from simulation_manager import SimulationManager
@@ -173,9 +174,13 @@ class RegimeNavigator1D:
 
 
     def run_simulation(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, macro_weights, period_key, sim_id, session = None, holdings = None):
+        
+       
+        
+        macro_weights /= macro_weights.sum()
         period = self.periods[period_key]
         
-        keep_date = (period['val_start_date'] <= df_macro.index) & (df_macro.index <= period['end_date'])
+        keep_date = (period['val_start_date'] <= self.df_macro.index) & (self.df_macro.index <= period['end_date'])
         df_macro = self.df_macro.loc[keep_date]
 
         s_risk_aversion_full = self.df_macro.dot(macro_weights).rename("risk_aversion") 
@@ -199,15 +204,19 @@ class RegimeNavigator1D:
         df_mom_weights = df_mom_decay.mul(df_mom.iloc[0], axis=1).mul(1 - s_quality_weight, axis=0)
         df_qual_weights = df_qual_decay.mul(df_qual.iloc[0], axis=1).mul(s_quality_weight, axis=0)
         df_weights = pd.concat([df_mom_weights, df_qual_weights], axis = 1)
-        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period, self.holdings_folder, sim_id, session = session, holdings = holdings)
+        #df_weights = df_weights.div(df_weights.sum(axis = 1), axis = 0)
+        df_weights.to_csv('temp/weights.csv')
+       #********************************************************************************************************************************* 
+
+        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
         
-        
+      
         return df_holdings
         
     
     def evaluate(self, x):
         t1 = time.time()
-        x_numeric = x.X if hasattr(x, "X") else x
+        x_numeric = x.get("X") if hasattr(x, "get") else x
         sim_id = get_dna_hash(x_numeric)
         
         # CHANGE self.mom_kit to self.mom_kit
@@ -276,8 +285,8 @@ def get_rn_problem_params(
         momentum_file = "s3://jdinvestment//momentum.nc", 
         quality_file = "s3://jdinvestment/simulation_data/quality.nc",
         gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
-        macro_file = "s3://jdinvestment/simulation_data/macro_signals.parquet",
-        manifold_file = "s3://jdinvestment/sim_results/manifold_triple_threat.csv",
+        macro_file = "simulation_data/macro_signals.parquet",
+        manifold_file = "sim_results/manifold_triple_threat.csv",
         output_folder = None,
         params = None,
         holdings = None
@@ -285,6 +294,8 @@ def get_rn_problem_params(
 
 
 ):
+    
+    
     
 
     # 1. Capture all incoming argument values from this local scope

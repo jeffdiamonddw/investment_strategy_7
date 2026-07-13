@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import awswrangler as wr
 import logging
+import s3fs
 
 
 from pymoo.algorithms.moo.nsga2 import NSGA2
@@ -78,6 +79,61 @@ class RegimeNavigator2D(RegimeNavigator1D):
        self.__dict__.update({k: v for k, v in locals().items() if k != 'self'})
 
 
+    
+       
+
+
+    def run_simulation(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, df_macro_weights, max_voo, period_key, sim_id, session=None, holdings=None):
+        
+        
+        macro_weights_risk = df_macro_weights.values.flatten()[:4]
+        macro_weights_temporal = df_macro_weights.values.flatten()[4:]
+        
+        macro_weights_risk /= macro_weights_risk.sum()
+        macro_weights_temporal /= macro_weights_temporal.sum()
+        period = self.periods[period_key]
+        
+        keep_date = (period['val_start_date'] <= self.df_macro.index) & (self.df_macro.index <= period['end_date'])
+        df_macro = self.df_macro.loc[keep_date]
+
+        s_risk_aversion_full = self.df_macro.dot(macro_weights_risk).rename("risk_aversion") 
+        risk_aversion_mean = s_risk_aversion_full.mean()
+        s_risk_aversion = s_risk_aversion_full.loc[
+            (self.df_macro.index >= period['val_start_date']) & (self.df_macro.index <= period['end_date'])
+        ]  
+
+        s_temporal_full = self.df_macro.dot(macro_weights_temporal).rename("temporal") 
+        temporal_mean = s_temporal_full.mean()
+        s_temporal = s_temporal_full.loc[
+            (self.df_macro.index >= period['val_start_date']) & (self.df_macro.index <= period['end_date'])
+        ]  
+        
+        
+        s_quality_weight = 1 / (1 + (-beta * (s_risk_aversion - threshold)).astype(float).apply(np.exp))
+        mom_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.mom_kit['columns']])
+        qual_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.qual_kit['columns']])
+        
+        df_mom_decay = pd.DataFrame(np.exp((- mom_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * mom_num_periods).astype(float)), index=s_risk_aversion.index, columns = self.mom_kit['columns'])
+        df_qual_decay = pd.DataFrame(np.exp((- qual_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * qual_num_periods).astype(float)), index=s_risk_aversion.index, columns = self.qual_kit['columns'])
+        
+        
+        w_dict = {}
+        df_mom = pd.DataFrame({self.mom_kit['columns'][j]: [w_mom_vals[j]] for j in range(len(w_mom_vals))})
+        df_qual = pd.DataFrame({self.qual_kit['columns'][j]: [w_qual_vals[j]] for j in range(len(w_mom_vals))})
+        
+        df_mom_weights = df_mom_decay.mul(df_mom.iloc[0], axis=1).mul(1 - s_quality_weight, axis=0)
+        df_qual_weights = df_qual_decay.mul(df_qual.iloc[0], axis=1).mul(s_quality_weight, axis=0)
+        df_weights = pd.concat([df_mom_weights, df_qual_weights], axis = 1)
+        #df_weights = df_weights.div(df_weights.sum(axis = 1), axis = 0)
+        df_weights.to_csv('temp/weights.csv')
+       #********************************************************************************************************************************* 
+
+        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
+        
+      
+        return df_holdings
+    
+
     def evaluate(self, x):
         
         x_numeric = x.X if hasattr(x, "X") else x
@@ -115,58 +171,6 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         
         return df_sim, total_value_series
-       
-
-
-    def run_simulation(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, df_macro_weights, max_voo, period_key, sim_id, session=None, holdings=None):
-        
-        
-        period = self.periods[period_key]
-        
-       
-
-        s_risk_aversion_full = self.df_macro.dot(df_macro_weights.loc['risk_weights']).rename("risk_aversion").astype(float) 
-        risk_aversion_mean = s_risk_aversion_full.mean()
-        s_risk_aversion = s_risk_aversion_full.loc[
-            (self.df_macro.index >= period['val_start_date']) & (self.df_macro.index <= period['end_date'])
-        ]  
-        
-        
-        s_quality_weight = 1 / (1 + np.exp(-beta * (s_risk_aversion - threshold)))
-        mom_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.mom_kit['columns']])
-        qual_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.qual_kit['columns']])
-        df_mom_decay = pd.DataFrame(np.exp(- mom_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * mom_num_periods), index=s_risk_aversion.index, columns = self.mom_kit['columns'])
-        df_qual_decay = pd.DataFrame(np.exp(- qual_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * qual_num_periods), index=s_risk_aversion.index, columns = self.qual_kit['columns'])
-        
-        
-        s_temporal_full = self.df_macro.dot(df_macro_weights.loc['temporal_weights']).rename("risk_aversion").astype(float)
-        s_temporal_mean = s_temporal_full.mean()
-        s_temporal_min_max= (s_temporal_full - s_temporal_full.min())/(s_temporal_full.max() - s_temporal_full.min())
-        s_temporal = s_temporal_min_max.loc[
-            (self.df_macro.index >= period['val_start_date']) & (self.df_macro.index <= period['end_date'])
-        ] 
-        
-        
-        mom_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.mom_kit['columns']])
-        qual_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.qual_kit['columns']])
-        df_mom_decay = pd.DataFrame(np.exp(- mom_decay * (s_temporal_mean - s_temporal).values[:, None] * mom_num_periods), index=s_risk_aversion.index, columns = self.mom_kit['columns'])
-        df_qual_decay = pd.DataFrame(np.exp(- qual_decay * (s_temporal_mean - s_temporal).values[:, None] * qual_num_periods), index=s_risk_aversion.index, columns = self.qual_kit['columns'])
-        
-        
-        w_dict = {}
-        df_mom = pd.DataFrame({self.mom_kit['columns'][j]: [w_mom_vals[j]] for j in range(len(w_mom_vals))})
-        df_qual = pd.DataFrame({self.qual_kit['columns'][j]: [w_qual_vals[j]] for j in range(len(w_mom_vals))})
-        
-        df_mom_weights = df_mom_decay.mul(df_mom.iloc[0], axis=1).mul(1 - s_quality_weight, axis=0)
-        df_qual_weights = df_qual_decay.mul(df_qual.iloc[0], axis=1).mul(s_quality_weight, axis=0)
-        
-        df_weights = pd.concat([df_mom_weights, df_qual_weights], axis = 1)
-        
-        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, 
-                               period, sim_id, max_voo = max_voo, session = session)
-        
-        
-        return df_holdings
         
         
 
@@ -179,14 +183,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--s3_path', required=True)
     parser.add_argument('--generation', type=int, required=True)
+    parser.add_argument('--train_folds', type=int, nargs='+', default=[],
+                        help='List of training fold integers (e.g., --train_fold 0 1 2)')
+    parser.add_argument('--val_folds', type=int, nargs='+', default=[],
+                        help='List of validation fold integers (e.g., --val_fold 3 4)')
     args = parser.parse_args()
 
     s3_path = args.s3_path
     generation = args.generation
     task_index = int(os.environ.get('AWS_BATCH_JOB_ARRAY_INDEX', 0))
+   
     
     logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
     my_boto3_session = boto3.Session()
+    s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
     periods = {
         'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-06-06')},
@@ -197,8 +207,8 @@ if __name__ == "__main__":
     
  
     
-    df_train_folds = df_folds.loc[df_folds.fold_index.isin([1,2,3])]
-    df_val_folds = df_folds.loc[df_folds.fold_index == 0]
+    df_train_folds = df_folds.loc[df_folds.fold_index.isin(args.train_folds)]
+    df_val_folds = df_folds.loc[df_folds.fold_index.isin(args.val_folds)]
 
     weighting_func_quantile = functools.partial(weighted_quantile, .1)
     start_date = min(df_folds.start_date)

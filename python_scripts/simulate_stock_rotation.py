@@ -128,6 +128,7 @@ def optimize(_params, df_features, current_price, holdings, budget, feature_weig
     def max_frac_constraint(model, stock):
        if stock == 'GIC': 
            return pyo.Constraint.Feasible
+       
        elif stock == 'VOO' and max_voo is not None:
            return sum(model.x[stock, a] * model.current_price[stock] for a in model.account) <= max_voo * sum(params['budget'])
        else:
@@ -138,23 +139,20 @@ def optimize(_params, df_features, current_price, holdings, budget, feature_weig
         return - sum(model.feature_weight[w] * model.feature_values[s, w] * model.x[s,a] for w in model.feature for s in model.stock for a in model.account)
     model.OBJ = pyo.Objective(rule=obj_expression, sense = pyo.minimize)
 
-    # --- WARM START INJECTION ---
-    solver = Highs()
-    solver.highs_options["time_limit"] = 1.0
-    #solver.highs_options["threads"] = 1
+    solver = pyo.SolverFactory('cbc')
+    solver.options["seconds"] = 1
+    solver.options["threads"] = 1  # Force CBC to use exactly one core
+    solver.options["ratioGap"] = 1 - params['objective_sensitivity']
+
+   
+
     
-    # Update the injection block at the start of your optimize function:
-    if prev_sol:
-        for var_name, values_dict in prev_sol.items():
-            if hasattr(model, var_name):
-                var_obj = model.find_component(var_name)
-                # values_dict is {index: value}
-                for index, val in values_dict.items():
-                    if val is not None:
-                        var_obj[index].set_value(val)
+    
 
     with SuppressOutput():
         solver.solve(model)
+
+    
     
     obj_value = pyo.value(model.OBJ)
     
@@ -169,6 +167,9 @@ def optimize(_params, df_features, current_price, holdings, budget, feature_weig
         
         with SuppressOutput(): 
             solver.solve(model)
+
+        
+
         
         df_sol = var_to_pivot_table(model.x).loc[params['current_price'].index, :]
     else:
@@ -182,13 +183,9 @@ def optimize(_params, df_features, current_price, holdings, budget, feature_weig
     
     # Capture new solution for next loop
    # Replace the old new_sol line with this:
-    new_sol = {}
-    for v in model.component_objects(pyo.Var):
-        # .get_values() returns a dictionary of {index: value}
-        # We store this under the variable's name
-        new_sol[v.name] = v.get_values()
     
-    return df_sol, num_trades * params['trade_fee'], obj_value, new_sol
+    
+    return df_sol, num_trades * params['trade_fee'], obj_value
 
 
 
@@ -215,7 +212,11 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
     df_holdings_history = pd.DataFrame()
     df_holdings_shares = pd.DataFrame()
     last_val_start_date = time_tups[0][0]
+    new_sol = None
     for val_start_date, val_end_date in time_tups:
+        
+        if val_start_date > max(data_features.coords['date'].to_pandas()):
+            break
         
         holdings_shares = pd.DataFrame((holdings.sum(axis = 1))).transpose()
         holdings_shares.loc[:, 'date'] = val_start_date
@@ -226,8 +227,8 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
         budget = (holdings.values * pd.DataFrame(current_price).fillna(0).values).sum(axis = 0)
         df_features = data_features.sel(date = val_start_date).to_pandas().transpose()
         feature_weights = dict(df_weights.loc[val_start_date])
-        new_sol = None
-        holdings, _, _  , new_sol = optimize(params, df_features, current_price, holdings, budget, feature_weights, new_sol, max_voo = max_voo)
+        
+        holdings,   _, _  = optimize(params, df_features, current_price, holdings, budget, feature_weights, new_sol, max_voo = max_voo)
         
         holdings_out = pd.DataFrame((holdings.sum(axis = 1).values * current_price)).transpose().reset_index().rename(columns = {'index': 'date'})
         holdings_out.loc[:, 'sim_id'] = sim_id

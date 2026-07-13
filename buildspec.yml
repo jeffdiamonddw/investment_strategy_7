@@ -12,12 +12,15 @@ env:
 
 phases:
   pre_build:
+    pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - echo Pulling base image to ensure latest version...
+      # Add this check to confirm login worked before the pull
+      - echo "Checking login status..."
+      - docker info
+      - echo Pulling base image...
       - docker pull $BASE_IMAGE_URI
-      - REPO_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPO_NAME
   build:
     commands:
       - echo Building the Docker image...

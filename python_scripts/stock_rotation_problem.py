@@ -318,7 +318,7 @@ def get_sr_problem_params(
     with smart_open(gic_file, 'rb') as fp:
         da_mom_gic = xr.open_dataarray(fp)
     da_qual_gic = get_gic_eps(da_mom_gic)
-    data_features = xr.concat([_data_features, xr.concat([da_mom_gic, da_qual_gic], dim='band')], dim='symbol').drop_sel(band = 'price_end')
+    data_features = xr.concat([_data_features, xr.concat([da_mom_gic, da_qual_gic], dim='band')], dim='symbol', join = 'inner').drop_sel(band = 'price_end')
     
     df_price = da_mom.sel(band='price_end').to_pandas()
     
