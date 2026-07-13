@@ -2,16 +2,16 @@ version: 0.2
 
 env:
   variables:
-    # Changed region to us-west-1 to match the ECR repository location
-    AWS_DEFAULT_REGION: "us-west-1"
+    # Changed region to us-west-2 to match the ECR repository location
+    AWS_DEFAULT_REGION: "us-west-2"
     AWS_ACCOUNT_ID: "129861351772"
     REPO_NAME: "simulation"
     IMAGE_TAG: "latest"
     DOCKERFILE_PATH: "docker/simulation.dockerfile"
     # Note: Ensure REPO_URL is defined in your CodeBuild project environment variables 
     # or uncomment and set it here to avoid errors in the build/post_build steps.
-    # REPO_URL: "129861351772.dkr.ecr.us-west-1.amazonaws.com/simulation"
-    BASE_IMAGE_URI: "129861351772.dkr.ecr.us-west-1.amazonaws.com/investment-base-image:latest"
+    # REPO_URL: "129861351772.dkr.ecr.us-west-2.amazonaws.com/simulation"
+    BASE_IMAGE_URI: "129861351772.dkr.ecr.us-west-2.amazonaws.com/investment-base-image:latest"
 
 phases:
   install:
