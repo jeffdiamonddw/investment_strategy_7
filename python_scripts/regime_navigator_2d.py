@@ -179,7 +179,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
 
 
 if __name__ == "__main__":
-    
+    t1 = time.time()
     parser = argparse.ArgumentParser()
     parser.add_argument('--s3_path', required=True)
     parser.add_argument('--generation', type=int, required=True)
@@ -273,6 +273,7 @@ if __name__ == "__main__":
     parameter_cols = [name for name in s_task.index if 'sim_id' not in name]
     x = s_task.loc[parameter_cols].values
     sim_id = get_dna_hash(x)
+    print('pre-time: {}'.format(time.time() - t1))
     df_history, total_value_series = regime_navigator.evaluate(x)
     
     logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
