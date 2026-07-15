@@ -9,7 +9,7 @@ from paretoset import paretoset
 import functools
 
 from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives
-
+from utils import get_dna_hash
 
 
 def get_pareto_layers(df, sense,  num_layers):
@@ -67,9 +67,10 @@ else:
 
 df_pop = df_pop.rename(columns = {col : col.replace('macro_weights', 'risk_macro_weights') for col in df_pop.columns if 'macro_weights' in col})
 df_add = df_pop.loc[:, [col for col in df_pop.columns if 'macro_weights' in col]].rename(columns = {col: col.replace('risk', 'temporal') for col in df_pop.columns if 'macro_weights' in col})
-df_initial = pd.concat([df_pop, df_add])
+df_initial = pd.concat([df_pop, df_add], axis = 1)
 df_initial['max_voo'] = .05
+df_initial.index = df_initial.apply(get_dna_hash, axis = 1)
 df_initial.to_parquet('sim_results/initial_pop_2d.parquet')
-df_initial.to_csv('s3://jdinvestment/2d_test_2/populations/gen_0.csv')
+df_initial.to_parquet('s3://jdinvestment/2d_test_2/populations/gen_0.parquet')
 
 

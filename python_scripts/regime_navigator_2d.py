@@ -273,7 +273,7 @@ if __name__ == "__main__":
 
     regime_navigator = RegimeNavigator2D(**problem_args)
 
-    s_task = pd.read_csv("{}/populations/gen_{}.csv".format(s3_path, generation)).iloc[task_index]
+    s_task = pd.read_parquet("{}/populations/gen_{}.parquet".format(s3_path, generation)).iloc[task_index]
     parameter_cols = [name for name in s_task.index if 'sim_id' not in name]
     x = s_task.loc[parameter_cols].values
     sim_id = get_dna_hash(x)
@@ -333,7 +333,7 @@ if __name__ == "__main__":
     df_agg['sim_id'] = parent_sim_id
     wr.s3.to_parquet(
             df=df_agg,
-            path='{}/median_objectives/sim_{}.parquet'.format(s3_path, sim_id),
+            path='{}/median_objectives/gen_{}/sim_{}.parquet'.format(s3_path, generation, parent_sim_id),
             dataset=False,
             index = True,
             boto3_session=my_boto3_session 
