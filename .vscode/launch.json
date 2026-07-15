@@ -11,7 +11,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["--s3_path", "s3://jdinvestment/2d_test_1", "--generation", "0", "--train_folds", "1", "2", "3", "--val_folds", "0"]
+            "args": ["--s3_path", "s3://jdinvestment/2d_test_2", "--generation", "0", "--train_folds", "1", "2", "3", "--val_folds", "0"]
         }
     ]
 }

@@ -9,7 +9,7 @@ def main():
     parser.add_argument('--generation', type=int, required=True)
     parser.add_argument('--train_folds', type=int, nargs='+', default=[])
     parser.add_argument('--val_folds', type=int, nargs='+', default=[])
-    parser.add_argument('--array_size', type=int, default=2)
+    parser.add_argument('--array_size', type=int, default=210)
     args = parser.parse_args()
 
     batch = boto3.client('batch', region_name='us-west-2')
