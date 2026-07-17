@@ -1,0 +1,13 @@
+nohup: ignoring input
+
+Compiled modules for significant speedup can not be used!
+https://pymoo.org/installation.html#installation
+
+To disable this warning:
+from pymoo.config import Config
+Config.warnings['not_compiled'] = False
+
+Registering/Updating Job Definition: simulation-job-def...
+Submitting array job...
+Successfully submitted! Job ID: eea93b16-5576-47a1-a06a-149bf3badca5 for generation 0
+batch complete: (False, 0)

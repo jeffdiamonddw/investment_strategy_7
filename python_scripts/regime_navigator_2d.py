@@ -124,7 +124,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         df_mom_weights = df_mom_decay.mul(df_mom.iloc[0], axis=1).mul(1 - s_quality_weight, axis=0)
         df_qual_weights = df_qual_decay.mul(df_qual.iloc[0], axis=1).mul(s_quality_weight, axis=0)
         df_weights = pd.concat([df_mom_weights, df_qual_weights], axis = 1)
-        #df_weights = df_weights.div(df_weights.sum(axis = 1), axis = 0)
+        df_weights = df_weights.div(df_weights.sum(axis = 1), axis = 0)
         df_weights.to_csv('temp/weights.csv')
        #********************************************************************************************************************************* 
 
@@ -282,7 +282,7 @@ if __name__ == "__main__":
     parent_sim_id = sim_id
     perturbed_x = x
     df_evaluations = pd.DataFrame()
-    for sample in range(num_samples):
+    for sample in range(1): # jeff  range(num_samples):
         sim_id = get_dna_hash(perturbed_x)
         df_history, total_value_series = regime_navigator.evaluate(perturbed_x)
     
