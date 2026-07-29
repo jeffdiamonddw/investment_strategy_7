@@ -9,15 +9,15 @@ Config.warnings['not_compiled'] = False
 
 Registering/Updating Job Definition: simulation-job-def...
 Submitting array job...
-Successfully submitted! Job ID: d6a4bf96-be35-4a67-b5ce-b8f1d9267a67 for generation 0
+Successfully submitted! Job ID: 6cee4deb-4f6e-4a11-843d-16fef9f0855c for generation 0
 batch complete: (False, 0)
-waiting on batch 33.90418767929077 seconds, 0/20 complete
-waiting on batch 66.52489757537842 seconds, 0/20 complete
-waiting on batch 99.11274719238281 seconds, 0/20 complete
-waiting on batch 131.79522585868835 seconds, 0/20 complete
-waiting on batch 164.4017412662506 seconds, 0/20 complete
-waiting on batch 197.016863822937 seconds, 20/20 complete
-completed Job ID: d6a4bf96-be35-4a67-b5ce-b8f1d9267a67 for generation 0
+waiting on batch 33.93970847129822 seconds, 0/20 complete
+waiting on batch 66.57661318778992 seconds, 0/20 complete
+waiting on batch 99.20990109443665 seconds, 0/20 complete
+waiting on batch 131.8336284160614 seconds, 0/20 complete
+waiting on batch 165.8670084476471 seconds, 8/20 complete
+waiting on batch 198.49563264846802 seconds, 20/20 complete
+completed Job ID: 6cee4deb-4f6e-4a11-843d-16fef9f0855c for generation 0
 Traceback (most recent call last):
   File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_0d.py", line 279, in <module>
     main()
