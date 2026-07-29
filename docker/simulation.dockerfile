@@ -22,4 +22,4 @@ RUN pip install zarr
 RUN pip install paretoset
 
 # 6. Execute your specific parallel dry run
-CMD ["python3", "python_scripts/regime_navigator_2d.py"]
+CMD ["python3", "python_scripts/regime_navigator_0d.py"]
