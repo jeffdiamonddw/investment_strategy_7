@@ -203,11 +203,11 @@ if __name__ == "__main__":
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
     periods = {
-        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-06-06')},
+        'train': {'train_start_date': pd.to_datetime('2016-01-01'), 'val_start_date': pd.to_datetime('2018-01-01'), 'end_date': pd.to_datetime('2022-01-01')},
     }
     
     
-    df_folds = pd.read_parquet('strategy/folds_1.parquet')
+    df_folds = pd.read_parquet('strategy/folds.parquet')
     
  
     
@@ -224,14 +224,14 @@ if __name__ == "__main__":
 
     objective_functions_dict = {
         'train': {
-            'regret_quantile': WeightedRegretApplyer(df_train_folds, agg_func, weighting_func_quantile, 'voo_return', 'max'),
-            'mean_regret' : WeightedRegretApplyer(df_train_folds, agg_func, weighted_mean, 'voo_return', 'max'),
+            'regret_quantile': WeightedRegretApplyer(df_train_folds, agg_func, weighting_func_quantile, 'max_annualized_return', 'max'),
+            'mean_regret' : WeightedRegretApplyer(df_train_folds, agg_func, weighted_mean, 'max_annualized_return', 'max'),
             'quantile': WeightedRegimeApplyer(df_train_folds, agg_func, weighting_func_quantile),
             'mean': WeightedRegimeApplyer(df_train_folds, agg_func, weighted_mean)
         },
         'val': {
-            'regret_quantile': WeightedRegretApplyer(df_val_folds, agg_func, weighting_func_quantile, 'voo_return', 'max'),
-            'mean_regret' : WeightedRegretApplyer(df_val_folds, agg_func, weighted_mean, 'voo_return', 'max'),
+            'regret_quantile': WeightedRegretApplyer(df_val_folds, agg_func, weighting_func_quantile, 'max_annualized_return', 'max'),
+            'mean_regret' : WeightedRegretApplyer(df_val_folds, agg_func, weighted_mean, 'max_annualized_return', 'max'),
             'quantile': WeightedRegimeApplyer(df_val_folds, agg_func, weighting_func_quantile),
             'mean': WeightedRegimeApplyer(df_val_folds, agg_func, weighted_mean)
         }
@@ -338,9 +338,6 @@ if __name__ == "__main__":
             index = True,
             boto3_session=my_boto3_session 
     )
-
-
-    zzz=1
         
     
     

@@ -7,7 +7,7 @@ F = np.load('sim_results/surrogate_history_f.npy')
 X_train = X[:4000]
 F_train = F[:4000]
 X_val = X[4000:]
-F_val = X[4000:]
+F_val = F[4000:]
 
 
 from surrogate_models import *

@@ -247,7 +247,8 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
         v_end = (holdings.loc[stocks] * df_price.loc[stocks, [val_end_date]].values).sum(axis=0) + gic_multiplier * holdings.loc['GIC']
         history.append((val_start_date, val_end_date, v_start.sum(), v_end.sum()))
         gic_frac = holdings.loc['GIC'].values.sum()/v_start.sum()
-        print(sim_id, val_start_date, val_end_date, v_start.sum(), v_end.sum(), gic_frac, flush = True)
+        voo_frac = holdings.loc['VOO'].values.sum()/v_start.sum()
+        print(sim_id, val_start_date, val_end_date, v_start.sum(), v_end.sum(), gic_frac, voo_frac, flush = True)
         
     stagger_delay = (int(sim_id, 16) % 5000) / 1000.0
     time.sleep(stagger_delay)

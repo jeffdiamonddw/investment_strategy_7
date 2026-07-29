@@ -56,109 +56,225 @@ def apply_objectives(objective_dict, a_series):
 
 
 
-class WeightedRegretApplyer:
+# class WeightedRegretApplyer:
     
-    def __init__(self, df_folds, agg_func, weighting_func, regret_col, sense):
+#     def __init__(self, df_folds, agg_func, weighting_func, regret_col, sense):
 
-        """
-        Creates a function that maps a series to a dictionary of aggregated 
-        values, one for each regime. This is ideal for establishing the 
-        'best-case' benchmark (S*_R) for regret calculations.
+#         """
+#         Creates a function that maps a series to a dictionary of aggregated 
+#         values, one for each regime. This is ideal for establishing the 
+#         'best-case' benchmark (S*_R) for regret calculations.
         
-        Parameters:
-        - regime_df: DataFrame with 'start', 'end', and 'regime_id' columns.
-        - agg_func: Function to apply (e.g., np.max, np.mean).
-        """
+#         Parameters:
+#         - regime_df: DataFrame with 'start', 'end', and 'regime_id' columns.
+#         - agg_func: Function to apply (e.g., np.max, np.mean).
+#         """
 
-        self.df_folds = df_folds.reset_index(drop = True)
-        self.agg_func = agg_func
-        self.weighting_func = weighting_func
-        self.regret_col = regret_col
-        self.sense = sense
+#         self.df_folds = df_folds.reset_index(drop = True)
+#         self.agg_func = agg_func
+#         self.weighting_func = weighting_func
+#         self.regret_col = regret_col
+#         self.sense = sense
        
 
 
-        self.intervals = pd.IntervalIndex.from_arrays(
-        df_folds['start_date'], 
-        df_folds['end_date'], 
-        closed='both', 
-        name='regime_id'
-        )
+#         self.intervals = pd.IntervalIndex.from_arrays(
+#         df_folds['start_date'], 
+#         df_folds['end_date'], 
+#         closed='both', 
+#         name='regime_id'
+#         )
     
-    def __call__(self, a_series):
+#     def __call__(self, a_series):
 
-        a_series.index = a_series.index.floor('D').astype('datetime64[us]')
-        regime_index = self.intervals.get_indexer(a_series.index)
+#         a_series.index = a_series.index.floor('D').astype('datetime64[us]')
+#         regime_index = self.intervals.get_indexer(a_series.index)
         
-        # Filter out dates that don't fall into any regime (indexer == -1)
-        valid_mask = regime_index != -1
+#         # Filter out dates that don't fall into any regime (indexer == -1)
+#         valid_mask = regime_index != -1
 
-        df = pd.DataFrame(a_series.loc[valid_mask].rename('value'))
-        df['regime_index'] = regime_index[valid_mask]
-        df_agg = df.groupby('regime_index').agg(self.agg_func)
-        df_agg['weight'] = (self.df_folds.end_date - self.df_folds.start_date).dt.days.iloc[df_agg.index]
-        df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
-        df_agg['weight'] /= df_agg['weight'].sum()
+#         df = pd.DataFrame(a_series.loc[valid_mask].rename('value'))
+#         df['regime_index'] = regime_index[valid_mask]
+#         df_agg = df.groupby('regime_index').agg(self.agg_func)
+#         df_agg['weight'] = (self.df_folds.end_date - self.df_folds.start_date).dt.days.iloc[df_agg.index]
+#         df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
+#         df_agg['weight'] /= df_agg['weight'].sum()
 
-        df_agg['best'] = self.df_folds[self.regret_col].loc[df_agg.index]
-        if self.sense == 'max':
-            df_agg['regret'] = df_agg['best'] - df_agg['value']
-        else:
-            df_agg['regret'] = df_agg['value'] - df_agg['best']
+#         df_agg['best'] = self.df_folds[self.regret_col].loc[df_agg.index]
+#         if self.sense == 'max':
+#             df_agg['regret'] = df_agg['best'] - df_agg['value']
+#         else:
+#             df_agg['regret'] = df_agg['value'] - df_agg['best']
         
-        result = self.weighting_func(df_agg.regret, df_agg.weight)
-        return result
+#         result = self.weighting_func(df_agg.regret, df_agg.weight)
+#         return result
     
 
 
+
+
+# class WeightedRegimeApplyer:
+    
+#     def __init__(self, df_folds, agg_func, weighting_func):
+
+#         """
+#         Creates a function that maps a series to a dictionary of aggregated 
+#         values, one for each regime. This is ideal for establishing the 
+#         'best-case' benchmark (S*_R) for regret calculations.
+        
+#         Parameters:
+#         - regime_df: DataFrame with 'start', 'end', and 'regime_id' columns.
+#         - agg_func: Function to apply (e.g., np.max, np.mean).
+#         """
+
+#         self.df_folds = df_folds.reset_index(drop = True)
+#         self.agg_func = agg_func
+#         self.weighting_func = weighting_func
+     
+
+#         self.intervals = pd.IntervalIndex.from_arrays(
+#         df_folds['start_date'], 
+#         df_folds['end_date'], 
+#         closed='both', 
+#         name='regime_id'
+#         )
+    
+#     def __call__(self, a_series):
+
+#         a_series.index = a_series.index.floor('D').astype('datetime64[us]')
+#         regime_index = self.intervals.get_indexer(a_series.index)
+        
+#         # Filter out dates that don't fall into any regime (indexer == -1)
+#         valid_mask = regime_index != -1
+
+#         df = pd.DataFrame(a_series.loc[valid_mask].rename('value'))
+#         df['regime_index'] = regime_index[valid_mask]
+#         df_agg = df.groupby('regime_index').agg(self.agg_func)
+#         df_agg['weight'] = (self.df_folds.end_date - self.df_folds.start_date).dt.days.iloc[df_agg.index]
+#         df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
+        
+        
+#         df_agg['weight'] /= df_agg['weight'].sum()
+        
+        
+#         result = self.weighting_func(df_agg.value, df_agg.weight)
+#         return result
+
+
+import pandas as pd
+
+
+class WeightedRegretApplyer:
+
+  def __init__(self, df_folds, agg_func, weighting_func, regret_col, sense):
+    """Creates a function that maps a series to a dictionary of aggregated
+
+    values, one for each regime. This is ideal for establishing the
+    'best-case' benchmark (S*_R) for regret calculations.
+
+    Parameters:
+    - regime_df: DataFrame with 'start', 'end', and 'regime_id' columns.
+    - agg_func: Function to apply (e.g., np.max, np.mean).
+    """
+
+    self.df_folds = df_folds.reset_index(drop=True)
+    self.agg_func = agg_func
+    self.weighting_func = weighting_func
+    self.regret_col = regret_col
+    self.sense = sense
+
+    # FIX: Standardize interval bounds to datetime64[us] to match the call indexer
+    start_dates = pd.to_datetime(self.df_folds["start_date"]).astype(
+        "datetime64[us]"
+    )
+    end_dates = pd.to_datetime(self.df_folds["end_date"]).astype(
+        "datetime64[us]"
+    )
+
+    self.intervals = pd.IntervalIndex.from_arrays(
+        start_dates, end_dates, closed="both", name="regime_id"
+    )
+
+  def __call__(self, a_series):
+    # Standardize incoming series index to match interval precision
+    a_series.index = pd.to_datetime(a_series.index).floor("D").astype(
+        "datetime64[us]"
+    )
+    regime_index = self.intervals.get_indexer(a_series.index)
+
+    # Filter out dates that don't fall into any regime (indexer == -1)
+    valid_mask = regime_index != -1
+
+    df = pd.DataFrame(a_series.loc[valid_mask].rename("value"))
+    df["regime_index"] = regime_index[valid_mask]
+    df_agg = df.groupby("regime_index").agg(self.agg_func)
+    df_agg["weight"] = (
+        self.df_folds.end_date - self.df_folds.start_date
+    ).dt.days.iloc[df_agg.index]
+    df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
+    df_agg["weight"] /= df_agg["weight"].sum()
+
+    df_agg["best"] = self.df_folds[self.regret_col].loc[df_agg.index]
+    if self.sense == "max":
+      df_agg["regret"] = df_agg["best"] - df_agg["value"]
+    else:
+      df_agg["regret"] = df_agg["value"] - df_agg["best"]
+
+    result = self.weighting_func(df_agg.regret, df_agg.weight)
+    return result
 
 
 class WeightedRegimeApplyer:
-    
-    def __init__(self, df_folds, agg_func, weighting_func):
 
-        """
-        Creates a function that maps a series to a dictionary of aggregated 
-        values, one for each regime. This is ideal for establishing the 
-        'best-case' benchmark (S*_R) for regret calculations.
-        
-        Parameters:
-        - regime_df: DataFrame with 'start', 'end', and 'regime_id' columns.
-        - agg_func: Function to apply (e.g., np.max, np.mean).
-        """
+  def __init__(self, df_folds, agg_func, weighting_func):
+    """Creates a function that maps a series to a dictionary of aggregated
 
-        self.df_folds = df_folds.reset_index(drop = True)
-        self.agg_func = agg_func
-        self.weighting_func = weighting_func
-     
+    values, one for each regime. This is ideal for establishing the
+    'best-case' benchmark (S*_R) for regret calculations.
 
-        self.intervals = pd.IntervalIndex.from_arrays(
-        df_folds['start_date'], 
-        df_folds['end_date'], 
-        closed='both', 
-        name='regime_id'
-        )
-    
-    def __call__(self, a_series):
+    Parameters:
+    - regime_df: DataFrame with 'start', 'end', and 'regime_id' columns.
+    - agg_func: Function to apply (e.g., np.max, np.mean).
+    """
 
-        a_series.index = a_series.index.floor('D').astype('datetime64[us]')
-        regime_index = self.intervals.get_indexer(a_series.index)
-        
-        # Filter out dates that don't fall into any regime (indexer == -1)
-        valid_mask = regime_index != -1
+    self.df_folds = df_folds.reset_index(drop=True)
+    self.agg_func = agg_func
+    self.weighting_func = weighting_func
 
-        df = pd.DataFrame(a_series.loc[valid_mask].rename('value'))
-        df['regime_index'] = regime_index[valid_mask]
-        df_agg = df.groupby('regime_index').agg(self.agg_func)
-        df_agg['weight'] = (self.df_folds.end_date - self.df_folds.start_date).dt.days.iloc[df_agg.index]
-        df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
-        
-        
-        df_agg['weight'] /= df_agg['weight'].sum()
-        
-        
-        result = self.weighting_func(df_agg.value, df_agg.weight)
-        return result
+    # FIX: Standardize interval bounds to datetime64[us] to match the call indexer
+    start_dates = pd.to_datetime(self.df_folds["start_date"]).astype(
+        "datetime64[us]"
+    )
+    end_dates = pd.to_datetime(self.df_folds["end_date"]).astype(
+        "datetime64[us]"
+    )
+
+    self.intervals = pd.IntervalIndex.from_arrays(
+        start_dates, end_dates, closed="both", name="regime_id"
+    )
+
+  def __call__(self, a_series):
+    # Standardize incoming series index to match interval precision
+    a_series.index = pd.to_datetime(a_series.index).floor("D").astype(
+        "datetime64[us]"
+    )
+    regime_index = self.intervals.get_indexer(a_series.index)
+
+    # Filter out dates that don't fall into any regime (indexer == -1)
+    valid_mask = regime_index != -1
+
+    df = pd.DataFrame(a_series.loc[valid_mask].rename("value"))
+    df["regime_index"] = regime_index[valid_mask]
+    df_agg = df.groupby("regime_index").agg(self.agg_func)
+    df_agg["weight"] = (
+        self.df_folds.end_date - self.df_folds.start_date
+    ).dt.days.iloc[df_agg.index]
+    df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
+
+    df_agg["weight"] /= df_agg["weight"].sum()
+
+    result = self.weighting_func(df_agg.value, df_agg.weight)
+    return result
     
 
 
@@ -222,3 +338,30 @@ def weighted_quantile(quantile, values, weights):
 def weighted_mean(values, weights):
     weighted_mean = (values * weights).sum() / weights.sum()
     return weighted_mean
+
+
+def extract_fold_regimes(df_fold, a_series):
+
+    intervals = pd.IntervalIndex.from_arrays(
+            df_fold['start_date'], 
+            df_fold['end_date'], 
+            closed='both', 
+            name='regime_id'
+    )
+    a_series.index = a_series.index.floor('D').astype('datetime64[us]')
+    regime_index = intervals.get_indexer(a_series.index)
+    valid_mask = regime_index != -1
+    df = pd.DataFrame(a_series.loc[valid_mask].rename('value'))
+    df['regime_index'] = regime_index[valid_mask]
+
+    df_out = pd.DataFrame()
+    for regime_index in df.regime_index.drop_duplicates():
+        df1 = df.loc[df.regime_index == regime_index]
+        previous_date = df1.index.min() - pd.Timedelta(days = 28)
+        previous_value = a_series.loc[previous_date]
+        df0 = pd.DataFrame({'regime_index': [regime_index], 'value': [previous_value], 'date': [previous_date]}).set_index('date')
+        df_add = pd.concat([df0, df1])
+        df_out = pd.concat([df_out, df_add])
+
+    return df_out
+    

@@ -1,0 +1,1 @@
+s3://jdinvestment/2d_test_4/portfolio_values/sim_bd2a345954a7.parquet

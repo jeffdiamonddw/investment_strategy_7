@@ -1,0 +1,27 @@
+description,start_date,end_date,fold_index,fold_name,max_annualized_return,voo_return
+Early GFC Recession (Pre-Lehman),2008-01-01 00:00:00,2008-08-31 00:00:00,1,Recovery & Policy Response,0.3035437803378917,-0.08560702196953351
+GFC Panic Apex (Lehman to Market Bottom),2008-09-01 00:00:00,2009-03-31 00:00:00,3,Policy Stabilization & Systemic Panic,0.112334906717666,-0.6255475194744984
+Transition: Liquidity-Driven Early Recovery,2009-04-01 00:00:00,2009-12-31 00:00:00,0,Reflation & Market Stress,0.5232151147322532,0.4579419345017437
+Mid-Cycle Expansion & QE1/QE2,2010-01-01 00:00:00,2011-04-30 00:00:00,3,Policy Stabilization & Systemic Panic,0.4450270109759506,0.13197869183563848
+Transition: Euro Sovereign Debt & US Downgrade,2011-05-01 00:00:00,2011-11-30 00:00:00,0,Reflation & Market Stress,-0.0358352379364088,-0.18230933045622366
+"Draghi ""Whatever It Takes"" Stabilization",2011-12-01 00:00:00,2013-04-30 00:00:00,3,Policy Stabilization & Systemic Panic,0.4055252614938214,0.248253698361115
+Transition: Taper Tantrum Rate Shock,2013-05-01 00:00:00,2013-12-31 00:00:00,3,Policy Stabilization & Systemic Panic,0.544121619815974,0.20293260341316
+US Decoupling & Strong Dollar Inflow,2014-01-01 00:00:00,2015-07-31 00:00:00,2,Macro Expansion & Structural Slowdown,0.2125976330441845,0.10908982197281247
+Transition: China Devaluation & Oil Crash,2015-08-01 00:00:00,2016-02-29 00:00:00,2,Macro Expansion & Structural Slowdown,0.230797932660465,-0.022362341330139923
+Post-Election Reflation & Low-Vol Goldilocks,2016-03-01 00:00:00,2017-12-31 00:00:00,0,Reflation & Market Stress,0.3940998827953221,0.19914092503598924
+Transition: Volmageddon Short-Volatility Squeeze,2018-01-01 00:00:00,2018-03-31 00:00:00,3,Policy Stabilization & Systemic Panic,0.4876062001312764,-0.039952295425778384
+Trade War Escalation & Synchronized Slowdown,2018-04-01 00:00:00,2018-09-30 00:00:00,1,Recovery & Policy Response,0.5201874983299235,0.30276171252467443
+"Transition: Fed ""Long Way From Neutral"" Hawk Crash",2018-10-01 00:00:00,2018-12-31 00:00:00,0,Reflation & Market Stress,0.4239784094786902,-0.2247335172284438
+Fed Dovish Pivot & Insurance Rate Cuts,2019-01-01 00:00:00,2020-01-31 00:00:00,2,Macro Expansion & Structural Slowdown,0.4604128856938614,0.2997640483772288
+Transition: COVID-19 Flash Liquidation Shock,2020-02-01 00:00:00,2020-04-30 00:00:00,2,Macro Expansion & Structural Slowdown,0.5575426405526953,-0.3967135888024208
+Hyper-Stimulus Recovery & Retail Euphoria,2020-05-01 00:00:00,2021-12-31 00:00:00,1,Recovery & Policy Response,0.6118388744413528,0.3420393562675983
+Transition: Great Inflation & Aggressive Fed Hikes,2022-01-01 00:00:00,2022-09-30 00:00:00,0,Reflation & Market Stress,0.4512288868033043,-0.187190713633831
+Yield Curve Inversion Deepening & SVB Banking Crack,2022-10-01 00:00:00,2023-06-30 00:00:00,2,Macro Expansion & Structural Slowdown,0.6464619260508542,0.34987337435014987
+Generative AI Boom & Soft-Landing Narrative,2023-07-01 00:00:00,2024-03-31 00:00:00,1,Recovery & Policy Response,0.5168811884312059,0.2503389791657229
+Transition: Sticky Inflation/Bumper Yield Spike,2024-04-01 00:00:00,2024-05-31 00:00:00,0,Reflation & Market Stress,2.2129206551998584,1.17064496026694
+Mega-Cap Momentum Concentration Flight,2024-06-01 00:00:00,2024-08-31 00:00:00,3,Policy Stabilization & Systemic Panic,1.464404680466128,-0.1357111896941816
+Fed Rate Cutting Cycle & Macro Stabilization,2024-09-01 00:00:00,2025-06-30 00:00:00,1,Recovery & Policy Response,1.718004689246358,0.15117633221536786
+Transition: Technical Derivative & Gamma Unwind Panic,2025-07-01 00:00:00,2025-08-31 00:00:00,4,Test Data,,0.2576541928536531
+Credit Realignment & Sovereign Spread Creep,2025-09-01 00:00:00,2025-11-30 00:00:00,4,Test Data,,0.42879291269441167
+Fiscal Horizon Reset & Volatility Compression,2025-12-01 00:00:00,2026-02-28 00:00:00,4,Test Data,,0.027277643740870383
+Transition: Margin Deleveraging Ripple,2026-03-01 00:00:00,2026-04-30 00:00:00,4,Test Data,,1.7716992733461008

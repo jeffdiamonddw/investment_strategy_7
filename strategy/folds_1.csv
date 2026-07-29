@@ -1,0 +1,28 @@
+index,start_date,end_date,fold_index,fold_name,max_annualized_return
+Early GFC Recession (Pre-Lehman),2008-01-01,2008-08-31,1,Recovery & Policy Response,0.30354378033789176
+GFC Panic Apex (Lehman to Market Bottom),2008-09-01,2009-03-31,3,Policy Stabilization & Systemic Panic,0.112334906717666
+Transition: Liquidity-Driven Early Recovery,2009-04-01,2009-12-31,0,Reflation & Market Stress,0.5232151147322532
+Mid-Cycle Expansion & QE1/QE2,2010-01-01,2011-04-30,3,Policy Stabilization & Systemic Panic,0.44502701097595065
+Transition: Euro Sovereign Debt & US Downgrade,2011-05-01,2011-11-30,0,Reflation & Market Stress,-0.03583523793640886
+"Draghi ""Whatever It Takes"" Stabilization",2011-12-01,2013-04-30,3,Policy Stabilization & Systemic Panic,0.4055252614938214
+Transition: Taper Tantrum Rate Shock,2013-05-01,2013-12-31,3,Policy Stabilization & Systemic Panic,0.544121619815974
+US Decoupling & Strong Dollar Inflow,2014-01-01,2015-07-31,2,Macro Expansion & Structural Slowdown,0.21259763304418455
+Transition: China Devaluation & Oil Crash,2015-08-01,2016-02-29,2,Macro Expansion & Structural Slowdown,0.230797932660465
+Post-Election Reflation & Low-Vol Goldilocks,2016-03-01,2017-12-31,0,Reflation & Market Stress,0.39409988279532215
+Transition: Volmageddon Short-Volatility Squeeze,2018-01-01,2018-03-31,3,Policy Stabilization & Systemic Panic,0.4876062001312764
+Trade War Escalation & Synchronized Slowdown,2018-04-01,2018-09-30,1,Recovery & Policy Response,0.5201874983299235
+"Transition: Fed ""Long Way From Neutral"" Hawk Crash",2018-10-01,2018-12-31,0,Reflation & Market Stress,0.42397840947869025
+Fed Dovish Pivot & Insurance Rate Cuts,2019-01-01,2020-01-31,2,Macro Expansion & Structural Slowdown,0.4604128856938614
+Transition: COVID-19 Flash Liquidation Shock,2020-02-01,2020-04-30,2,Macro Expansion & Structural Slowdown,0.5575426405526953
+Hyper-Stimulus Recovery & Retail Euphoria,2020-05-01,2021-12-31,1,Recovery & Policy Response,0.6118388744413528
+Transition: Great Inflation & Aggressive Fed Hikes,2022-01-01,2022-09-30,0,Reflation & Market Stress,0.4512288868033043
+Yield Curve Inversion Deepening & SVB Banking Crack,2022-10-01,2023-06-30,2,Macro Expansion & Structural Slowdown,0.6464619260508542
+Generative AI Boom & Soft-Landing Narrative,2023-07-01,2024-03-31,1,Recovery & Policy Response,0.5168811884312059
+Transition: Sticky Inflation/Bumper Yield Spike,2024-04-01,2024-05-31,0,Reflation & Market Stress,2.2129206551998584
+Mega-Cap Momentum Concentration Flight,2024-06-01,2024-08-31,3,Policy Stabilization & Systemic Panic,1.464404680466128
+Fed Rate Cutting Cycle & Macro Stabilization,2024-09-01,2025-06-30,1,Recovery & Policy Response,1.7180046892463579
+Transition: Technical Derivative & Gamma Unwind Panic,2025-07-01,2025-08-31,4,Test Data,
+Credit Realignment & Sovereign Spread Creep,2025-09-01,2025-11-30,4,Test Data,
+Fiscal Horizon Reset & Volatility Compression,2025-12-01,2026-02-28,4,Test Data,
+Transition: Margin Deleveraging Ripple,2026-03-01,2026-04-30,4,Test Data,
+

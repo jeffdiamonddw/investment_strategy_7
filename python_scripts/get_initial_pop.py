@@ -9,28 +9,10 @@ from paretoset import paretoset
 import functools
 
 from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives
-from utils import get_dna_hash
+from utils import get_dna_hash, get_pareto_layers
 
 
-def get_pareto_layers(df, sense,  num_layers):
-    df_out = df.copy()
-    df_out['layer'] = num_layers 
-    df_current = df.copy()
-    
-    
-    for layer_idx in range(num_layers):
-        # paretoset returns a boolean mask for the current non-dominated front
-        mask = paretoset(df_current.values, sense=sense)
-        layer_ids = df_current.index[mask]
-        other_ids = df_current.index[~mask] # Define sense (max/min) for your objectives
-        
-        # Store the current layer
-        df_out.loc[layer_ids, 'layer'] = layer_idx
-        
-        # Remove these points and move to the next layer
-        df_current = df_current.loc[other_ids]
-        
-    return df_out   
+ 
 
 if not os.path.isfile('sim_results/best_pop_1d.parquet'):
     

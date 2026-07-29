@@ -15,34 +15,13 @@ from pymoo.core.population import Population
 from apsa_ngsa2 import APSANGSA2
 from surrogate_models import FastStackedSurrogate, HeterogeneousEnsemble, SurrogateProblem
 
-import boto3
-from botocore.exceptions import ClientError
-from urllib.parse import urlparse
 
-def s3_file_exists(s3_path: str) -> bool:
-    """
-    Checks if a file exists at the given S3 path.
-    
-    :param s3_path: The full S3 path (e.g., 's3://my-bucket/path/to/file.txt')
-    :return: True if exists, False otherwise.
-    """
-    # Parse the S3 URI
-    parsed = urlparse(s3_path)
-    bucket_name = parsed.netloc
-    key = parsed.path.lstrip('/')
-    
-    s3_client = boto3.client('s3')
-    
-    try:
-        s3_client.head_object(Bucket=bucket_name, Key=key)
-        return True
-    except ClientError as e:
-        # If the error code is 404, the file does not exist
-        if e.response['Error']['Code'] == "404":
-            return False
-        else:
-            # If it's a different error (e.g., 403 Forbidden), re-raise it
-            raise e
+
+
+
+from utils import s3_file_exists, s3_folder_exists, s3_list_files
+
+
 
 
 def get_array_status_summary(parent_job_id):
@@ -63,81 +42,63 @@ def get_array_status_summary(parent_job_id):
 
 
 def batch_complete(parent_job_id, num_jobs):
-    summary = {}
-    while len(summary) == 0: 
+    time.sleep(1)
+    summary = get_array_status_summary(parent_job_id)
+    while not ( hasattr(summary, '__len__') and len(summary)>0):
+        print('waiting for summary', flush = True)
         summary = get_array_status_summary(parent_job_id)
+        time.sleep(1)
     total_count = sum(list(summary.values()))
     while total_count < num_jobs:
+        print('waiting for total count to add up {}/{}'.format(total_count, num_jobs), flush = True)
+        summary = get_array_status_summary(parent_job_id)
         total_count = sum(list(summary.values()))
+        time.sleep(1)
     
     done_count = sum([summary[key] for key in ['SUCCEEDED', 'FAILED'] if key in summary])
     
     return done_count == total_count, done_count
 
 
+import time
 import boto3
-from urllib.parse import urlparse
 
-def s3_folder_exists(s3_full_path):
+def wait_for_batch_job(job_id):
     """
-    Checks if an S3 folder exists given a full 's3://bucket/path/to/folder' string.
+    Waits for an AWS Batch array job to reach a terminal state.
     """
-    # Parse the S3 URL
-    parsed = urlparse(s3_full_path)
-    if parsed.scheme != 's3':
-        raise ValueError("Path must start with s3://")
+    client = boto3.client('batch')
     
-    bucket_name = parsed.netloc
-    prefix = parsed.path.lstrip('/')
-    
-    # Ensure prefix ends with a slash to avoid partial matches
-    if prefix and not prefix.endswith('/'):
-        prefix += '/'
+    while True:
+        response = client.describe_jobs(jobs=[job_id])
+        if not response['jobs']:
+            raise Exception(f"Job {job_id} not found.")
+            
+        job = response['jobs'][0]
+        status = job.get('status')
         
-    s3 = boto3.client('s3')
-    
-    # List objects with the prefix, limit to 1 for performance
-    response = s3.list_objects_v2(
-        Bucket=bucket_name,
-        Prefix=prefix,
-        MaxKeys=1
-    )
-    
-    return 'Contents' in response
+        # 'SUCCEEDED' or 'FAILED' are terminal states for the parent job
+        # Note: If the parent job status is 'FAILED', it means the job couldn't be scheduled.
+        # Array jobs themselves usually reach 'SUCCEEDED' once all children are processed,
+        # regardless of whether the children succeeded or failed.
+        if status in ['SUCCEEDED', 'FAILED']:
+            print(f"Job {job_id} reached terminal state: {status}")
+            break
+            
+        print(f"Job {job_id} status is {status}... waiting 30s")
+        time.sleep(30)
+
+    # Return status summary for your logs
+    return job.get('arrayProperties', {}).get('statusSummary', {})
 
 
-import boto3
-from urllib.parse import urlparse
 
-def list_s3_files(s3_full_path):
-    """
-    Returns a list of full s3:// paths for all files in the given S3 folder.
-    """
-    parsed = urlparse(s3_full_path)
-    if parsed.scheme != 's3':
-        raise ValueError("Path must start with s3://")
-    
-    bucket_name = parsed.netloc
-    prefix = parsed.path.lstrip('/')
-    
-    # Ensure prefix ends with a slash if it's meant to be a folder
-    if prefix and not prefix.endswith('/'):
-        prefix += '/'
-        
-    s3 = boto3.client('s3')
-    paginator = s3.get_paginator('list_objects_v2')
-    
-    file_list = []
-    
-    # Paginator handles the "next token" logic automatically
-    for page in paginator.paginate(Bucket=bucket_name, Prefix=prefix):
-        if 'Contents' in page:
-            for obj in page['Contents']:
-                # Construct the full s3:// path for each object
-                file_path = f"s3://{bucket_name}/{obj['Key']}"
-                file_list.append(file_path)
-                
-    return file_list
+
+
+
+
+
+
 
 
 
@@ -155,7 +116,7 @@ def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
 
         # 1. Define resources within the script
         # This replaces the need for the external job-definition.json
-        print(f"Registering/Updating Job Definition: {job_def_name}...")
+        print(f"Registering/Updating Job Definition: {job_def_name}...", flush = True)
         batch.register_job_definition(
             jobDefinitionName=job_def_name,
             type='container',
@@ -178,7 +139,7 @@ def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
             "--val_folds", *map(str, val_folds)
         ]
 
-        print("Submitting array job...")
+        print("Submitting array job...", flush = True)
         response = batch.submit_job(
             jobName=f"sim-gen-{generation}",
             jobQueue="batch-arm-192-queue",
@@ -188,13 +149,14 @@ def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
         )
 
         batch_id = response['jobId']
-        print(f"Successfully submitted! Job ID: {batch_id} for generation {generation}")
+        print(f"Successfully submitted! Job ID: {batch_id} for generation {generation}", flush = True)
         t1 = time.time() 
-        print('batch complete: {}'.format(batch_complete(batch_id, num_jobs)), flush = True)
+        num_complete = batch_complete(batch_id, num_jobs)
+        print('batch complete: {}'.format(num_complete), flush = True)
         while not batch_complete(batch_id, num_jobs)[0]:
             time.sleep(30)
             num_complete = batch_complete(batch_id, num_jobs)[1]
-            print('waiting on batch {} seconds, {}/{} complete'.format(time.time() - t1, num_complete, num_jobs))
+            print('waiting on batch {} seconds, {}/{} complete'.format(time.time() - t1, num_complete, num_jobs), flush = True)
         print(f"completed Job ID: {batch_id} for generation {generation}", flush = True)
     else:
         print("output already exists for generation {}".format(generation), flush = True)
@@ -258,8 +220,8 @@ def main():
     
     df_initial = pd.read_parquet('sim_results/initial_pop_2d.parquet')
     s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
-    if not s3_file_exists(s3_pop_file):
-        df_initial.to_parquet('s3_pop_file')
+    #if not s3_file_exists(s3_pop_file):
+    #    df_initial.to_parquet(s3_pop_file)
     num_vars = df_initial.shape[1]
     
     # Indices: 0-7: PCA, 8: Threshold, 9: Beta, 10-11: Decay, 12-15: Macro Weights
