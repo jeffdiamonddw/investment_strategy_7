@@ -12,6 +12,7 @@ import awswrangler as wr
 from utils import get_dna_hash
 from pymoo.util.display.multi import MultiObjectiveOutput
 from pymoo.core.population import Population
+from pymoo.algorithms.moo.nsga2 import NSGA2
 from apsa_ngsa2 import APSANGSA2
 from surrogate_models import FastStackedSurrogate, HeterogeneousEnsemble, SurrogateProblem
 
@@ -210,67 +211,41 @@ def main():
 
     param_names = [
         'dollar_ret_1p', 'dollar_ret_6p', 'dollar_ret_13p', 'dollar_ret_26p',
-       'avg_eps_1q', 'avg_eps_2q', 'avg_eps_4q', 'avg_eps_8q', 'threshold',
-       'beta', 'mom_decay', 'qual_decay', 'risk_macro_weights_0',
-       'risk_macro_weights_1', 'risk_macro_weights_2', 'risk_macro_weights_3',
-       'temporal_macro_weights_0', 'temporal_macro_weights_1',
-       'temporal_macro_weights_2', 'temporal_macro_weights_3', 'max_voo'
+       'avg_eps_1q', 'avg_eps_2q', 'avg_eps_4q', 'avg_eps_8q',  'max_voo'
     ]
     image_arn = "129861351772.dkr.ecr.us-west-2.amazonaws.com/simulation:latest"
     
-    df_initial = pd.read_parquet('sim_results/initial_pop_2d.parquet')
-    s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
-    if not s3_file_exists(s3_pop_file):
-        df_initial.to_parquet(s3_pop_file)
-    num_vars = df_initial.shape[1]
+    # df_initial = pd.read_parquet('sim_results/initial_pop_2d.parquet')
+    # s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
+    # if not s3_file_exists(s3_pop_file):
+    #     df_initial.to_parquet(s3_pop_file)
+    # num_vars = df_initial.shape[1]
     
     # Indices: 0-7: PCA, 8: Threshold, 9: Beta, 10-11: Decay, 12-15: Macro Weights
     xl= np.array([
-        -2, -2, -2, -2,  # Mom PCA
-        -2, -2, -2, -2,  # Qual PCA
-        -2.0,            # Threshold (Index 8: expanded from 0.1)
-        0.5,             # Beta (Index 9)
-        -1, -1,          # Decays
-        -1, -1, -1, -1,   # risk Macro Weights
-        -1, -1, -1, -1,  # temporal Macro Weights
+        0, 0, 0, 0,  # Mom PCA
+        0, 0, 0, 0,  # Qual PCA
         .05              #max_voo
     ])
 
     xu = np.array([
-        2, 2, 2, 2,      # Mom PCA
-        2, 2, 2, 2,      # Qual PCA
-        2.0,             # Threshold (Index 8: expanded from 0.9)
-        15.0,            # Beta (Index 9: expanded from 2.0)
-        1, 1,            # Decays
-        1, 1, 1, 1,       # risk Macro Weights
-        1, 1, 1, 1,       # temporal Macro Weights
+        1, 1, 1, 1,      # Mom PCA
+        1, 1, 1, 1,      # Qual PCA     
         .6                 #max_voo
     ])
 
-
+    num_vars = len(xl)
     master_problem = BatchArrayProblem(image_arn, args.s3_path, args.train_folds, args.val_folds, param_names, xl, xu)
-    models = [FastStackedSurrogate(num_vars) for i in range(2)]
-    ensemble = HeterogeneousEnsemble(models)
-    surrogate_problem = SurrogateProblem(ensemble, master_problem)
-
-    algorithm = APSANGSA2(
-        pop_size=210,
-        n_infills = 215,
-        surr_n_gen=30,
-        surr_thresholds = {'min_point': .1, 'max_point': .01},
-        surr_eps_elim=1e-6,
-        output=MultiObjectiveOutput(),
-        surr_tolerance = .1,
-        surrogate_problem = surrogate_problem,
-        master_problem = master_problem,
-        surrogate_memory_generations = 3
-    )
     
+    
+
+    algorithm = NSGA2(pop_size = 20)
+    algorithm.setup(master_problem)
     
     
 
     
-    for gen in range(150):
+    for gen in range(3):
         
         
         

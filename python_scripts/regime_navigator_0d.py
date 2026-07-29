@@ -121,12 +121,8 @@ class RegimeNavigator0D(RegimeNavigator1D):
         ).flatten()
         w_mom, w_qual = np.clip(w_mom, 0, 1), np.clip(w_qual, 0, 1)
 
-        opt_threshold = x_numeric[8]
-        opt_beta = x_numeric[9]
-        mom_decay = x_numeric[10]
-        qual_decay = x_numeric[11]
-        df_macro_weights = pd.DataFrame(x_numeric[12:20].reshape(2,4), index = ['risk_weights', 'temporal_weights'], columns = self.df_macro.columns)
-        max_voo = x_numeric[20]
+        
+        max_voo = x_numeric[-1]
 
         
         
@@ -254,7 +250,7 @@ if __name__ == "__main__":
     parent_sim_id = sim_id
     perturbed_x = x
     df_evaluations = pd.DataFrame()
-    for sample in range(1): # jeff  range(num_samples):
+    for sample in range(3): # jeff  range(num_samples):
         sim_id = get_dna_hash(perturbed_x)
         df_history, total_value_series = regime_navigator.evaluate(perturbed_x)
     

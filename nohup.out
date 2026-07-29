@@ -1,3 +1,4 @@
+nohup: ignoring input
 
 Compiled modules for significant speedup can not be used!
 https://pymoo.org/installation.html#installation
@@ -8,232 +9,40 @@ Config.warnings['not_compiled'] = False
 
 Registering/Updating Job Definition: simulation-job-def...
 Submitting array job...
-Successfully submitted! Job ID: 085193ba-fcd1-4feb-9df4-a99355ba79c5 for generation 0
-waiting for summary
-waiting for summary
-waiting for summary
-waiting for summary
+Successfully submitted! Job ID: d6a4bf96-be35-4a67-b5ce-b8f1d9267a67 for generation 0
 batch complete: (False, 0)
-waiting on batch 39.24047517776489 seconds, 0/210 complete
-waiting on batch 71.9668357372284 seconds, 0/210 complete
-waiting on batch 104.66857576370239 seconds, 0/210 complete
-waiting on batch 137.3481457233429 seconds, 0/210 complete
-waiting on batch 170.01767778396606 seconds, 0/210 complete
-waiting on batch 202.68129706382751 seconds, 180/210 complete
-waiting on batch 235.3674921989441 seconds, 210/210 complete
-completed Job ID: 085193ba-fcd1-4feb-9df4-a99355ba79c5 for generation 0
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 8e563919-8ec3-45f5-9e97-397d8f530f85 for generation 1
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 37.96111273765564 seconds, 0/215 complete
-waiting on batch 70.62278890609741 seconds, 50/215 complete
-waiting on batch 103.27710700035095 seconds, 100/215 complete
-waiting on batch 135.95390963554382 seconds, 143/215 complete
-waiting on batch 168.6509346961975 seconds, 185/215 complete
-waiting on batch 201.30083775520325 seconds, 200/215 complete
-waiting on batch 233.90245914459229 seconds, 215/215 complete
-completed Job ID: 8e563919-8ec3-45f5-9e97-397d8f530f85 for generation 1
-surrogate error: 0.21523025791508493/0.2586820270630228, num_recommendations: 0
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: a7eae521-71f2-4130-b113-0d4206c17170 for generation 2
-waiting for summary
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 39.16844940185547 seconds, 0/215 complete
-waiting on batch 71.97453951835632 seconds, 0/215 complete
-waiting on batch 104.79952335357666 seconds, 0/215 complete
-waiting on batch 137.41313648223877 seconds, 0/215 complete
-waiting on batch 170.09324288368225 seconds, 0/215 complete
-waiting on batch 202.98829650878906 seconds, 9/215 complete
-waiting on batch 235.6486234664917 seconds, 172/215 complete
-waiting on batch 268.2787652015686 seconds, 215/215 complete
-completed Job ID: a7eae521-71f2-4130-b113-0d4206c17170 for generation 2
-surrogate error: 0.10493859762916379/0.1215359331843422, num_recommendations: 7
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: cd2ae650-4042-4de0-b4f9-7a3de9007319 for generation 3
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 36.60888624191284 seconds, 0/215 complete
-waiting on batch 69.29914021492004 seconds, 174/215 complete
-waiting on batch 101.96202445030212 seconds, 215/215 complete
-completed Job ID: cd2ae650-4042-4de0-b4f9-7a3de9007319 for generation 3
-surrogate error: 0.10191162405630702/0.11888499893462123, num_recommendations: 8
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 4068fe21-4b51-453f-bb32-994f431c482c for generation 4
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 37.86081004142761 seconds, 0/215 complete
-waiting on batch 70.5282039642334 seconds, 39/215 complete
-waiting on batch 103.21804475784302 seconds, 76/215 complete
-waiting on batch 135.91977500915527 seconds, 91/215 complete
-waiting on batch 168.5551815032959 seconds, 128/215 complete
-waiting on batch 201.22688508033752 seconds, 201/215 complete
-waiting on batch 233.9892373085022 seconds, 215/215 complete
-completed Job ID: 4068fe21-4b51-453f-bb32-994f431c482c for generation 4
-surrogate error: 0.0934309294606444/0.10554748003181909, num_recommendations: 16
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 0908be39-5704-4b4b-9ca2-2706bb4a414c for generation 5
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 36.52825355529785 seconds, 0/215 complete
-waiting on batch 69.15440011024475 seconds, 78/215 complete
-waiting on batch 101.82381010055542 seconds, 215/215 complete
-completed Job ID: 0908be39-5704-4b4b-9ca2-2706bb4a414c for generation 5
-surrogate error: 0.08907542373640778/0.10021479751056463, num_recommendations: 20
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 19b87d3b-63b8-4da1-9107-f7fb877fdee8 for generation 6
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 36.570181369781494 seconds, 0/215 complete
-waiting on batch 69.21197032928467 seconds, 41/215 complete
-waiting on batch 102.15578937530518 seconds, 77/215 complete
-waiting on batch 134.75672030448914 seconds, 108/215 complete
-waiting on batch 167.4644091129303 seconds, 139/215 complete
-waiting on batch 200.12093329429626 seconds, 151/215 complete
-waiting on batch 232.77382278442383 seconds, 215/215 complete
-completed Job ID: 19b87d3b-63b8-4da1-9107-f7fb877fdee8 for generation 6
-surrogate error: 0.1017630561814762/0.12175909083258085, num_recommendations: 7
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 58fd5080-5aff-41a1-b4dc-14698d1896f6 for generation 7
-waiting for summary
-waiting for total count to add up 184/215
-batch complete: (False, 0)
-waiting on batch 36.588011741638184 seconds, 19/215 complete
-waiting on batch 69.24972558021545 seconds, 132/215 complete
-waiting on batch 101.95051455497742 seconds, 170/215 complete
-waiting on batch 134.59862756729126 seconds, 215/215 complete
-completed Job ID: 58fd5080-5aff-41a1-b4dc-14698d1896f6 for generation 7
-surrogate error: 0.10276780229886158/0.11374487545560326, num_recommendations: 11
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 597a8bbf-0e4d-433a-936e-4b7aca2a3cfc for generation 8
-waiting for summary
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 39.322081089019775 seconds, 0/215 complete
-waiting on batch 71.97033786773682 seconds, 41/215 complete
-waiting on batch 104.60138154029846 seconds, 70/215 complete
-waiting on batch 137.21568489074707 seconds, 88/215 complete
-waiting on batch 169.92673921585083 seconds, 112/215 complete
-waiting on batch 202.5898666381836 seconds, 172/215 complete
-waiting on batch 235.2950177192688 seconds, 215/215 complete
-completed Job ID: 597a8bbf-0e4d-433a-936e-4b7aca2a3cfc for generation 8
-surrogate error: 0.08360306280129909/0.09287490661966208, num_recommendations: 28
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: e0526926-d0b9-44eb-b833-c52675561e4f for generation 9
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 37.854649782180786 seconds, 0/215 complete
-waiting on batch 70.50730204582214 seconds, 83/215 complete
-waiting on batch 103.09408521652222 seconds, 215/215 complete
-completed Job ID: e0526926-d0b9-44eb-b833-c52675561e4f for generation 9
-surrogate error: 0.08415675051276682/0.09267457049366506, num_recommendations: 28
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 521f5abe-922a-4cab-b746-e2e223c2a960 for generation 10
-waiting for summary
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 39.30027437210083 seconds, 0/215 complete
-waiting on batch 71.97365236282349 seconds, 103/215 complete
-waiting on batch 104.635329246521 seconds, 173/215 complete
-waiting on batch 137.33561038970947 seconds, 215/215 complete
-completed Job ID: 521f5abe-922a-4cab-b746-e2e223c2a960 for generation 10
-surrogate error: 0.0955841282274167/0.1031549272782716, num_recommendations: 18
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 1faa6738-86c1-4d68-8213-ac18bb465615 for generation 11
-waiting for summary
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 39.16059899330139 seconds, 0/215 complete
-waiting on batch 71.78734922409058 seconds, 81/215 complete
-waiting on batch 104.50187849998474 seconds, 172/215 complete
-waiting on batch 137.1168875694275 seconds, 215/215 complete
-completed Job ID: 1faa6738-86c1-4d68-8213-ac18bb465615 for generation 11
-surrogate error: 0.08300461053851986/0.08889892686095568, num_recommendations: 33
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 0ecaf29e-7e20-42eb-bf0b-b0351771387e for generation 12
-batch complete: (False, 0)
-waiting on batch 33.91134548187256 seconds, 5/215 complete
-waiting on batch 66.53108024597168 seconds, 86/215 complete
-waiting on batch 99.29820823669434 seconds, 215/215 complete
-completed Job ID: 0ecaf29e-7e20-42eb-bf0b-b0351771387e for generation 12
-surrogate error: 0.08076064056344161/0.08566968598568304, num_recommendations: 38
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 70cdb4f6-5d3e-42b0-9f5c-977643fc2b1c for generation 13
-batch complete: (False, 0)
-waiting on batch 33.96484422683716 seconds, 0/215 complete
-waiting on batch 66.62381839752197 seconds, 121/215 complete
-waiting on batch 99.28220629692078 seconds, 215/215 complete
-completed Job ID: 70cdb4f6-5d3e-42b0-9f5c-977643fc2b1c for generation 13
-surrogate error: 0.08187074605279701/0.08707875688435972, num_recommendations: 36
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 3b393337-97e9-4975-b1b9-5847c8b82e2c for generation 14
-waiting for summary
-waiting for total count to add up 115/215
-batch complete: (False, 0)
-waiting on batch 36.57431364059448 seconds, 0/215 complete
-waiting on batch 69.2817153930664 seconds, 173/215 complete
-waiting on batch 102.00759744644165 seconds, 215/215 complete
-completed Job ID: 3b393337-97e9-4975-b1b9-5847c8b82e2c for generation 14
-surrogate error: 0.08399129059755765/0.08944921648631045, num_recommendations: 32
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: f72fa587-2d27-4d91-876f-83de0474f4cf for generation 15
-batch complete: (False, 0)
-waiting on batch 33.96894454956055 seconds, 0/215 complete
-waiting on batch 66.6243028640747 seconds, 129/215 complete
-waiting on batch 99.22979617118835 seconds, 215/215 complete
-completed Job ID: f72fa587-2d27-4d91-876f-83de0474f4cf for generation 15
-surrogate error: 0.09281754305292045/0.09885760728594786, num_recommendations: 22
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 278ada80-5801-4a83-bac2-d5e2e9d0310b for generation 16
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 36.49800753593445 seconds, 0/215 complete
-waiting on batch 69.13422179222107 seconds, 103/215 complete
-waiting on batch 101.77651381492615 seconds, 173/215 complete
-waiting on batch 134.42667198181152 seconds, 215/215 complete
-completed Job ID: 278ada80-5801-4a83-bac2-d5e2e9d0310b for generation 16
-surrogate error: 0.09723666726840006/0.10338313515452989, num_recommendations: 18
-Registering/Updating Job Definition: simulation-job-def...
-Submitting array job...
-Successfully submitted! Job ID: 731d2af6-0683-4051-935e-4e65277e1f9e for generation 17
-waiting for summary
-waiting for summary
-waiting for summary
-waiting for summary
-batch complete: (False, 0)
-waiting on batch 39.41285943984985 seconds, 0/215 complete
+waiting on batch 33.90418767929077 seconds, 0/20 complete
+waiting on batch 66.52489757537842 seconds, 0/20 complete
+waiting on batch 99.11274719238281 seconds, 0/20 complete
+waiting on batch 131.79522585868835 seconds, 0/20 complete
+waiting on batch 164.4017412662506 seconds, 0/20 complete
+waiting on batch 197.016863822937 seconds, 20/20 complete
+completed Job ID: d6a4bf96-be35-4a67-b5ce-b8f1d9267a67 for generation 0
+Traceback (most recent call last):
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_0d.py", line 279, in <module>
+    main()
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_0d.py", line 263, in main
+    F = master_problem.evaluate(pop.get("X"))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 257, in evaluate
+    _out = self.do(X, return_values_of, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 299, in do
+    self._evaluate_vectorized(X, out, *args, **kwargs)
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 307, in _evaluate_vectorized
+    self._evaluate(X, out, *args, **kwargs)
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_0d.py", line 196, in _evaluate
+    df_obj = get_objectives(self.s3_path, self.generation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_0d.py", line 168, in get_objectives
+    df = wr.df = wr.s3.read_parquet(
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_utils.py", line 178, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_config.py", line 732, in wrapper
+    return function(**args)
+           ^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/s3/_read_parquet.py", line 525, in read_parquet
+    raise exceptions.NoFilesFound(f"No files Found on: {path}.")
+awswrangler.exceptions.NoFilesFound: No files Found on: s3://jdinvestment/2d_test_0d/median_objectives/gen_0/.
