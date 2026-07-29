@@ -19,6 +19,7 @@ ENV PYTHONUNBUFFERED=1
 RUN pip install psutil
 RUN pip install smart_open
 RUN pip install zarr
+RUN pip install paretoset
 
 # 6. Execute your specific parallel dry run
 CMD ["python3", "python_scripts/regime_navigator_2d.py"]
