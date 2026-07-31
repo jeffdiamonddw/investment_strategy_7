@@ -100,7 +100,7 @@ class RegimeNavigator0D(RegimeNavigator1D):
         
        #********************************************************************************************************************************* 
 
-        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
+        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings, max_voo = max_voo)
         
       
         return df_holdings

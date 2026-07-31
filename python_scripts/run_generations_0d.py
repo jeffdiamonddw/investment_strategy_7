@@ -246,7 +246,7 @@ def main():
     
 
     
-    for gen in range(300):
+    for gen in range(1):
         
         
         
