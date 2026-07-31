@@ -105,7 +105,7 @@ def wait_for_batch_job(job_id):
 
 
 
-def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
+def run_batch_array(image_arn, script_path,  s3_path, generation, train_folds, val_folds):
 
     output_path = "{}/median_objectives/gen={}".format(s3_path, generation)
     if not s3_folder_exists(output_path): 
@@ -133,7 +133,7 @@ def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
 
         # 2. Submit the job
         cmd = [
-            "python3", "python_scripts/regime_navigator_2d.py",
+            "python3", script_path,
             "--s3_path", s3_path,
             "--generation", str(generation),
             "--train_folds", *map(str, train_folds),
@@ -179,7 +179,7 @@ def get_objectives(s3_path, generation, obj_columns = ['train_mean_regret', 'tra
 
 class BatchArrayProblem(Problem):
 
-    def __init__(self,  image_arn, s3_path, train_folds, val_folds, param_names, xl, xu):
+    def __init__(self,  image_arn, script_path, s3_path, train_folds, val_folds, param_names, xl, xu):
         
         self.__dict__.update({k: v for k, v in locals().items() if k != 'self'})
         self.generation = 0
@@ -192,7 +192,7 @@ class BatchArrayProblem(Problem):
         df_tasks.index = df_tasks.apply(get_dna_hash, axis = 1)
         
         df_tasks.to_parquet("{}/populations/gen_{}.parquet".format(self.s3_path, self.generation))
-        run_batch_array(self.image_arn, self.s3_path, self.generation, self.train_folds, self.val_folds)
+        run_batch_array(self.image_arn, self.script_path, self.s3_path, self.generation, self.train_folds, self.val_folds)
         df_obj = get_objectives(self.s3_path, self.generation)
 
         df_pop = df_tasks[[]].join(df_obj, how = 'left')
@@ -214,6 +214,7 @@ def main():
        'avg_eps_1q', 'avg_eps_2q', 'avg_eps_4q', 'avg_eps_8q',  'max_voo'
     ]
     image_arn = "129861351772.dkr.ecr.us-west-2.amazonaws.com/simulation:latest"
+    script_path = 'python_scripts/regime_navigator_0d.py'
     
     # df_initial = pd.read_parquet('sim_results/initial_pop_2d.parquet')
     # s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
@@ -235,17 +236,17 @@ def main():
     ])
 
     num_vars = len(xl)
-    master_problem = BatchArrayProblem(image_arn, args.s3_path, args.train_folds, args.val_folds, param_names, xl, xu)
+    master_problem = BatchArrayProblem(image_arn, script_path, args.s3_path, args.train_folds, args.val_folds, param_names, xl, xu)
     
     
 
-    algorithm = NSGA2(pop_size = 20)
+    algorithm = NSGA2(pop_size = 100)
     algorithm.setup(master_problem)
     
     
 
     
-    for gen in range(3):
+    for gen in range(300):
         
         
         
