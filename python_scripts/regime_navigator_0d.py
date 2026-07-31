@@ -171,11 +171,11 @@ if __name__ == "__main__":
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
     periods = {
-        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-06-06')},
+        'train': {'train_start_date': pd.to_datetime('2020-01-01'), 'val_start_date': pd.to_datetime('2022-01-01'), 'end_date': pd.to_datetime('2026-06-06')},
     }
     
     
-    df_folds = pd.read_parquet('strategy/folds_2.parquet')
+    df_folds = pd.read_parquet('strategy/folds_3.parquet')
     
  
     
