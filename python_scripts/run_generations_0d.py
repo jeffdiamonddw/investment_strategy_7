@@ -243,10 +243,9 @@ def main():
     algorithm = NSGA2(pop_size = 100)
     algorithm.setup(master_problem)
     
-    
 
     
-    for gen in range(1):
+    for gen in range(50):
         
         
         
