@@ -301,7 +301,7 @@ if __name__ == "__main__":
     df_agg['sim_id'] = parent_sim_id
     wr.s3.to_parquet(
             df=df_agg,
-            path='{}/median_objectives/gen_{}/sim_{}.parquet'.format(s3_path, generation, parent_sim_id),
+            path='{}/median_objectives/gen={}/sim_{}.parquet'.format(s3_path, generation, parent_sim_id),
             dataset=False,
             index = True,
             boto3_session=my_boto3_session 
