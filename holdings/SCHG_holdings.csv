@@ -1,0 +1,51 @@
+,Code,Exchange,Name,Sector,Industry,Country,Region,Assets_%
+NVDA.US,NVDA,US,NVIDIA Corporation,Technology,Semiconductors,United States,North America,11.51482
+AAPL.US,AAPL,US,Apple Inc,Technology,Consumer Electronics,United States,North America,9.70957
+MSFT.US,MSFT,US,Microsoft Corporation,Technology,Software - Infrastructure,United States,North America,7.46681
+AMZN.US,AMZN,US,Amazon.com Inc,Consumer Cyclical,Internet Retail,United States,North America,5.02282
+META.US,META,US,Meta Platforms Inc.,Communication Services,Internet Content & Information,United States,North America,4.57116
+GOOGL.US,GOOGL,US,Alphabet Inc Class A,Communication Services,Internet Content & Information,United States,North America,4.44309
+TSLA.US,TSLA,US,Tesla Inc,Consumer Cyclical,Auto Manufacturers,United States,North America,4.32522
+AVGO.US,AVGO,US,Broadcom Inc,Technology,Semiconductors,United States,North America,4.11839
+GOOG.US,GOOG,US,Alphabet Inc Class C,Communication Services,Internet Content & Information,United States,North America,3.55886
+LLY.US,LLY,US,Eli Lilly and Company,Healthcare,Drug Manufacturers - General,United States,North America,3.09158
+V.US,V,US,Visa Inc. Class A,Financial Services,Credit Services,United States,North America,2.04786
+COST.US,COST,US,Costco Wholesale Corp,Consumer Defensive,Discount Stores,United States,North America,1.66621
+MA.US,MA,US,Mastercard Inc,Financial Services,Credit Services,United States,North America,1.6231
+GE.US,GE,US,GE Aerospace,Industrials,Aerospace & Defense,United States,North America,1.34344
+AMD.US,AMD,US,Advanced Micro Devices Inc,Technology,Semiconductors,United States,North America,1.25997
+NFLX.US,NFLX,US,Netflix Inc,Communication Services,Entertainment,United States,North America,1.24193
+PLTR.US,PLTR,US,Palantir Technologies Inc.,Technology,Software - Infrastructure,United States,North America,1.1727
+UNH.US,UNH,US,UnitedHealth Group Incorporated,Healthcare,Healthcare Plans,United States,North America,0.99925
+LIN.US,LIN,US,Linde plc Ordinary Shares,Basic Materials,Specialty Chemicals,United States,North America,0.87079
+GEV.US,GEV,US,GE Vernova LLC,Industrials,Specialty Industrial Machinery,United States,North America,0.86164
+TMO.US,TMO,US,Thermo Fisher Scientific Inc,Healthcare,Diagnostics & Research,United States,North America,0.73638
+KLAC.US,KLAC,US,KLA Corporation,Technology,Semiconductor Equipment & Materials,United States,North America,0.73542
+DIS.US,DIS,US,Walt Disney Company,Communication Services,Entertainment,United States,North America,0.72054
+ISRG.US,ISRG,US,Intuitive Surgical Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.67377
+CRM.US,CRM,US,Salesforce.com Inc,Technology,Software - Application,United States,North America,0.67126
+BLK.US,BLK,US,BlackRock Inc,Financial Services,Asset Management,United States,North America,0.59365
+UBER.US,UBER,US,Uber Technologies Inc,Technology,Software - Application,United States,North America,0.57664
+ANET.US,ANET,US,Arista Networks,Technology,Computer Hardware,United States,North America,0.53929
+DHR.US,DHR,US,Danaher Corporation,Healthcare,Diagnostics & Research,United States,North America,0.50529
+BKNG.US,BKNG,US,Booking Holdings Inc,Consumer Cyclical,Travel Services,United States,North America,0.4923
+SPGI.US,SPGI,US,S&P Global Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.49156
+PH.US,PH,US,Parker-Hannifin Corporation,Industrials,Specialty Industrial Machinery,United States,North America,0.48625
+PANW.US,PANW,US,Palo Alto Networks Inc,Technology,Software - Infrastructure,United States,North America,0.45673
+VRTX.US,VRTX,US,Vertex Pharmaceuticals Inc,Healthcare,Biotechnology,United States,North America,0.45303
+PGR.US,PGR,US,Progressive Corp,Financial Services,Insurance - Property & Casualty,United States,North America,0.45032
+MCK.US,MCK,US,McKesson Corporation,Healthcare,Medical Distribution,United States,North America,0.4401
+APP.US,APP,US,Applovin Corp,Communication Services,Advertising Agencies,United States,North America,0.4247
+NOW.US,NOW,US,ServiceNow Inc,Technology,Software - Application,United States,North America,0.42437
+ADBE.US,ADBE,US,Adobe Systems Incorporated,Technology,Software - Application,United States,North America,0.41372
+INTU.US,INTU,US,Intuit Inc,Technology,Software - Application,United States,North America,0.40541
+CRWD.US,CRWD,US,Crowdstrike Holdings Inc,Technology,Software - Infrastructure,United States,North America,0.40355
+TMUS.US,TMUS,US,T-Mobile US Inc,Communication Services,Telecom Services,United States,North America,0.39457
+TT.US,TT,US,Trane Technologies plc,Industrials,Building Products & Equipment,United States,North America,0.39141
+VRT.US,VRT,US,Vertiv Holdings Co,Industrials,Electrical Equipment & Parts,United States,North America,0.35384
+CEG.US,CEG,US,Constellation Energy Corp,Utilities,Utilities - Independent Power Producers,United States,North America,0.34655
+EQIX.US,EQIX,US,Equinix Inc,Real Estate,REIT - Specialty,United States,North America,0.34325
+PWR.US,PWR,US,Quanta Services Inc,Industrials,Engineering & Construction,United States,North America,0.31451
+SHW.US,SHW,US,Sherwin-Williams Co,Basic Materials,Specialty Chemicals,United States,North America,0.31419
+SNPS.US,SNPS,US,Synopsys Inc,Technology,Software - Infrastructure,United States,North America,0.31315
+CDNS.US,CDNS,US,Cadence Design Systems Inc,Technology,Software - Application,United States,North America,0.30825

@@ -245,7 +245,7 @@ def main():
     
 
     
-    for gen in range(50):
+    for gen in range(150):
         
         
         

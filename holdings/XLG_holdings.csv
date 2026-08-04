@@ -1,0 +1,51 @@
+,Code,Exchange,Name,Sector,Industry,Country,Region,Assets_%
+NVDA.US,NVDA,US,NVIDIA Corporation,Technology,Semiconductors,United States,North America,13.05417
+AAPL.US,AAPL,US,Apple Inc,Technology,Consumer Electronics,United States,North America,11.00872
+MSFT.US,MSFT,US,Microsoft Corporation,Technology,Software - Infrastructure,United States,North America,8.46742
+AMZN.US,AMZN,US,Amazon.com Inc,Consumer Cyclical,Internet Retail,United States,North America,5.69772
+GOOGL.US,GOOGL,US,Alphabet Inc Class A,Communication Services,Internet Content & Information,United States,North America,5.03762
+AVGO.US,AVGO,US,Broadcom Inc,Technology,Semiconductors,United States,North America,4.50951
+GOOG.US,GOOG,US,Alphabet Inc Class C,Communication Services,Internet Content & Information,United States,North America,4.03567
+META.US,META,US,Meta Platforms Inc.,Communication Services,Internet Content & Information,United States,North America,4.01389
+TSLA.US,TSLA,US,Tesla Inc,Consumer Cyclical,Auto Manufacturers,United States,North America,3.30743
+BRK-B.US,BRK-B,US,Berkshire Hathaway Inc,Financial Services,Insurance - Diversified,United States,North America,2.60524
+JPM.US,JPM,US,JPMorgan Chase & Co,Financial Services,Banks - Diversified,United States,North America,2.39791
+LLY.US,LLY,US,Eli Lilly and Company,Healthcare,Drug Manufacturers - General,United States,North America,2.32305
+XOM.US,XOM,US,Exxon Mobil Corp,Energy,Oil & Gas Integrated,United States,North America,1.82019
+JNJ.US,JNJ,US,Johnson & Johnson,Healthcare,Drug Manufacturers - General,United States,North America,1.70109
+WMT.US,WMT,US,Walmart Inc. Common Stock,Consumer Defensive,Discount Stores,United States,North America,1.56535
+V.US,V,US,Visa Inc. Class A,Financial Services,Credit Services,United States,North America,1.53836
+COST.US,COST,US,Costco Wholesale Corp,Consumer Defensive,Discount Stores,United States,North America,1.25246
+MA.US,MA,US,Mastercard Inc,Financial Services,Credit Services,United States,North America,1.22036
+ABBV.US,ABBV,US,AbbVie Inc,Healthcare,Drug Manufacturers - General,United States,North America,1.13355
+HD.US,HD,US,The Home Depot Inc,Consumer Cyclical,Home Improvement Retail,United States,North America,1.07772
+PG.US,PG,US,Procter & Gamble Company,Consumer Defensive,Household & Personal Products,United States,North America,1.05941
+CAT.US,CAT,US,Caterpillar Inc,Industrials,Farm & Heavy Construction Machinery,United States,North America,1.01663
+BAC.US,BAC,US,Bank of America Corp,Financial Services,Banks - Diversified,United States,North America,1.01355
+GE.US,GE,US,GE Aerospace,Industrials,Aerospace & Defense,United States,North America,1.00976
+CVX.US,CVX,US,Chevron Corp,Energy,Oil & Gas Integrated,United States,North America,0.99986
+AMD.US,AMD,US,Advanced Micro Devices Inc,Technology,Semiconductors,United States,North America,0.94633
+NFLX.US,NFLX,US,Netflix Inc,Communication Services,Entertainment,United States,North America,0.93289
+CSCO.US,CSCO,US,Cisco Systems Inc,Technology,Communication Equipment,United States,North America,0.88521
+PLTR.US,PLTR,US,Palantir Technologies Inc.,Technology,Software - Infrastructure,United States,North America,0.88112
+KO.US,KO,US,The Coca-Cola Company,Consumer Defensive,Beverages - Non-Alcoholic,United States,North America,0.87349
+MRK.US,MRK,US,Merck & Company Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.86455
+PM.US,PM,US,Philip Morris International Inc,Consumer Defensive,Tobacco,United States,North America,0.81694
+WFC.US,WFC,US,Wells Fargo & Company,Financial Services,Banks - Diversified,United States,North America,0.78601
+GS.US,GS,US,Goldman Sachs Group Inc,Financial Services,Capital Markets,United States,North America,0.78571
+ORCL.US,ORCL,US,Oracle Corporation,Technology,Software - Infrastructure,United States,North America,0.75295
+UNH.US,UNH,US,UnitedHealth Group Incorporated,Healthcare,Healthcare Plans,United States,North America,0.75066
+IBM.US,IBM,US,International Business Machines,Technology,Information Technology Services,United States,North America,0.68513
+MCD.US,MCD,US,McDonald’s Corporation,Consumer Cyclical,Restaurants,United States,North America,0.6656
+LIN.US,LIN,US,Linde plc Ordinary Shares,Basic Materials,Specialty Chemicals,United States,North America,0.65367
+PEP.US,PEP,US,PepsiCo Inc,Consumer Defensive,Beverages - Non-Alcoholic,United States,North America,0.64362
+VZ.US,VZ,US,Verizon Communications Inc,Communication Services,Telecom Services,United States,North America,0.58633
+TXN.US,TXN,US,Texas Instruments Incorporated,Technology,Semiconductors,United States,North America,0.56633
+T.US,T,US,AT&T Inc,Communication Services,Telecom Services,United States,North America,0.56508
+ABT.US,ABT,US,Abbott Laboratories,Healthcare,Medical Devices,United States,North America,0.55791
+DIS.US,DIS,US,Walt Disney Company,Communication Services,Entertainment,United States,North America,0.54111
+ISRG.US,ISRG,US,Intuitive Surgical Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.50592
+CRM.US,CRM,US,Salesforce.com Inc,Technology,Software - Application,United States,North America,0.50403
+ACN.US,ACN,US,Accenture plc,Technology,Information Technology Services,United States,North America,0.3812
+NOW.US,NOW,US,ServiceNow Inc,Technology,Software - Application,United States,North America,0.31844
+ADBE.US,ADBE,US,Adobe Systems Incorporated,Technology,Software - Application,United States,North America,0.31007

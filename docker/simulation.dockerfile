@@ -20,6 +20,7 @@ RUN pip install psutil
 RUN pip install smart_open
 RUN pip install zarr
 RUN pip install paretoset
+RUN pip install "xarray[io]"
 
 # 6. Execute your specific parallel dry run
 CMD ["python3", "python_scripts/regime_navigator_0d.py"]

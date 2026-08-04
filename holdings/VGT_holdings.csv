@@ -1,0 +1,318 @@
+,Code,Exchange,Name,Sector,Industry,Country,Region,Assets_%
+NVDA.US,NVDA,US,NVIDIA Corporation,Technology,Semiconductors,United States,North America,18.05
+AAPL.US,AAPL,US,Apple Inc,Technology,Consumer Electronics,United States,North America,14.33
+MSFT.US,MSFT,US,Microsoft Corporation,Technology,Software - Infrastructure,United States,North America,10.94
+AVGO.US,AVGO,US,Broadcom Inc,Technology,Semiconductors,United States,North America,4.33
+MU.US,MU,US,Micron Technology Inc,Technology,Semiconductors,United States,North America,2.35
+AMD.US,AMD,US,Advanced Micro Devices Inc,Technology,Semiconductors,United States,North America,1.9
+PLTR.US,PLTR,US,Palantir Technologies Inc.,Technology,Software - Infrastructure,United States,North America,1.62
+CSCO.US,CSCO,US,Cisco Systems Inc,Technology,Communication Equipment,United States,North America,1.56
+LRCX.US,LRCX,US,Lam Research Corp,Technology,Semiconductor Equipment & Materials,United States,North America,1.52
+IBM.US,IBM,US,International Business Machines,Technology,Information Technology Services,United States,North America,1.44
+ORCL.US,ORCL,US,Oracle Corporation,Technology,Software - Infrastructure,United States,North America,1.37
+AMAT.US,AMAT,US,Applied Materials Inc,Technology,Semiconductor Equipment & Materials,United States,North America,1.34
+INTC.US,INTC,US,Intel Corporation,Technology,Semiconductors,United States,North America,1.07
+TXN.US,TXN,US,Texas Instruments Incorporated,Technology,Semiconductors,United States,North America,1.03
+CRM.US,CRM,US,Salesforce.com Inc,Technology,Software - Application,United States,North America,1.02
+KLAC.US,KLAC,US,KLA Corporation,Technology,Semiconductor Equipment & Materials,United States,North America,0.99
+APH.US,APH,US,Amphenol Corporation,Technology,Electronic Components,United States,North America,0.91
+ACN.US,ACN,US,Accenture plc,Technology,Information Technology Services,United States,North America,0.86
+QCOM.US,QCOM,US,Qualcomm Incorporated,Technology,Semiconductors,United States,North America,0.84
+ADI.US,ADI,US,Analog Devices Inc,Technology,Semiconductors,United States,North America,0.83
+ANET.US,ANET,US,Arista Networks,Technology,Computer Hardware,United States,North America,0.79
+INTU.US,INTU,US,Intuit Inc,Technology,Software - Application,United States,North America,0.72
+ADBE.US,ADBE,US,Adobe Systems Incorporated,Technology,Software - Application,United States,North America,0.66
+NOW.US,NOW,US,ServiceNow Inc,Technology,Software - Application,United States,North America,0.62
+PANW.US,PANW,US,Palo Alto Networks Inc,Technology,Software - Infrastructure,United States,North America,0.62
+CRWD.US,CRWD,US,Crowdstrike Holdings Inc,Technology,Software - Infrastructure,United States,North America,0.59
+APP.US,APP,US,Applovin Corp,Communication Services,Advertising Agencies,United States,North America,0.57
+SNDK.US,SNDK,US,Sandisk Corp,Technology,Computer Hardware,United States,North America,0.56
+WDC.US,WDC,US,Western Digital Corporation,Technology,Computer Hardware,United States,North America,0.54
+STX.US,STX,US,Seagate Technology PLC,Technology,Computer Hardware,United States,North America,0.54
+GLW.US,GLW,US,Corning Incorporated,Technology,Electronic Components,United States,North America,0.49
+SNPS.US,SNPS,US,Synopsys Inc,Technology,Software - Infrastructure,United States,North America,0.49
+CDNS.US,CDNS,US,Cadence Design Systems Inc,Technology,Software - Application,United States,North America,0.45
+MRVL.US,MRVL,US,Marvell Technology Group Ltd,Technology,Semiconductors,United States,North America,0.39
+MSI.US,MSI,US,Motorola Solutions Inc,Technology,Communication Equipment,United States,North America,0.39
+TEL.US,TEL,US,TE Connectivity Ltd,Technology,Electronic Components,United States,North America,0.39
+NXPI.US,NXPI,US,NXP Semiconductors NV,Technology,Semiconductors,United States,North America,0.36
+SNOW.US,SNOW,US,Snowflake Inc.,Technology,Software - Application,United States,North America,0.35
+MPWR.US,MPWR,US,Monolithic Power Systems Inc,Technology,Semiconductors,United States,North America,0.34
+FTNT.US,FTNT,US,Fortinet Inc,Technology,Software - Infrastructure,United States,North America,0.33
+ADSK.US,ADSK,US,Autodesk Inc,Technology,Software - Application,United States,North America,0.32
+NET.US,NET,US,Cloudflare Inc,Technology,Software - Infrastructure,United States,North America,0.32
+TER.US,TER,US,Teradyne Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.3
+MCHP.US,MCHP,US,Microchip Technology Inc,Technology,Semiconductors,United States,North America,0.29
+CTSH.US,CTSH,US,Cognizant Technology Solutions Corp Class A,Technology,Information Technology Services,United States,North America,0.28
+KEYS.US,KEYS,US,Keysight Technologies Inc,Technology,Scientific & Technical Instruments,United States,North America,0.28
+COHR.US,COHR,US,Coherent Inc,Technology,Scientific & Technical Instruments,United States,North America,0.28
+CIEN.US,CIEN,US,Ciena Corp,Technology,Communication Equipment,United States,North America,0.27
+LITE.US,LITE,US,Lumentum Holdings Inc,Technology,Communication Equipment,United States,North America,0.27
+ROP.US,ROP,US,"Roper Technologies, Inc.",Technology,Software - Application,United States,North America,0.25
+DDOG.US,DDOG,US,Datadog Inc,Technology,Software - Application,United States,North America,0.24
+WDAY.US,WDAY,US,Workday Inc,Technology,Software - Application,United States,North America,0.24
+FICO.US,FICO,US,Fair Isaac Corporation,Technology,Software - Application,United States,North America,0.24
+DELL.US,DELL,US,Dell Technologies Inc,Technology,Computer Hardware,United States,North America,0.24
+TDY.US,TDY,US,Teledyne Technologies Incorporated,Technology,Scientific & Technical Instruments,United States,North America,0.23
+MDB.US,MDB,US,MongoDB,Technology,Software - Infrastructure,United States,North America,0.23
+MSTR.US,MSTR,US,MicroStrategy Incorporated,Technology,Software - Application,United States,North America,0.21
+ON.US,ON,US,ON Semiconductor Corporation,Technology,Semiconductors,United States,North America,0.21
+MKSI.US,MKSI,US,MKS Instruments Inc,Technology,Scientific & Technical Instruments,United States,North America,0.21
+JBL.US,JBL,US,Jabil Circuit Inc,Technology,Electronic Components,United States,North America,0.21
+HPE.US,HPE,US,Hewlett Packard Enterprise Co,Technology,Communication Equipment,United States,North America,0.2
+ZM.US,ZM,US,Zoom Video Communications Inc,Technology,Software - Application,United States,North America,0.2
+FLEX.US,FLEX,US,Flex Ltd,Technology,Electronic Components,United States,North America,0.19
+ENTG.US,ENTG,US,Entegris Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.18
+MTSI.US,MTSI,US,MACOM Technology Solutions Holdings Inc,Technology,Semiconductors,United States,North America,0.18
+FSLR.US,FSLR,US,First Solar Inc,Technology,Solar,United States,North America,0.18
+VRSN.US,VRSN,US,VeriSign Inc,Technology,Software - Infrastructure,United States,North America,0.18
+Q.US,Q,US,"Qnity Electronics, Inc",Technology,Semiconductor Equipment & Materials,United States,North America,0.18
+FN.US,FN,US,Fabrinet,Technology,Electronic Components,United States,North America,0.17
+TTMI.US,TTMI,US,TTM Technologies Inc,Technology,Electronic Components,United States,North America,0.17
+TWLO.US,TWLO,US,Twilio Inc,Technology,Software - Infrastructure,United States,North America,0.17
+ONTO.US,ONTO,US,Onto Innovation Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.17
+ALAB.US,ALAB,US,"Astera Labs, Inc.",Technology,Semiconductors,United States,North America,0.16
+AKAM.US,AKAM,US,Akamai Technologies Inc,Technology,Software - Infrastructure,United States,North America,0.16
+FFIV.US,FFIV,US,F5 Networks Inc,Technology,Software - Infrastructure,United States,North America,0.16
+PSTG.US,PSTG,US,Pure Storage Inc,Technology,Computer Hardware,United States,North America,0.16
+EPAM.US,EPAM,US,EPAM Systems Inc,Technology,Information Technology Services,United States,North America,0.16
+NTAP.US,NTAP,US,NetApp Inc,Technology,Software - Infrastructure,United States,North America,0.15
+TEAM.US,TEAM,US,Atlassian Corp Plc,Technology,Software - Application,United States,North America,0.15
+PTC.US,PTC,US,PTC Inc,Technology,Software - Application,United States,North America,0.15
+CRDO.US,CRDO,US,Credo Technology Group Holding Ltd,Technology,Semiconductors,United States,North America,0.15
+AEIS.US,AEIS,US,Advanced Energy Industries Inc,Industrials,Electrical Equipment & Parts,United States,North America,0.15
+CFLT.US,CFLT,US,Confluent Inc,Technology,Software - Infrastructure,United States,North America,0.15
+ZS.US,ZS,US,Zscaler Inc,Technology,Software - Infrastructure,United States,North America,0.15
+TRMB.US,TRMB,US,Trimble Inc,Technology,Scientific & Technical Instruments,United States,North America,0.14
+OKTA.US,OKTA,US,Okta Inc,Technology,Software - Infrastructure,United States,North America,0.14
+IT.US,IT,US,Gartner Inc,Technology,Information Technology Services,United States,North America,0.14
+CDW.US,CDW,US,CDW Corp,Technology,Information Technology Services,United States,North America,0.14
+HPQ.US,HPQ,US,HP Inc,Technology,Computer Hardware,United States,North America,0.14
+SITM.US,SITM,US,Sitime Corporation,Technology,Semiconductors,United States,North America,0.14
+LFUS.US,LFUS,US,Littelfuse Inc,Technology,Electronic Components,United States,North America,0.14
+RMBS.US,RMBS,US,Rambus Inc,Technology,Semiconductors,United States,North America,0.14
+LSCC.US,LSCC,US,Lattice Semiconductor Corporation,Technology,Semiconductors,United States,North America,0.14
+SNX.US,SNX,US,Synnex Corporation,Technology,Electronics & Computer Distribution,United States,North America,0.14
+TYL.US,TYL,US,Tyler Technologies Inc,Technology,Software - Application,United States,North America,0.14
+GEN.US,GEN,US,Gen Digital Inc.,Technology,Software - Infrastructure,United States,North America,0.13
+GDDY.US,GDDY,US,Godaddy Inc,Technology,Software - Infrastructure,United States,North America,0.13
+APLD.US,APLD,US,Applied Digital Corporation,Technology,Information Technology Services,United States,North America,0.13
+ZBRA.US,ZBRA,US,Zebra Technologies Corporation,Technology,Communication Equipment,United States,North America,0.13
+SMTC.US,SMTC,US,Semtech Corporation,Technology,Semiconductors,United States,North America,0.13
+ARW.US,ARW,US,Arrow Electronics Inc,Technology,Electronics & Computer Distribution,United States,North America,0.12
+CWAN.US,CWAN,US,Clearwater Analytics Holdings Inc,Technology,Software - Application,United States,North America,0.12
+DT.US,DT,US,Dynatrace Holdings LLC,Technology,Software - Application,United States,North America,0.12
+SMCI.US,SMCI,US,Super Micro Computer Inc,Technology,Computer Hardware,United States,North America,0.11
+HUBS.US,HUBS,US,HubSpot Inc,Technology,Software - Application,United States,North America,0.11
+RAL.US,RAL,US,Ralliant Corporation Common Stock,Technology,Electronic Components,United States,North America,0.11
+AMKR.US,AMKR,US,Amkor Technology Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.11
+CRUS.US,CRUS,US,Cirrus Logic Inc,Technology,Semiconductors,United States,North America,0.11
+MANH.US,MANH,US,Manhattan Associates Inc,Technology,Software - Application,United States,North America,0.11
+DOCU.US,DOCU,US,DocuSign Inc,Technology,Software - Application,United States,North America,0.11
+SANM.US,SANM,US,Sanmina Corporation,Technology,Electronic Components,United States,North America,0.11
+IDCC.US,IDCC,US,InterDigital Inc,Technology,Software - Application,United States,North America,0.11
+U.US,U,US,Unity Software Inc,Technology,Software - Application,United States,North America,0.11
+HUT.US,HUT,US,Hut 8 Corp. Common Stock,Financial Services,Capital Markets,United States,North America,0.1
+VIAV.US,VIAV,US,Viavi Solutions Inc,Technology,Communication Equipment,United States,North America,0.1
+FORM.US,FORM,US,FormFactor Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.1
+DMYI.US,DMYI,US,dMY Technology Group Inc. III,Financial Services,Shell Companies,United States,North America,0.1
+PLXS.US,PLXS,US,Plexus Corp,Technology,Electronic Components,United States,North America,0.1
+FROG.US,FROG,US,Jfrog Ltd,Technology,Software - Application,United States,North America,0.1
+GWRE.US,GWRE,US,Guidewire Software Inc,Technology,Software - Application,United States,North America,0.1
+QRVO.US,QRVO,US,Qorvo Inc,Technology,Semiconductors,United States,North America,0.1
+PATH.US,PATH,US,Uipath Inc,Technology,Software - Infrastructure,United States,North America,0.1
+VNT.US,VNT,US,Vontier Corp,Technology,Scientific & Technical Instruments,United States,North America,0.1
+SWKS.US,SWKS,US,Skyworks Solutions Inc,Technology,Semiconductors,United States,North America,0.1
+CGNX.US,CGNX,US,Cognex Corporation,Technology,Scientific & Technical Instruments,United States,North America,0.1
+MIR.US,MIR,US,Mirion Technologies Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.1
+AVT.US,AVT,US,Avnet Inc,Technology,Electronics & Computer Distribution,United States,North America,0.1
+IOT.US,IOT,US,Samsara Inc,Technology,Software - Infrastructure,United States,North America,0.09
+NTNX.US,NTNX,US,Nutanix Inc,Technology,Software - Infrastructure,United States,North America,0.09
+RBRK.US,RBRK,US,"Rubrik, Inc.",Technology,Software - Infrastructure,United States,North America,0.09
+PCOR.US,PCOR,US,Procore Technologies Inc,Technology,Software - Application,United States,North America,0.09
+ENPH.US,ENPH,US,Enphase Energy Inc,Technology,Solar,United States,North America,0.09
+NOVT.US,NOVT,US,Novanta Inc,Technology,Scientific & Technical Instruments,United States,North America,0.09
+ALGM.US,ALGM,US,Allegro Microsystems Inc,Technology,Semiconductors,United States,North America,0.09
+KD.US,KD,US,Kyndryl Holdings Inc,Technology,Information Technology Services,United States,North America,0.09
+QLYS.US,QLYS,US,Qualys Inc,Technology,Software - Infrastructure,United States,North America,0.09
+DBX.US,DBX,US,Dropbox Inc,Technology,Software - Infrastructure,United States,North America,0.09
+ESTC.US,ESTC,US,Elastic NV,Technology,Software - Application,United States,North America,0.09
+VSAT.US,VSAT,US,ViaSat Inc,Technology,Communication Equipment,United States,North America,0.09
+BDC.US,BDC,US,Belden Inc,Technology,Communication Equipment,United States,North America,0.09
+SLAB.US,SLAB,US,Silicon Laboratories Inc,Technology,Semiconductors,United States,North America,0.09
+RIOT.US,RIOT,US,Riot Blockchain Inc,Financial Services,Capital Markets,United States,North America,0.09
+QBTS.US,QBTS,US,D-Wave Quantum Inc.,Technology,Computer Hardware,United States,North America,0.09
+OLED.US,OLED,US,Universal Display,Technology,Electronic Components,United States,North America,0.09
+ACIW.US,ACIW,US,ACI Worldwide Inc,Technology,Software - Infrastructure,United States,North America,0.08
+CORZ.US,CORZ,US,"Core Scientific, Inc. Common Stock",Technology,Software - Infrastructure,United States,North America,0.08
+BSY.US,BSY,US,Bentley Systems Inc,Technology,Software - Application,United States,North America,0.08
+BMI.US,BMI,US,Badger Meter Inc,Technology,Scientific & Technical Instruments,United States,North America,0.08
+GTLB.US,GTLB,US,Gitlab Inc,Technology,Software - Infrastructure,United States,North America,0.08
+S.US,S,US,SentinelOne Inc,Technology,Software - Infrastructure,United States,North America,0.08
+ITRI.US,ITRI,US,Itron Inc,Technology,Scientific & Technical Instruments,United States,North America,0.08
+AUR.US,AUR,US,Aurora Innovation Inc,Technology,Information Technology Services,United States,North America,0.08
+CIFR.US,CIFR,US,Cipher Mining Inc,Financial Services,Capital Markets,United States,North America,0.08
+APPF.US,APPF,US,Appfolio Inc,Technology,Software - Application,United States,North America,0.08
+WULF.US,WULF,US,Terawulf Inc,Financial Services,Capital Markets,United States,North America,0.08
+OSIS.US,OSIS,US,OSI Systems Inc,Technology,Electronic Components,United States,North America,0.08
+PEGA.US,PEGA,US,Pegasystems Inc,Technology,Software - Application,United States,North America,0.07
+DLB.US,DLB,US,Dolby Laboratories,Industrials,Specialty Business Services,United States,North America,0.07
+RGTI.US,RGTI,US,Rigetti Computing Inc,Technology,Computer Hardware,United States,North America,0.07
+QTWO.US,QTWO,US,Q2 Holdings,Technology,Software - Application,United States,North America,0.07
+WK.US,WK,US,Workiva Inc,Technology,Software - Application,United States,North America,0.07
+DOCN.US,DOCN,US,DigitalOcean Holdings Inc,Technology,Software - Infrastructure,United States,North America,0.07
+DGNR.US,DGNR,US,Dragoneer Growth Opportunities Corp,Financial Services,Shell Companies,United States,North America,0.07
+BILL.US,BILL,US,Bill Com Holdings Inc,Technology,Software - Application,United States,North America,0.07
+COMM.US,COMM,US,CommScope Holding Co Inc,Technology,Communication Equipment,United States,North America,0.07
+BOX.US,BOX,US,Box Inc,Technology,Software - Infrastructure,United States,North America,0.07
+CMPO.US,CMPO,US,"CompoSecure, Inc.",Industrials,Metal Fabrication,United States,North America,0.07
+PI.US,PI,US,Impinj Inc,Technology,Semiconductors,United States,North America,0.07
+CVLT.US,CVLT,US,CommVault Systems Inc,Technology,Software - Application,United States,North America,0.07
+LIFX.US,LIFX,US,Life360 Inc,Technology,Software - Application,United States,North America,0.07
+SPSC.US,SPSC,US,SPS Commerce Inc,Technology,Software - Application,United States,North America,0.06
+VRNS.US,VRNS,US,Varonis Systems,Technology,Software - Infrastructure,United States,North America,0.06
+ZETA.US,ZETA,US,Zeta Global Holdings Corp,Technology,Software - Infrastructure,United States,North America,0.06
+CLSK.US,CLSK,US,CleanSpark Inc,Financial Services,Capital Markets,United States,North America,0.06
+SYNA.US,SYNA,US,Synaptics Incorporated,Technology,Semiconductors,United States,North America,0.06
+ACMR.US,ACMR,US,Acm Research Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.06
+KLIC.US,KLIC,US,Kulicke and Soffa Industries Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.06
+MARA.US,MARA,US,Marathon Digital Holdings Inc,Financial Services,Capital Markets,United States,North America,0.06
+SOUN.US,SOUN,US,SoundHound AI Inc,Technology,Software - Application,United States,North America,0.05
+CALX.US,CALX,US,Calix Inc,Technology,Software - Infrastructure,United States,North America,0.05
+DIOD.US,DIOD,US,Diodes Incorporated,Technology,Semiconductors,United States,North America,0.05
+ACLS.US,ACLS,US,Axcelis Technologies Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.05
+TENB.US,TENB,US,Tenable Holdings Inc,Technology,Software - Infrastructure,United States,North America,0.05
+CRCL.US,CRCL,US,"Circle Internet Group, Inc.",Financial Services,Capital Markets,United States,North America,0.05
+CXT.US,CXT,US,Crane NXT Co,Industrials,Specialty Industrial Machinery,United States,North America,0.05
+DXC.US,DXC,US,DXC Technology Co,Technology,Information Technology Services,United States,North America,0.05
+POWI.US,POWI,US,Power Integrations Inc,Technology,Semiconductors,United States,North America,0.05
+AMBA.US,AMBA,US,Ambarella Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.05
+YOU.US,YOU,US,Clear Secure Inc,Technology,Software - Application,United States,North America,0.05
+BL.US,BL,US,Blackline Inc,Technology,Software - Application,United States,North America,0.05
+TDC.US,TDC,US,Teradata Corp,Technology,Software - Infrastructure,United States,North America,0.05
+NSIT.US,NSIT,US,Insight Enterprises Inc,Technology,Electronics & Computer Distribution,United States,North America,0.05
+IPGP.US,IPGP,US,IPG Photonics Corporation,Technology,Semiconductor Equipment & Materials,United States,North America,0.04
+AAOI.US,AAOI,US,Applied Opt,Technology,Communication Equipment,United States,North America,0.04
+AGYS.US,AGYS,US,Agilysys Inc,Technology,Software - Application,United States,North America,0.04
+ALRM.US,ALRM,US,Alarm.com Holdings Inc,Technology,Software - Application,United States,North America,0.04
+ASGN.US,ASGN,US,ASGN Inc,Technology,Information Technology Services,United States,North America,0.04
+KVYO.US,KVYO,US,"Klaviyo, Inc.",Technology,Software - Application,United States,North America,0.04
+PLUS.US,PLUS,US,ePlus inc,Technology,Software - Application,United States,North America,0.04
+VSH.US,VSH,US,Vishay Intertechnology Inc,Technology,Semiconductors,United States,North America,0.04
+NCNO.US,NCNO,US,nCino Inc,Technology,Software - Application,United States,North America,0.04
+LASR.US,LASR,US,nLIGHT Inc,Technology,Semiconductors,United States,North America,0.04
+BELFB.US,BELFB,US,Bel Fuse B Inc,Technology,Electronic Components,United States,North America,0.04
+BLKB.US,BLKB,US,Blackbaud Inc,Technology,Software - Application,United States,North America,0.04
+KN.US,KN,US,Knowles Cor,Technology,Electronic Components,United States,North America,0.04
+FRSH.US,FRSH,US,Freshworks Inc,Technology,Software - Application,United States,North America,0.04
+PLAB.US,PLAB,US,Photronics Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.04
+NTCT.US,NTCT,US,NetScout Systems Inc,Technology,Software - Infrastructure,United States,North America,0.04
+UCTT.US,UCTT,US,Ultra Clean Holdings Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.04
+EXTR.US,EXTR,US,Extreme Networks Inc,Technology,Communication Equipment,United States,North America,0.04
+INTA.US,INTA,US,Intapp Inc,Technology,Software - Application,United States,North America,0.04
+BHE.US,BHE,US,Benchmark Electronics Inc,Technology,Electronic Components,United States,North America,0.04
+VECO.US,VECO,US,Veeco Instruments Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.04
+QUBT.US,QUBT,US,Quantum Computing Inc,Technology,Computer Hardware,United States,North America,0.04
+RNG.US,RNG,US,Ringcentral Inc,Technology,Software - Application,United States,North America,0.04
+SEDG.US,SEDG,US,SolarEdge Technologies Inc,Technology,Solar,United States,North America,0.03
+PRGS.US,PRGS,US,Progress Software Corporation,Technology,Software - Infrastructure,United States,North America,0.03
+OS.US,OS,US,"OneStream, Inc. Class A Common Stock",Technology,Software - Infrastructure,United States,North America,0.03
+DGII.US,DGII,US,Digi International Inc,Technology,Communication Equipment,United States,North America,0.03
+RAMP.US,RAMP,US,Liveramp Holdings Inc,Technology,Software - Infrastructure,United States,North America,0.03
+BRZE.US,BRZE,US,Braze Inc,Technology,Software - Application,United States,North America,0.03
+ALKT.US,ALKT,US,Alkami Technology Inc,Technology,Software - Application,United States,North America,0.03
+ROG.US,ROG,US,Rogers Corporation,Technology,Electronic Components,United States,North America,0.03
+BBAI.US,BBAI,US,BigBearai Holdings Inc,Technology,Information Technology Services,United States,North America,0.03
+CTS.US,CTS,US,CTS Corporation,Technology,Electronic Components,United States,North America,0.03
+MXL.US,MXL,US,MaxLinear Inc,Technology,Semiconductors,United States,North America,0.03
+APXT.US,APXT,US,Apex Technology Acquisition Corporation,Financial Services,Shell Companies,United States,North America,0.03
+AI.US,AI,US,C3 Ai Inc,Technology,Software - Infrastructure,United States,North America,0.03
+VERX.US,VERX,US,Vertex,Technology,Software - Application,United States,North America,0.03
+COHU.US,COHU,US,Cohu Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.03
+NSSC.US,NSSC,US,NAPCO Security Technologies Inc,Industrials,Security & Protection Services,United States,North America,0.02
+ARLO.US,ARLO,US,Arlo Technologies,Industrials,Building Products & Equipment,United States,North America,0.02
+VYX.US,VYX,US,NCR Voyix Corporation,Technology,Information Technology Services,United States,North America,0.02
+FSLY.US,FSLY,US,"Fastly, Inc. Class A Common Stock",Technology,Software - Application,United States,North America,0.02
+ATEN.US,ATEN,US,A10 Network,Technology,Software - Infrastructure,United States,North America,0.02
+LOKB.US,LOKB,US,Live Oak Acquisition Corp. II,Financial Services,Shell Companies,United States,North America,0.02
+FIVN.US,FIVN,US,Five9 Inc,Technology,Software - Infrastructure,United States,North America,0.02
+HLIT.US,HLIT,US,Harmonic Inc,Technology,Communication Equipment,United States,North America,0.02
+OUST.US,OUST,US,"Ouster, Inc. Common Stock",Technology,Electronic Components,United States,North America,0.02
+PAR.US,PAR,US,PAR Technology Corporation,Technology,Software - Application,United States,North America,0.02
+NN_old.US,NN_old,US,NN,Communication Services,Internet Content & Information,United States,North America,0.02
+ICHR.US,ICHR,US,Ichor Holdings Ltd,Technology,Semiconductor Equipment & Materials,United States,North America,0.02
+DBD.US,DBD,US,"Diebold Nixdorf, Incorporated",Technology,Software - Application,United States,North America,0.02
+PDFS.US,PDFS,US,PDF Solutions Inc,Technology,Software - Application,United States,North America,0.02
+88E.F,88E,F,88E,Technology,Information Technology Services,Germany,Europe,0.02
+PD.US,PD,US,Pagerduty Inc,Technology,Software - Application,United States,North America,0.02
+SCSC.US,SCSC,US,ScanSource Inc,Technology,Electronics & Computer Distribution,United States,North America,0.02
+PGYWW.US,PGYWW,US,Pagaya Technologies Ltd. Warrants,,,United States,North America,0.02
+APPN.US,APPN,US,Appian Corp,Technology,Software - Infrastructure,United States,North America,0.02
+DAKT.US,DAKT,US,Daktronics Inc,Technology,Electronic Components,United States,North America,0.02
+ASAN.US,ASAN,US,Asana Inc,Technology,Software - Application,United States,North America,0.02
+AMPL_old.US,AMPL_old,US,AMPL,Technology, Software - Application,United States,North America,0.02
+INDI.US,INDI,US,indie Semiconductor Inc,Technology,Semiconductors,United States,North America,0.02
+CXM.US,CXM,US,Sprinklr Inc,Technology,Software - Application,United States,North America,0.01
+DJCO.US,DJCO,US,Daily Journal Corp,Technology,Software - Application,United States,North America,0.01
+YEXT.US,YEXT,US,Yext Inc,Technology,Software - Infrastructure,United States,North America,0.01
+JAMF.US,JAMF,US,Jamf Holding,Technology,Software - Application,United States,North America,0.01
+KE.US,KE,US,Kimball Electronics,Industrials,Electrical Equipment & Parts,United States,North America,0.01
+AEHR.US,AEHR,US,Aehr Test Systems,Technology,Semiconductor Equipment & Materials,United States,North America,0.01
+RPD.US,RPD,US,Rapid7 Inc,Technology,Software - Infrastructure,United States,North America,0.01
+CNXN.US,CNXN,US,PC Connection Inc,Technology,Electronics & Computer Distribution,United States,North America,0.01
+QH9.MU,QH9,MU,ADTRAN Holdings Inc.,,,Germany,Europe,0.01
+NHIC_old1.US,NHIC_old1,US,NHIC,Financial Services,Shell Companies,United States,North America,0.01
+NTSK.US,NTSK,US,"Netskope, Inc. Class A Common Stock",Technology,Software - Infrastructure,United States,North America,0.01
+PWFL.US,PWFL,US,PowerFleet Inc,Technology,Software - Infrastructure,United States,North America,0.01
+VPG.US,VPG,US,Vishay Precision Group Inc,Technology,Scientific & Technical Instruments,United States,North America,0.01
+NTGR.US,NTGR,US,NETGEAR Inc,Technology,Communication Equipment,United States,North America,0.01
+CEVA.US,CEVA,US,CEVA Inc,Technology,Semiconductors,United States,North America,0.01
+AOSL.US,AOSL,US,Alpha and Omega Semiconductor Ltd,Technology,Semiconductors,United States,North America,0.01
+GDYN.US,GDYN,US,Grid Dynamics Holdings Inc,Technology,Information Technology Services,United States,North America,0.01
+SEMR.US,SEMR,US,Semrush Holdings Inc,Technology,Software - Application,United States,North America,0.01
+PRCH.US,PRCH,US,Porch Group Inc,Technology,Software - Application,United States,North America,0.01
+APPS.US,APPS,US,Digital Turbine Inc,Technology,Software - Application,United States,North America,0.01
+RDVT.US,RDVT,US,Red Violet Inc,Technology,Software - Application,United States,North America,0.01
+IIIV.US,IIIV,US,i3 Verticals Inc,Technology,Software - Infrastructure,United States,North America,0.01
+BLND.US,BLND,US,Blend Labs Inc,Technology,Software - Application,United States,North America,0.01
+SPT.US,SPT,US,Sprout Social Inc,Technology,Software - Application,United States,North America,0.01
+CRNC.US,CRNC,US,Cerence Inc,Technology,Software - Application,United States,North America,0.01
+MITK.US,MITK,US,Mitek Systems Inc,Technology,Software - Application,United States,North America,0.01
+NABL.US,NABL,US,N-Able Inc,Technology,Information Technology Services,United States,North America,0.01
+HCKT.US,HCKT,US,The Hackett Group Inc,Technology,Information Technology Services,United States,North America,0.01
+OSPN.US,OSPN,US,OneSpan Inc,Technology,Software - Infrastructure,United States,North America,0.01
+LWLG.US,LWLG,US,Lightwave Logic Inc,Basic Materials,Specialty Chemicals,United States,North America,0.01
+CCSI.US,CCSI,US,Consensus Cloud Solutions Inc,Technology,Software - Infrastructure,United States,North America,0.01
+WEAV.US,WEAV,US,Weave Communications Inc,Healthcare,Health Information Services,United States,North America,0.01
+KODK.US,KODK,US,Eastman Kodak Co,Industrials,Specialty Business Services,United States,North America,0.01
+CLFD.US,CLFD,US,Clearfield Inc,Technology,Communication Equipment,United States,North America,0.01
+NVEC.US,NVEC,US,NVE Corporation,Technology,Semiconductors,United States,North America,0.01
+BELFA.US,BELFA,US,Bel Fuse A Inc,Technology,Electronic Components,United States,North America,0.01
+MEI.US,MEI,US,Methode Electronics Inc,Technology,Electronic Components,United States,North America,0.01
+FWAA.US,FWAA,US,Fifth Wall Acquisition Corp. I,"Electronic Equipment, Instruments & Components",Information Technology,United States,North America,0.01
+XRX.US,XRX,US,Xerox Corp,Industrials,Business Equipment & Supplies,United States,North America,0.0
+RBBN.US,RBBN,US,Ribbon Communications Inc,Technology,Software - Application,United States,North America,0.0
+CRSR.US,CRSR,US,Corsair Gaming Inc,Technology,Computer Hardware,United States,North America,0.0
+XPER.US,XPER,US,Xperi Corp,Technology,Software - Application,United States,North America,0.0
+BIGC.US,BIGC,US,Bigcommerce Holdings Inc,Technology,Software - Application,United States,North America,0.0
+EGHT.US,EGHT,US,8x8 Inc Common Stock,Technology,Software - Application,United States,North America,0.0
+MVIS.US,MVIS,US,Microvision Inc,Technology,Scientific & Technical Instruments,United States,North America,0.0
+DOMO.US,DOMO,US,Domo Inc,Technology,Software - Application,United States,North America,0.0
+UIS.US,UIS,US,Unisys Corporation,Technology,Information Technology Services,United States,North America,0.0
+RMNI.US,RMNI,US,Rimini Street Inc,Technology,Software - Application,United States,North America,0.0
+LAW.US,LAW,US,CS Disco LLC,Technology,Software - Application,United States,North America,0.0
+EXFY.US,EXFY,US,Expensify Inc,Technology,Software - Application,United States,North America,0.0
+PMTS.TO,PMTS,TO,CPI Card Group Inc,Financial Services,Credit Services,Canada,North America,0.0
+DMRC.US,DMRC,US,Digimarc Corporation,Technology,Software - Application,United States,North America,0.0
+RXT_old.US,RXT_old,US,Rackspace Technology Inc,Technology, Software - Infrastructure,United States,North America,0.0
+EXOD.US,EXOD,US,"Exodus Movement, Inc.",Technology,Software - Infrastructure,United States,North America,0.0
+ONDS_old.US,ONDS_old,US,Ondas Holdings Inc,Information Technology,Communications Equipment,United States,North America,0.0
+SKYT.US,SKYT,US,Skywater Technology Inc,Technology,Semiconductors,United States,North America,0.0
+IREN.US,IREN,US,IREN Ltd,Financial Services,Capital Markets,United States,North America,0.0
+CRWV.US,CRWV,US,"CoreWeave, Inc. Class A Common Stock",Technology,Software - Infrastructure,United States,North America,0.0
+KOPN.US,KOPN,US,Kopin Corporation,Technology,Electronic Components,United States,North America,0.0
+TTAN.US,TTAN,US,"ServiceTitan, Inc. Class A Common Stock",Technology,Software - Application,United States,North America,0.0
+DNJR.US,DNJR,US,Golden Bull Limited,Financial Services,Credit Services,United States,North America,0.0
+VERI.US,VERI,US,Veritone Inc,Technology,Software - Infrastructure,United States,North America,0.0
+BMNR.US,BMNR,US,"Bitmine Immersion Technologies, Inc.",Financial Services,Capital Markets,United States,North America,0.0
+FIG.US,FIG,US,"Figma, Inc.",Technology,Software - Application,United States,North America,0.0

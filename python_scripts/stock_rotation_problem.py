@@ -300,9 +300,9 @@ class StockRotationProblem(Problem):
 
 def get_sr_problem_params(
         periods,
-        momentum_file = "simulation_data/momentum.nc", 
-        quality_file = "simulation_data/quality.nc",
-        gic_file = "simulation_data/gic_data.nc",
+        momentum_file = "s3://jdinvestment/simulation_data/momentum.nc", 
+        quality_file = "s3://jdinvestment/simulation_data/quality.nc",
+        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
         params = None,
         output_folder = None
         

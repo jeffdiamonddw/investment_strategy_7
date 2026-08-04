@@ -1,3 +1,4 @@
+nohup: ignoring input
 
 Compiled modules for significant speedup can not be used!
 https://pymoo.org/installation.html#installation
@@ -8,15 +9,15 @@ Config.warnings['not_compiled'] = False
 
 Registering/Updating Job Definition: simulation-job-def...
 Submitting array job...
-Successfully submitted! Job ID: 036af51c-2c8e-45e6-ad6d-d57aebe84817 for generation 0
+Successfully submitted! Job ID: 2277b258-98f0-4886-a20a-13170a4712e9 for generation 0
 batch complete: (False, 0)
-waiting on batch 34.027764558792114 seconds, 0/100 complete
-waiting on batch 66.74704384803772 seconds, 0/100 complete
-waiting on batch 99.4099817276001 seconds, 0/100 complete
-waiting on batch 132.0695550441742 seconds, 0/100 complete
-waiting on batch 164.70673084259033 seconds, 0/100 complete
-waiting on batch 197.3329563140869 seconds, 100/100 complete
-completed Job ID: 036af51c-2c8e-45e6-ad6d-d57aebe84817 for generation 0
+waiting on batch 33.96852493286133 seconds, 0/100 complete
+waiting on batch 66.62128019332886 seconds, 0/100 complete
+waiting on batch 99.25791478157043 seconds, 17/100 complete
+waiting on batch 131.9072620868683 seconds, 60/100 complete
+waiting on batch 164.5271303653717 seconds, 96/100 complete
+waiting on batch 197.17450666427612 seconds, 100/100 complete
+completed Job ID: 2277b258-98f0-4886-a20a-13170a4712e9 for generation 0
 Traceback (most recent call last):
   File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_0d.py", line 279, in <module>
     main()
@@ -44,4 +45,4 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^
   File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/s3/_read_parquet.py", line 525, in read_parquet
     raise exceptions.NoFilesFound(f"No files Found on: {path}.")
-awswrangler.exceptions.NoFilesFound: No files Found on: s3://jdinvestment/0d_test_2/median_objectives/gen=0/.
+awswrangler.exceptions.NoFilesFound: No files Found on: s3://jdinvestment/0d_quality_fixed/median_objectives/gen=0/.

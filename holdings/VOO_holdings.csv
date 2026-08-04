@@ -1,0 +1,503 @@
+,Code,Exchange,Name,Sector,Industry,Country,Region,Assets_%
+NVDA.US,NVDA,US,NVIDIA Corporation,Technology,Semiconductors,United States,North America,7.84
+AAPL.US,AAPL,US,Apple Inc,Technology,Consumer Electronics,United States,North America,6.47
+MSFT.US,MSFT,US,Microsoft Corporation,Technology,Software - Infrastructure,United States,North America,5.4
+AMZN.US,AMZN,US,Amazon.com Inc,Consumer Cyclical,Internet Retail,United States,North America,3.93
+GOOGL.US,GOOGL,US,Alphabet Inc Class A,Communication Services,Internet Content & Information,United States,North America,3.32
+GOOG.US,GOOG,US,Alphabet Inc Class C,Communication Services,Internet Content & Information,United States,North America,2.66
+AVGO.US,AVGO,US,Broadcom Inc,Technology,Semiconductors,United States,North America,2.64
+META.US,META,US,Meta Platforms Inc.,Communication Services,Internet Content & Information,United States,North America,2.63
+TSLA.US,TSLA,US,Tesla Inc,Consumer Cyclical,Auto Manufacturers,United States,North America,2.04
+BRK-B.US,BRK-B,US,Berkshire Hathaway Inc,Financial Services,Insurance - Diversified,United States,North America,1.49
+LLY.US,LLY,US,Eli Lilly and Company,Healthcare,Drug Manufacturers - General,United States,North America,1.39
+JPM.US,JPM,US,JPMorgan Chase & Co,Financial Services,Banks - Diversified,United States,North America,1.34
+XOM.US,XOM,US,Exxon Mobil Corp,Energy,Oil & Gas Integrated,United States,North America,1.01
+JNJ.US,JNJ,US,Johnson & Johnson,Healthcare,Drug Manufacturers - General,United States,North America,0.92
+V.US,V,US,Visa Inc. Class A,Financial Services,Credit Services,United States,North America,0.9
+WMT.US,WMT,US,Walmart Inc. Common Stock,Consumer Defensive,Discount Stores,United States,North America,0.88
+MU.US,MU,US,Micron Technology Inc,Technology,Semiconductors,United States,North America,0.79
+MA.US,MA,US,Mastercard Inc,Financial Services,Credit Services,United States,North America,0.75
+COST.US,COST,US,Costco Wholesale Corp,Consumer Defensive,Discount Stores,United States,North America,0.7
+ABBV.US,ABBV,US,AbbVie Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.67
+AMD.US,AMD,US,Advanced Micro Devices Inc,Technology,Semiconductors,United States,North America,0.65
+HD.US,HD,US,The Home Depot Inc,Consumer Cyclical,Home Improvement Retail,United States,North America,0.63
+PG.US,PG,US,Procter & Gamble Company,Consumer Defensive,Household & Personal Products,United States,North America,0.6
+NFLX.US,NFLX,US,Netflix Inc,Communication Services,Entertainment,United States,North America,0.6
+BAC.US,BAC,US,Bank of America Corp,Financial Services,Banks - Diversified,United States,North America,0.59
+PLTR.US,PLTR,US,Palantir Technologies Inc.,Technology,Software - Infrastructure,United States,North America,0.56
+CVX.US,CVX,US,Chevron Corp,Energy,Oil & Gas Integrated,United States,North America,0.56
+GE.US,GE,US,GE Aerospace,Industrials,Aerospace & Defense,United States,North America,0.55
+CSCO.US,CSCO,US,Cisco Systems Inc,Technology,Communication Equipment,United States,North America,0.52
+CAT.US,CAT,US,Caterpillar Inc,Industrials,Farm & Heavy Construction Machinery,United States,North America,0.52
+LRCX.US,LRCX,US,Lam Research Corp,Technology,Semiconductor Equipment & Materials,United States,North America,0.49
+KO.US,KO,US,The Coca-Cola Company,Consumer Defensive,Beverages - Non-Alcoholic,United States,North America,0.49
+IBM.US,IBM,US,International Business Machines,Technology,Information Technology Services,United States,North America,0.48
+WFC.US,WFC,US,Wells Fargo & Company,Financial Services,Banks - Diversified,United States,North America,0.48
+PM.US,PM,US,Philip Morris International Inc,Consumer Defensive,Tobacco,United States,North America,0.47
+ORCL.US,ORCL,US,Oracle Corporation,Technology,Software - Infrastructure,United States,North America,0.47
+MRK.US,MRK,US,Merck & Company Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.46
+GS.US,GS,US,Goldman Sachs Group Inc,Financial Services,Capital Markets,United States,North America,0.46
+RTX.US,RTX,US,Raytheon Technologies Corp,Industrials,Aerospace & Defense,United States,North America,0.45
+UNH.US,UNH,US,UnitedHealth Group Incorporated,Healthcare,Healthcare Plans,United States,North America,0.44
+AMAT.US,AMAT,US,Applied Materials Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.43
+MCD.US,MCD,US,McDonald’s Corporation,Consumer Cyclical,Restaurants,United States,North America,0.38
+MS.US,MS,US,Morgan Stanley,Financial Services,Capital Markets,United States,North America,0.37
+TMO.US,TMO,US,Thermo Fisher Scientific Inc,Healthcare,Diagnostics & Research,United States,North America,0.37
+LIN.US,LIN,US,Linde plc Ordinary Shares,Basic Materials,Specialty Chemicals,United States,North America,0.36
+PEP.US,PEP,US,PepsiCo Inc,Consumer Defensive,Beverages - Non-Alcoholic,United States,North America,0.35
+INTC.US,INTC,US,Intel Corporation,Technology,Semiconductors,United States,North America,0.35
+CRM.US,CRM,US,Salesforce.com Inc,Technology,Software - Application,United States,North America,0.34
+DIS.US,DIS,US,Walt Disney Company,Communication Services,Entertainment,United States,North America,0.34
+C.US,C,US,Citigroup Inc.,Financial Services,Banks - Diversified,United States,North America,0.34
+GEV.US,GEV,US,GE Vernova LLC,Industrials,Specialty Industrial Machinery,United States,North America,0.33
+TXN.US,TXN,US,Texas Instruments Incorporated,Technology,Semiconductors,United States,North America,0.33
+ABT.US,ABT,US,Abbott Laboratories,Healthcare,Medical Devices,United States,North America,0.32
+AXP.US,AXP,US,American Express Company,Financial Services,Credit Services,United States,North America,0.32
+VZ.US,VZ,US,Verizon Communications Inc,Communication Services,Telecom Services,United States,North America,0.32
+KLAC.US,KLAC,US,KLA Corporation,Technology,Semiconductor Equipment & Materials,United States,North America,0.32
+T.US,T,US,AT&T Inc,Communication Services,Telecom Services,United States,North America,0.31
+AMGN.US,AMGN,US,Amgen Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.31
+NEE.US,NEE,US,Nextera Energy Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.31
+BA.US,BA,US,The Boeing Company,Industrials,Aerospace & Defense,United States,North America,0.31
+ISRG.US,ISRG,US,Intuitive Surgical Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.3
+APH.US,APH,US,Amphenol Corporation,Technology,Electronic Components,United States,North America,0.3
+GILD.US,GILD,US,Gilead Sciences Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.3
+SCHW.US,SCHW,US,Charles Schwab Corp,Financial Services,Capital Markets,United States,North America,0.29
+TJX.US,TJX,US,The TJX Companies Inc,Consumer Cyclical,Apparel Retail,United States,North America,0.28
+UBER.US,UBER,US,Uber Technologies Inc,Technology,Software - Application,United States,North America,0.28
+SPGI.US,SPGI,US,S&P Global Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.28
+ACN.US,ACN,US,Accenture plc,Technology,Information Technology Services,United States,North America,0.28
+QCOM.US,QCOM,US,Qualcomm Incorporated,Technology,Semiconductors,United States,North America,0.27
+BLK.US,BLK,US,BlackRock Inc,Financial Services,Asset Management,United States,North America,0.27
+BKNG.US,BKNG,US,Booking Holdings Inc,Consumer Cyclical,Travel Services,United States,North America,0.27
+ADI.US,ADI,US,Analog Devices Inc,Technology,Semiconductors,United States,North America,0.26
+PFE.US,PFE,US,Pfizer Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.25
+LOW.US,LOW,US,Lowe's Companies Inc,Consumer Cyclical,Home Improvement Retail,United States,North America,0.25
+ANET.US,ANET,US,Arista Networks,Technology,Computer Hardware,United States,North America,0.25
+HON.US,HON,US,Honeywell International Inc,Industrials,Conglomerates,United States,North America,0.24
+UNP.US,UNP,US,Union Pacific Corporation,Industrials,Railroads,United States,North America,0.24
+COF.US,COF,US,Capital One Financial Corporation,Financial Services,Credit Services,United States,North America,0.23
+INTU.US,INTU,US,Intuit Inc,Technology,Software - Application,United States,North America,0.23
+BSX.US,BSX,US,Boston Scientific Corp,Healthcare,Medical Devices,United States,North America,0.23
+DHR.US,DHR,US,Danaher Corporation,Healthcare,Diagnostics & Research,United States,North America,0.23
+ETN.US,ETN,US,Eaton Corporation PLC,Industrials,Specialty Industrial Machinery,United States,North America,0.23
+DE.US,DE,US,Deere & Company,Industrials,Farm & Heavy Construction Machinery,United States,North America,0.22
+MDT.US,MDT,US,Medtronic PLC,Healthcare,Medical Devices,United States,North America,0.22
+WELL.US,WELL,US,Welltower Inc,Real Estate,REIT - Healthcare Facilities,United States,North America,0.22
+LMT.US,LMT,US,Lockheed Martin Corporation,Industrials,Aerospace & Defense,United States,North America,0.22
+COP.US,COP,US,ConocoPhillips,Energy,Oil & Gas E&P,United States,North America,0.22
+APP.US,APP,US,Applovin Corp,Communication Services,Advertising Agencies,United States,North America,0.22
+SYK.US,SYK,US,Stryker Corporation,Healthcare,Medical Devices,United States,North America,0.21
+ADBE.US,ADBE,US,Adobe Systems Incorporated,Technology,Software - Application,United States,North America,0.21
+NEM.US,NEM,US,Newmont Goldcorp Corp,Basic Materials,Gold,United States,North America,0.21
+PGR.US,PGR,US,Progressive Corp,Financial Services,Insurance - Property & Casualty,United States,North America,0.21
+NOW.US,NOW,US,ServiceNow Inc,Technology,Software - Application,United States,North America,0.2
+PLD.US,PLD,US,Prologis Inc,Real Estate,REIT - Industrial,United States,North America,0.2
+PANW.US,PANW,US,Palo Alto Networks Inc,Technology,Software - Infrastructure,United States,North America,0.2
+VRTX.US,VRTX,US,Vertex Pharmaceuticals Inc,Healthcare,Biotechnology,United States,North America,0.2
+PH.US,PH,US,Parker-Hannifin Corporation,Industrials,Specialty Industrial Machinery,United States,North America,0.2
+CB.US,CB,US,Chubb Ltd,Financial Services,Insurance - Property & Casualty,United States,North America,0.19
+BMY.US,BMY,US,Bristol-Myers Squibb Company,Healthcare,Drug Manufacturers - General,United States,North America,0.19
+CRWD.US,CRWD,US,Crowdstrike Holdings Inc,Technology,Software - Infrastructure,United States,North America,0.19
+CMCSA.US,CMCSA,US,Comcast Corp,Communication Services,Telecom Services,United States,North America,0.18
+BX.US,BX,US,Blackstone Group Inc,Financial Services,Asset Management,United States,North America,0.18
+SBUX.US,SBUX,US,Starbucks Corporation,Consumer Cyclical,Restaurants,United States,North America,0.18
+CME.US,CME,US,CME Group Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.18
+MO.US,MO,US,Altria Group,Consumer Defensive,Tobacco,United States,North America,0.18
+MCK.US,MCK,US,McKesson Corporation,Healthcare,Medical Distribution,United States,North America,0.17
+ADP.US,ADP,US,Automatic Data Processing Inc,Technology,Software - Application,United States,North America,0.17
+ICE.US,ICE,US,Intercontinental Exchange Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.17
+SO.US,SO,US,Southern Company,Utilities,Utilities - Regulated Electric,United States,North America,0.17
+TMUS.US,TMUS,US,T-Mobile US Inc,Communication Services,Telecom Services,United States,North America,0.16
+CVS.US,CVS,US,CVS Health Corp,Healthcare,Healthcare Plans,United States,North America,0.16
+DUK.US,DUK,US,Duke Energy Corporation,Utilities,Utilities - Regulated Electric,United States,North America,0.16
+TT.US,TT,US,Trane Technologies plc,Industrials,Building Products & Equipment,United States,North America,0.16
+NOC.US,NOC,US,Northrop Grumman Corporation,Industrials,Aerospace & Defense,United States,North America,0.16
+MMC.US,MMC,US,Marsh & McLennan Companies Inc,Financial Services,Insurance Brokers,United States,North America,0.16
+GD.US,GD,US,General Dynamics Corporation,Industrials,Aerospace & Defense,United States,North America,0.15
+STX.US,STX,US,Seagate Technology PLC,Technology,Computer Hardware,United States,North America,0.15
+CEG.US,CEG,US,Constellation Energy Corp,Utilities,Utilities - Independent Power Producers,United States,North America,0.15
+PNC.US,PNC,US,PNC Financial Services Group Inc,Financial Services,Banks - Regional,United States,North America,0.15
+USB.US,USB,US,U.S. Bancorp,Financial Services,Banks - Regional,United States,North America,0.15
+FCX.US,FCX,US,Freeport-McMoran Copper & Gold Inc,Basic Materials,Copper,United States,North America,0.15
+SNPS.US,SNPS,US,Synopsys Inc,Technology,Software - Infrastructure,United States,North America,0.15
+WDC.US,WDC,US,Western Digital Corporation,Technology,Computer Hardware,United States,North America,0.14
+AMT.US,AMT,US,American Tower Corp,Real Estate,REIT - Specialty,United States,North America,0.14
+HWM.US,HWM,US,Howmet Aerospace Inc,Industrials,Aerospace & Defense,United States,North America,0.14
+BK.US,BK,US,The Bank of New York Mellon Corporation,Financial Services,Banks - Diversified,United States,North America,0.14
+ORLY.US,ORLY,US,O’Reilly Automotive Inc,Consumer Cyclical,Auto Parts,United States,North America,0.14
+EMR.US,EMR,US,Emerson Electric Company,Industrials,Specialty Industrial Machinery,United States,North America,0.14
+WM.US,WM,US,Waste Management Inc,Industrials,Waste Management,United States,North America,0.14
+RCL.US,RCL,US,Royal Caribbean Cruises Ltd,Consumer Cyclical,Travel Services,United States,North America,0.14
+WMB.US,WMB,US,Williams Companies Inc,Energy,Oil & Gas Midstream,United States,North America,0.14
+CRH.LSE,CRH,LSE,CRH PLC,Basic Materials,Building Materials,United Kingdom,Europe,0.14
+SHW.US,SHW,US,Sherwin-Williams Co,Basic Materials,Specialty Chemicals,United States,North America,0.14
+MMM.US,MMM,US,3M Company,Industrials,Conglomerates,United States,North America,0.14
+CDNS.US,CDNS,US,Cadence Design Systems Inc,Technology,Software - Application,United States,North America,0.14
+EQIX.US,EQIX,US,Equinix Inc,Real Estate,REIT - Specialty,United States,North America,0.14
+GLW.US,GLW,US,Corning Incorporated,Technology,Electronic Components,United States,North America,0.14
+TDG.US,TDG,US,Transdigm Group Incorporated,Industrials,Aerospace & Defense,United States,North America,0.14
+SNDK.US,SNDK,US,Sandisk Corp,Technology,Computer Hardware,United States,North America,0.14
+CMI.US,CMI,US,Cummins Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.13
+MCO.US,MCO,US,Moodys Corporation,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.13
+UPS.US,UPS,US,United Parcel Service Inc,Industrials,Integrated Freight & Logistics,United States,North America,0.13
+KKR.US,KKR,US,KKR & Co LP,Financial Services,Asset Management,United States,North America,0.13
+GM.US,GM,US,General Motors Company,Consumer Cyclical,Auto Manufacturers,United States,North America,0.13
+HOOD.US,HOOD,US,Robinhood Markets Inc,Financial Services,Capital Markets,United States,North America,0.13
+HCA.US,HCA,US,HCA Holdings Inc,Healthcare,Medical Care Facilities,United States,North America,0.13
+DASH.US,DASH,US,"DoorDash, Inc. Class A Common Stock",Consumer Cyclical,Internet Retail,United States,North America,0.13
+ELV.US,ELV,US,Elevance Health Inc,Healthcare,Healthcare Plans,United States,North America,0.13
+MDLZ.US,MDLZ,US,Mondelez International Inc,Consumer Defensive,Confectioners,United States,North America,0.13
+AON.US,AON,US,Aon PLC,Financial Services,Insurance Brokers,United States,North America,0.13
+REGN.US,REGN,US,Regeneron Pharmaceuticals Inc,Healthcare,Biotechnology,United States,North America,0.13
+NKE.US,NKE,US,Nike Inc,Consumer Cyclical,Footwear & Accessories,United States,North America,0.12
+CI.US,CI,US,Cigna Corp,Healthcare,Healthcare Plans,United States,North America,0.12
+JCI.US,JCI,US,Johnson Controls International PLC,Industrials,Building Products & Equipment,United States,North America,0.12
+CL.US,CL,US,Colgate-Palmolive Company,Consumer Defensive,Household & Personal Products,United States,North America,0.12
+SLB.US,SLB,US,Schlumberger NV,Energy,Oil & Gas Equipment & Services,United States,North America,0.12
+ECL.US,ECL,US,Ecolab Inc,Basic Materials,Specialty Chemicals,United States,North America,0.12
+PWR.US,PWR,US,Quanta Services Inc,Industrials,Engineering & Construction,United States,North America,0.12
+CSX.US,CSX,US,CSX Corporation,Industrials,Railroads,United States,North America,0.12
+MAR.US,MAR,US,Marriott International Inc,Consumer Cyclical,Lodging,United States,North America,0.12
+FDX.US,FDX,US,FedEx Corporation,Industrials,Integrated Freight & Logistics,United States,North America,0.12
+COR.US,COR,US,Cencora Inc.,Healthcare,Medical Distribution,United States,North America,0.12
+HLT.US,HLT,US,Hilton Worldwide Holdings Inc,Consumer Cyclical,Lodging,United States,North America,0.12
+ITW.US,ITW,US,Illinois Tool Works Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.12
+WBD.US,WBD,US,Warner Bros Discovery Inc,Communication Services,Entertainment,United States,North America,0.12
+MSI.US,MSI,US,Motorola Solutions Inc,Technology,Communication Equipment,United States,North America,0.11
+TFC.US,TFC,US,Truist Financial Corp,Financial Services,Banks - Regional,United States,North America,0.11
+TEL.US,TEL,US,TE Connectivity Ltd,Technology,Electronic Components,United States,North America,0.11
+CTAS.US,CTAS,US,Cintas Corporation,Industrials,Specialty Business Services,United States,North America,0.11
+NSC.US,NSC,US,Norfolk Southern Corporation,Industrials,Railroads,United States,North America,0.11
+PCAR.US,PCAR,US,PACCAR Inc,Industrials,Farm & Heavy Construction Machinery,United States,North America,0.11
+LHX.US,LHX,US,L3Harris Technologies Inc,Industrials,Aerospace & Defense,United States,North America,0.11
+AEP.US,AEP,US,American Electric Power Co Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.11
+AJG.US,AJG,US,Arthur J Gallagher & Co,Financial Services,Insurance Brokers,United States,North America,0.11
+TRV.US,TRV,US,The Travelers Companies Inc,Financial Services,Insurance - Property & Casualty,United States,North America,0.11
+APO.US,APO,US,Apollo Global Management LLC Class A,Financial Services,Asset Management,United States,North America,0.11
+SPG.US,SPG,US,Simon Property Group Inc,Real Estate,REIT - Retail,United States,North America,0.11
+AZO.US,AZO,US,AutoZone Inc,Consumer Cyclical,Auto Parts,United States,North America,0.1
+ROST.US,ROST,US,Ross Stores Inc,Consumer Cyclical,Apparel Retail,United States,North America,0.1
+EOG.US,EOG,US,EOG Resources Inc,Energy,Oil & Gas E&P,United States,North America,0.1
+APD.US,APD,US,Air Products and Chemicals Inc,Basic Materials,Specialty Chemicals,United States,North America,0.1
+KMI.US,KMI,US,Kinder Morgan Inc,Energy,Oil & Gas Midstream,United States,North America,0.1
+BDX.US,BDX,US,Becton Dickinson and Company,Healthcare,Medical Instruments & Supplies,United States,North America,0.1
+PSX.US,PSX,US,Phillips 66,Energy,Oil & Gas Refining & Marketing,United States,North America,0.1
+MNST.US,MNST,US,Monster Beverage Corp,Consumer Defensive,Beverages - Non-Alcoholic,United States,North America,0.1
+NXPI.US,NXPI,US,NXP Semiconductors NV,Technology,Semiconductors,United States,North America,0.1
+SRE.US,SRE,US,Sempra Energy,Utilities,Utilities - Diversified,United States,North America,0.1
+CVNA.US,CVNA,US,Carvana Co,Consumer Cyclical,Auto & Truck Dealerships,United States,North America,0.1
+O.US,O,US,Realty Income Corporation,Real Estate,REIT - Retail,United States,North America,0.09
+VLO.US,VLO,US,Valero Energy Corporation,Energy,Oil & Gas Refining & Marketing,United States,North America,0.09
+BKR.US,BKR,US,Baker Hughes Co,Energy,Oil & Gas Equipment & Services,United States,North America,0.09
+ABNB.US,ABNB,US,Airbnb Inc,Consumer Cyclical,Travel Services,United States,North America,0.09
+ZTS.US,ZTS,US,Zoetis Inc,Healthcare,Drug Manufacturers - Specialty & Generic,United States,North America,0.09
+F.US,F,US,Ford Motor Company,Consumer Cyclical,Auto Manufacturers,United States,North America,0.09
+MPWR.US,MPWR,US,Monolithic Power Systems Inc,Technology,Semiconductors,United States,North America,0.09
+ADSK.US,ADSK,US,Autodesk Inc,Technology,Software - Application,United States,North America,0.09
+DLR.US,DLR,US,Digital Realty Trust Inc,Real Estate,REIT - Specialty,United States,North America,0.09
+IDXX.US,IDXX,US,IDEXX Laboratories Inc,Healthcare,Diagnostics & Research,United States,North America,0.09
+MPC.US,MPC,US,Marathon Petroleum Corp,Energy,Oil & Gas Refining & Marketing,United States,North America,0.09
+AFL.US,AFL,US,Aflac Incorporated,Financial Services,Insurance - Life,United States,North America,0.09
+ALL.US,ALL,US,The Allstate Corporation,Financial Services,Insurance - Property & Casualty,United States,North America,0.09
+AME.US,AME,US,Ametek Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.09
+CMG.US,CMG,US,Chipotle Mexican Grill Inc,Consumer Cyclical,Restaurants,United States,North America,0.09
+D.US,D,US,Dominion Energy Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.09
+FTNT.US,FTNT,US,Fortinet Inc,Technology,Software - Infrastructure,United States,North America,0.09
+CAH.US,CAH,US,Cardinal Health Inc,Healthcare,Medical Distribution,United States,North America,0.09
+VST.US,VST,US,Vistra Energy Corp,Utilities,Utilities - Independent Power Producers,United States,North America,0.09
+CBRE.US,CBRE,US,CBRE Group Inc Class A,Real Estate,Real Estate Services,United States,North America,0.08
+OKE.US,OKE,US,ONEOK Inc,Energy,Oil & Gas Midstream,United States,North America,0.08
+FAST.US,FAST,US,Fastenal Company,Industrials,Industrial Distribution,United States,North America,0.08
+URI.US,URI,US,United Rentals Inc,Industrials,Rental & Leasing Services,United States,North America,0.08
+CTVA.US,CTVA,US,Corteva Inc,Basic Materials,Agricultural Inputs,United States,North America,0.08
+AMP.US,AMP,US,Ameriprise Financial Inc,Financial Services,Asset Management,United States,North America,0.08
+TGT.US,TGT,US,Target Corporation,Consumer Defensive,Discount Stores,United States,North America,0.08
+ROK.US,ROK,US,Rockwell Automation Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.08
+GWW.US,GWW,US,WW Grainger Inc,Industrials,Industrial Distribution,United States,North America,0.08
+EW.US,EW,US,Edwards Lifesciences Corp,Healthcare,Medical Devices,United States,North America,0.08
+CARR.US,CARR,US,Carrier Global Corp,Industrials,Building Products & Equipment,United States,North America,0.08
+PYPL.US,PYPL,US,PayPal Holdings Inc,Financial Services,Credit Services,United States,North America,0.08
+EA.US,EA,US,Electronic Arts Inc,Communication Services,Electronic Gaming & Multimedia,United States,North America,0.08
+MSCI.US,MSCI,US,MSCI Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.08
+EXC.US,EXC,US,Exelon Corporation,Utilities,Utilities - Regulated Electric,United States,North America,0.08
+FITB.US,FITB,US,Fifth Third Bancorp,Financial Services,Banks - Regional,United States,North America,0.08
+XEL.US,XEL,US,Xcel Energy Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.08
+COIN.US,COIN,US,Coinbase Global Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.07
+NDAQ.US,NDAQ,US,Nasdaq Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.07
+MET.US,MET,US,MetLife Inc,Financial Services,Insurance - Life,United States,North America,0.07
+PSA.US,PSA,US,Public Storage,Real Estate,REIT - Industrial,United States,North America,0.07
+RSG.US,RSG,US,Republic Services Inc,Industrials,Waste Management,United States,North America,0.07
+YUM.US,YUM,US,Yum! Brands Inc,Consumer Cyclical,Restaurants,United States,North America,0.07
+TRGP.US,TRGP,US,Targa Resources Inc,Energy,Oil & Gas Midstream,United States,North America,0.07
+ETR.US,ETR,US,Entergy Corporation,Utilities,Utilities - Regulated Electric,United States,North America,0.07
+DAL.US,DAL,US,Delta Air Lines Inc,Industrials,Airlines,United States,North America,0.07
+DDOG.US,DDOG,US,Datadog Inc,Technology,Software - Application,United States,North America,0.07
+EBAY.US,EBAY,US,eBay Inc,Consumer Cyclical,Internet Retail,United States,North America,0.07
+PEG.US,PEG,US,Public Service Enterprise Group Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.07
+MCHP.US,MCHP,US,Microchip Technology Inc,Technology,Semiconductors,United States,North America,0.07
+DHI.US,DHI,US,DR Horton Inc,Consumer Cyclical,Residential Construction,United States,North America,0.07
+NUE.US,NUE,US,Nucor Corp,Basic Materials,Steel,United States,North America,0.07
+AIG.US,AIG,US,American International Group Inc,Financial Services,Insurance - Diversified,United States,North America,0.07
+SYY.US,SYY,US,Sysco Corporation,Consumer Defensive,Food Distribution,United States,North America,0.07
+FIX.US,FIX,US,Comfort Systems USA Inc,Industrials,Engineering & Construction,United States,North America,0.07
+ROP.US,ROP,US,"Roper Technologies, Inc.",Technology,Software - Application,United States,North America,0.07
+VMC.US,VMC,US,Vulcan Materials Company,Basic Materials,Building Materials,United States,North America,0.07
+CTSH.US,CTSH,US,Cognizant Technology Solutions Corp Class A,Technology,Information Technology Services,United States,North America,0.07
+WAB.US,WAB,US,Westinghouse Air Brake Technologies Corp,Industrials,Railroads,United States,North America,0.07
+MLM.US,MLM,US,Martin Marietta Materials Inc,Basic Materials,Building Materials,United States,North America,0.07
+IQV.US,IQV,US,IQVIA Holdings Inc,Healthcare,Diagnostics & Research,United States,North America,0.07
+PRU.US,PRU,US,Prudential Financial Inc,Financial Services,Insurance - Life,United States,North America,0.07
+ED.US,ED,US,Consolidated Edison Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.06
+TTWO.US,TTWO,US,Take-Two Interactive Software Inc,Communication Services,Electronic Gaming & Multimedia,United States,North America,0.06
+AXON.US,AXON,US,Axon Enterprise Inc.,Industrials,Aerospace & Defense,United States,North America,0.06
+WDAY.US,WDAY,US,Workday Inc,Technology,Software - Application,United States,North America,0.06
+A.US,A,US,Agilent Technologies Inc,Healthcare,Diagnostics & Research,United States,North America,0.06
+CCI.US,CCI,US,Crown Castle,Real Estate,REIT - Specialty,United States,North America,0.06
+TER.US,TER,US,Teradyne Inc,Technology,Semiconductor Equipment & Materials,United States,North America,0.06
+RMD.US,RMD,US,ResMed Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.06
+HIG.US,HIG,US,Hartford Financial Services Group,Financial Services,Insurance - Diversified,United States,North America,0.06
+KDP.US,KDP,US,Keurig Dr Pepper Inc,Consumer Defensive,Beverages - Non-Alcoholic,United States,North America,0.06
+KEYS.US,KEYS,US,Keysight Technologies Inc,Technology,Scientific & Technical Instruments,United States,North America,0.06
+STT.US,STT,US,State Street Corp,Financial Services,Asset Management,United States,North America,0.06
+VTR.US,VTR,US,Ventas Inc,Real Estate,REIT - Healthcare Facilities,United States,North America,0.06
+CPRT.US,CPRT,US,Copart Inc,Industrials,Specialty Business Services,United States,North America,0.06
+EQT.US,EQT,US,EQT Corporation,Energy,Oil & Gas E&P,United States,North America,0.06
+WEC.US,WEC,US,WEC Energy Group Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.06
+GEHC.US,GEHC,US,GE HealthCare Technologies Inc.,Healthcare,Medical Devices,United States,North America,0.06
+KR.US,KR,US,Kroger Company,Consumer Defensive,Grocery Stores,United States,North America,0.06
+HBAN.US,HBAN,US,Huntington Bancshares Incorporated,Financial Services,Banks - Regional,United States,North America,0.06
+ACGL.US,ACGL,US,Arch Capital Group Ltd,Financial Services,Insurance - Diversified,United States,North America,0.06
+FICO.US,FICO,US,Fair Isaac Corporation,Technology,Software - Application,United States,North America,0.06
+DELL.US,DELL,US,Dell Technologies Inc,Technology,Computer Hardware,United States,North America,0.06
+FI.US,FI,US,"Fiserv, Inc.",Technology,Information Technology Services,United States,North America,0.06
+MTB.US,MTB,US,M&T Bank Corporation,Financial Services,Banks - Regional,United States,North America,0.06
+PCG.US,PCG,US,PG&E Corp,Utilities,Utilities - Regulated Electric,United States,North America,0.06
+XYL.US,XYL,US,Xylem Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.06
+PAYX.US,PAYX,US,Paychex Inc,Technology,Software - Application,United States,North America,0.06
+IBKR.US,IBKR,US,Interactive Brokers Group Inc,Financial Services,Capital Markets,United States,North America,0.06
+KVUE.US,KVUE,US,Kenvue Inc.,Consumer Defensive,Household & Personal Products,United States,North America,0.06
+OTIS.US,OTIS,US,Otis Worldwide Corp,Industrials,Specialty Industrial Machinery,United States,North America,0.06
+KMB.US,KMB,US,Kimberly-Clark Corporation,Consumer Defensive,Household & Personal Products,United States,North America,0.06
+UAL.US,UAL,US,United Airlines Holdings Inc,Industrials,Airlines,United States,North America,0.06
+XYZ.US,XYZ,US,"Block, Inc",Technology,Software - Infrastructure,United States,North America,0.06
+GRMN.US,GRMN,US,Garmin Ltd,Technology,Scientific & Technical Instruments,United States,North America,0.06
+OXY.US,OXY,US,Occidental Petroleum Corporation,Energy,Oil & Gas E&P,United States,North America,0.06
+CCL.US,CCL,US,Carnival Corporation,Consumer Cyclical,Travel Services,United States,North America,0.05
+ADM.US,ADM,US,Archer-Daniels-Midland Company,Consumer Defensive,Farm Products,United States,North America,0.05
+EME.US,EME,US,EMCOR Group Inc,Industrials,Engineering & Construction,United States,North America,0.05
+ODFL.US,ODFL,US,Old Dominion Freight Line Inc,Industrials,Trucking,United States,North America,0.05
+DG.US,DG,US,Dollar General Corporation,Consumer Defensive,Discount Stores,United States,North America,0.05
+EXPE.US,EXPE,US,Expedia Group Inc.,Consumer Cyclical,Travel Services,United States,North America,0.05
+IR.US,IR,US,Ingersoll Rand Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.05
+ARES.US,ARES,US,Ares Management LP,Financial Services,Asset Management,United States,North America,0.05
+FANG.US,FANG,US,Diamondback Energy Inc,Energy,Oil & Gas E&P,United States,North America,0.05
+WTW.US,WTW,US,Willis Towers Watson PLC,Financial Services,Insurance Brokers,United States,North America,0.05
+VRSK.US,VRSK,US,Verisk Analytics Inc,Industrials,Consulting Services,United States,North America,0.05
+EXR.US,EXR,US,Extra Space Storage Inc,Real Estate,REIT - Industrial,United States,North America,0.05
+NRG.US,NRG,US,NRG Energy Inc.,Utilities,Utilities - Independent Power Producers,United States,North America,0.05
+RJF.US,RJF,US,Raymond James Financial Inc.,Financial Services,Asset Management,United States,North America,0.05
+TDY.US,TDY,US,Teledyne Technologies Incorporated,Technology,Scientific & Technical Instruments,United States,North America,0.05
+ULTA.US,ULTA,US,Ulta Beauty Inc,Consumer Cyclical,Specialty Retail,United States,North America,0.05
+HSY.US,HSY,US,Hershey Co,Consumer Defensive,Confectioners,United States,North America,0.05
+FIS.US,FIS,US,Fidelity National Information Services Inc,Technology,Information Technology Services,United States,North America,0.05
+DXCM.US,DXCM,US,DexCom Inc,Healthcare,Medical Devices,United States,North America,0.05
+HPE.US,HPE,US,Hewlett Packard Enterprise Co,Technology,Communication Equipment,United States,North America,0.05
+EL.US,EL,US,Estee Lauder Companies Inc,Consumer Defensive,Household & Personal Products,United States,North America,0.05
+NTRS.US,NTRS,US,Northern Trust Corporation,Financial Services,Asset Management,United States,North America,0.05
+HAL.US,HAL,US,Halliburton Company,Energy,Oil & Gas Equipment & Services,United States,North America,0.05
+MTD.US,MTD,US,Mettler-Toledo International Inc,Healthcare,Diagnostics & Research,United States,North America,0.05
+AEE.US,AEE,US,Ameren Corp,Utilities,Utilities - Regulated Electric,United States,North America,0.05
+DTE.US,DTE,US,DTE Energy Company,Utilities,Utilities - Regulated Electric,United States,North America,0.05
+VICI.US,VICI,US,VICI Properties Inc,Real Estate,REIT - Diversified,United States,North America,0.05
+CBOE.US,CBOE,US,Cboe Global Markets Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.05
+DOV.US,DOV,US,Dover Corporation,Industrials,Specialty Industrial Machinery,United States,North America,0.05
+IRM.US,IRM,US,Iron Mountain Incorporated,Real Estate,REIT - Specialty,United States,North America,0.05
+CFG.US,CFG,US,"Citizens Financial Group, Inc.",Financial Services,Banks - Regional,United States,North America,0.05
+TSCO.US,TSCO,US,Tractor Supply Company,Consumer Cyclical,Specialty Retail,United States,North America,0.05
+PPL.US,PPL,US,PPL Corporation,Utilities,Utilities - Regulated Electric,United States,North America,0.05
+CHK.US,CHK,US,Chesapeake Energy Corporation,Energy,Oil & Gas E&P,United States,North America,0.05
+ATO.US,ATO,US,Atmos Energy Corporation,Utilities,Utilities - Regulated Gas,United States,North America,0.05
+BIIB.US,BIIB,US,Biogen Inc,Healthcare,Drug Manufacturers - General,United States,North America,0.04
+SYF.US,SYF,US,Synchrony Financial,Financial Services,Credit Services,United States,North America,0.04
+CSGP.US,CSGP,US,CoStar Group Inc,Real Estate,Real Estate Services,United States,North America,0.04
+TPR.US,TPR,US,Tapestry Inc,Consumer Cyclical,Luxury Goods,United States,North America,0.04
+ES.US,ES,US,Eversource Energy,Utilities,Utilities - Regulated Electric,United States,North America,0.04
+PPG.US,PPG,US,PPG Industries Inc,Basic Materials,Specialty Chemicals,United States,North America,0.04
+HUBB.US,HUBB,US,Hubbell Inc,Industrials,Electrical Equipment & Parts,United States,North America,0.04
+CNP.US,CNP,US,CenterPoint Energy Inc,Utilities,Utilities - Regulated Electric,United States,North America,0.04
+STE.US,STE,US,STERIS plc,Healthcare,Medical Devices,United States,North America,0.04
+JBL.US,JBL,US,Jabil Circuit Inc,Technology,Electronic Components,United States,North America,0.04
+DVN.US,DVN,US,Devon Energy Corporation,Energy,Oil & Gas E&P,United States,North America,0.04
+AWK.US,AWK,US,American Water Works,Utilities,Utilities - Regulated Water,United States,North America,0.04
+AVB.US,AVB,US,AvalonBay Communities Inc,Real Estate,REIT - Residential,United States,North America,0.04
+CINF.US,CINF,US,Cincinnati Financial Corporation,Financial Services,Insurance - Property & Casualty,United States,North America,0.04
+RF.US,RF,US,Regions Financial Corporation,Financial Services,Banks - Regional,United States,North America,0.04
+WSM.US,WSM,US,Williams-Sonoma Inc,Consumer Cyclical,Specialty Retail,United States,North America,0.04
+GIS.US,GIS,US,General Mills Inc,Consumer Defensive,Packaged Foods,United States,North America,0.04
+EFX.US,EFX,US,Equifax Inc,Industrials,Consulting Services,United States,North America,0.04
+STLD.US,STLD,US,Steel Dynamics Inc,Basic Materials,Steel,United States,North America,0.04
+FE.US,FE,US,FirstEnergy Corporation,Utilities,Utilities - Regulated Electric,United States,North America,0.04
+VLTO.US,VLTO,US,Veralto Corporation,Industrials,Pollution & Treatment Controls,United States,North America,0.04
+OMC.US,OMC,US,Omnicom Group Inc,Communication Services,Advertising Agencies,United States,North America,0.04
+LUV.US,LUV,US,Southwest Airlines Company,Industrials,Airlines,United States,North America,0.04
+PHM.US,PHM,US,PulteGroup Inc,Consumer Cyclical,Residential Construction,United States,North America,0.04
+FSLR.US,FSLR,US,First Solar Inc,Technology,Solar,United States,North America,0.04
+ON.US,ON,US,ON Semiconductor Corporation,Technology,Semiconductors,United States,North America,0.04
+LDOS.US,LDOS,US,Leidos Holdings Inc,Technology,Information Technology Services,United States,North America,0.04
+EIX.US,EIX,US,Edison International,Utilities,Utilities - Regulated Electric,United States,North America,0.04
+LEN.US,LEN,US,Lennar Corporation,Consumer Cyclical,Residential Construction,United States,North America,0.04
+HUM.US,HUM,US,Humana Inc,Healthcare,Healthcare Plans,United States,North America,0.04
+DRI.US,DRI,US,Darden Restaurants Inc,Consumer Cyclical,Restaurants,United States,North America,0.04
+CHD.US,CHD,US,Church & Dwight Company Inc,Consumer Defensive,Household & Personal Products,United States,North America,0.04
+TROW.US,TROW,US,T. Rowe Price Group Inc,Financial Services,Asset Management,United States,North America,0.04
+CHRW.US,CHRW,US,CH Robinson Worldwide Inc,Industrials,Integrated Freight & Logistics,United States,North America,0.04
+BR.US,BR,US,Broadridge Financial Solutions Inc,Technology,Information Technology Services,United States,North America,0.04
+LYV.US,LYV,US,Live Nation Entertainment Inc,Communication Services,Entertainment,United States,North America,0.04
+LH.US,LH,US,Laboratory Corporation of America Holdings,Healthcare,Diagnostics & Research,United States,North America,0.04
+DLTR.US,DLTR,US,Dollar Tree Inc,Consumer Defensive,Discount Stores,United States,North America,0.04
+STZ.US,STZ,US,Constellation Brands Inc Class A,Consumer Defensive,Beverages - Brewers,United States,North America,0.04
+WAT.US,WAT,US,Waters Corporation,Healthcare,Diagnostics & Research,United States,North America,0.04
+CPAY.US,CPAY,US,Corpay Inc,Technology,Software - Infrastructure,United States,North America,0.04
+CTRA.US,CTRA,US,Coterra Energy Inc,Energy,Oil & Gas E&P,United States,North America,0.04
+CMS.US,CMS,US,CMS Energy Corporation,Utilities,Utilities - Regulated Electric,United States,North America,0.04
+SW.US,SW,US,Smurfit WestRock plc,Consumer Cyclical,Packaging & Containers,United States,North America,0.04
+NVR.US,NVR,US,NVR Inc,Consumer Cyclical,Residential Construction,United States,North America,0.04
+EQR.US,EQR,US,Equity Residential,Real Estate,REIT - Residential,United States,North America,0.04
+EXPD.US,EXPD,US,"Expeditors International of Washington, Inc.",Industrials,Integrated Freight & Logistics,United States,North America,0.04
+IP.US,IP,US,International Paper,Consumer Cyclical,Packaging & Containers,United States,North America,0.04
+BRO.US,BRO,US,Brown & Brown Inc,Financial Services,Insurance Brokers,United States,North America,0.04
+NI.US,NI,US,NiSource Inc,Utilities,Utilities - Regulated Gas,United States,North America,0.04
+DGX.US,DGX,US,Quest Diagnostics Incorporated,Healthcare,Diagnostics & Research,United States,North America,0.04
+WRB.US,WRB,US,W. R. Berkley Corp,Financial Services,Insurance - Property & Casualty,United States,North America,0.03
+VRSN.US,VRSN,US,VeriSign Inc,Technology,Software - Infrastructure,United States,North America,0.03
+KHC.US,KHC,US,Kraft Heinz Co,Consumer Defensive,Packaged Foods,United States,North America,0.03
+CNC.US,CNC,US,Centene Corp,Healthcare,Healthcare Plans,United States,North America,0.03
+TPL.US,TPL,US,Texas Pacific Land Trust,Energy,Oil & Gas E&P,United States,North America,0.03
+Q.US,Q,US,"Qnity Electronics, Inc",Technology,Semiconductor Equipment & Materials,United States,North America,0.03
+ALB.US,ALB,US,Albemarle Corp,Basic Materials,Specialty Chemicals,United States,North America,0.03
+KEY.US,KEY,US,KeyCorp,Financial Services,Banks - Regional,United States,North America,0.03
+PKG.US,PKG,US,Packaging Corp of America,Consumer Cyclical,Packaging & Containers,United States,North America,0.03
+SBAC.US,SBAC,US,SBA Communications Corp,Real Estate,REIT - Specialty,United States,North America,0.03
+DOW.US,DOW,US,Dow Inc,Basic Materials,Chemicals,United States,North America,0.03
+GPC.US,GPC,US,Genuine Parts Co,Consumer Cyclical,Auto Parts,United States,North America,0.03
+SNA.US,SNA,US,Snap-On Inc,Industrials,Tools & Accessories,United States,North America,0.03
+PFG.US,PFG,US,Principal Financial Group Inc,Financial Services,Asset Management,United States,North America,0.03
+LULU.US,LULU,US,Lululemon Athletica Inc.,Consumer Cyclical,Apparel Retail,United States,North America,0.03
+NTAP.US,NTAP,US,NetApp Inc,Technology,Software - Infrastructure,United States,North America,0.03
+PTC.US,PTC,US,PTC Inc,Technology,Software - Application,United States,North America,0.03
+ROL.US,ROL,US,Rollins Inc,Consumer Cyclical,Personal Services,United States,North America,0.03
+WY.US,WY,US,Weyerhaeuser Company,Real Estate,REIT - Specialty,United States,North America,0.03
+TSN.US,TSN,US,Tyson Foods Inc,Consumer Defensive,Farm Products,United States,North America,0.03
+DD.US,DD,US,Dupont De Nemours Inc,Basic Materials,Specialty Chemicals,United States,North America,0.03
+HPQ.US,HPQ,US,HP Inc,Technology,Computer Hardware,United States,North America,0.03
+CHTR.US,CHTR,US,Charter Communications Inc,Communication Services,Telecom Services,United States,North America,0.03
+PODD.US,PODD,US,Insulet Corporation,Healthcare,Medical Devices,United States,North America,0.03
+L.US,L,US,Loews Corp,Financial Services,Insurance - Property & Casualty,United States,North America,0.03
+IFF.US,IFF,US,International Flavors & Fragrances Inc,Basic Materials,Specialty Chemicals,United States,North America,0.03
+EVRG.US,EVRG,US,"Evergy, Inc.",Utilities,Utilities - Regulated Electric,United States,North America,0.03
+DECK.US,DECK,US,Deckers Outdoor Corporation,Consumer Cyclical,Footwear & Accessories,United States,North America,0.03
+ZBH.US,ZBH,US,Zimmer Biomet Holdings Inc,Healthcare,Medical Devices,United States,North America,0.03
+PNR.US,PNR,US,Pentair PLC,Industrials,Specialty Industrial Machinery,United States,North America,0.03
+LNT.US,LNT,US,Alliant Energy Corp,Utilities,Utilities - Regulated Electric,United States,North America,0.03
+FTV.US,FTV,US,Fortive Corp,Technology,Scientific & Technical Instruments,United States,North America,0.03
+GPN.US,GPN,US,Global Payments Inc,Industrials,Specialty Business Services,United States,North America,0.03
+HOLX.US,HOLX,US,Hologic Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.03
+WST.US,WST,US,West Pharmaceutical Services Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.03
+HII.US,HII,US,Huntington Ingalls Industries Inc,Industrials,Aerospace & Defense,United States,North America,0.03
+INCY.US,INCY,US,Incyte Corporation,Healthcare,Biotechnology,United States,North America,0.03
+CDW.US,CDW,US,CDW Corp,Technology,Information Technology Services,United States,North America,0.03
+APTV.US,APTV,US,Aptiv PLC,Consumer Cyclical,Auto Parts,United States,North America,0.03
+ESS.US,ESS,US,Essex Property Trust Inc,Real Estate,REIT - Residential,United States,North America,0.03
+COO.US,COO,US,"The Cooper Companies, Inc",Healthcare,Medical Instruments & Supplies,United States,North America,0.03
+J.US,J,US,Jacobs Solutions Inc.,Industrials,Engineering & Construction,United States,North America,0.03
+TRMB.US,TRMB,US,Trimble Inc,Technology,Scientific & Technical Instruments,United States,North America,0.03
+LVS.US,LVS,US,Las Vegas Sands Corp,Consumer Cyclical,Resorts & Casinos,United States,North America,0.03
+TYL.US,TYL,US,Tyler Technologies Inc,Technology,Software - Application,United States,North America,0.03
+FFIV.US,FFIV,US,F5 Networks Inc,Technology,Software - Infrastructure,United States,North America,0.03
+LII.US,LII,US,Lennox International Inc,Industrials,Building Products & Equipment,United States,North America,0.03
+MAA.US,MAA,US,Mid-America Apartment Communities Inc,Real Estate,REIT - Residential,United States,North America,0.03
+MKC.US,MKC,US,McCormick & Company Incorporated,Consumer Defensive,Packaged Foods,United States,North America,0.03
+TXT.US,TXT,US,Textron Inc,Industrials,Aerospace & Defense,United States,North America,0.03
+BG.US,BG,US,Bunge Limited,Consumer Defensive,Farm Products,United States,North America,0.03
+MRNA.US,MRNA,US,Moderna Inc,Healthcare,Biotechnology,United States,North America,0.03
+JBHT.US,JBHT,US,JB Hunt Transport Services Inc,Industrials,Integrated Freight & Logistics,United States,North America,0.03
+BALL.US,BALL,US,Ball Corporation,Consumer Cyclical,Packaging & Containers,United States,North America,0.03
+FOXA.US,FOXA,US,Fox Corp Class A,Communication Services,Entertainment,United States,North America,0.03
+IT.US,IT,US,Gartner Inc,Technology,Information Technology Services,United States,North America,0.03
+INVH.US,INVH,US,Invitation Homes Inc,Real Estate,REIT - Residential,United States,North America,0.03
+VTRS.US,VTRS,US,Viatris Inc,Healthcare,Drug Manufacturers - Specialty & Generic,United States,North America,0.03
+IEX.US,IEX,US,IDEX Corporation,Industrials,Specialty Industrial Machinery,United States,North America,0.03
+NDSN.US,NDSN,US,Nordson Corporation,Industrials,Specialty Industrial Machinery,United States,North America,0.02
+SMCI.US,SMCI,US,Super Micro Computer Inc,Technology,Computer Hardware,United States,North America,0.02
+CF.US,CF,US,CF Industries Holdings Inc,Basic Materials,Agricultural Inputs,United States,North America,0.02
+AVY.US,AVY,US,Avery Dennison Corp,Consumer Cyclical,Packaging & Containers,United States,North America,0.02
+KIM.US,KIM,US,Kimco Realty Corporation,Real Estate,REIT - Retail,United States,North America,0.02
+ALLE.US,ALLE,US,Allegion PLC,Industrials,Security & Protection Services,United States,North America,0.02
+AKAM.US,AKAM,US,Akamai Technologies Inc,Technology,Software - Infrastructure,United States,North America,0.02
+EG.US,EG,US,Everest Group Ltd,Financial Services,Insurance - Reinsurance,United States,North America,0.02
+CLX.US,CLX,US,The Clorox Company,Consumer Defensive,Household & Personal Products,United States,North America,0.02
+MAS.US,MAS,US,Masco Corporation,Industrials,Building Products & Equipment,United States,North America,0.02
+RL.US,RL,US,Ralph Lauren Corp Class A,Consumer Cyclical,Apparel Manufacturing,United States,North America,0.02
+GDDY.US,GDDY,US,Godaddy Inc,Technology,Software - Infrastructure,United States,North America,0.02
+GEN.US,GEN,US,Gen Digital Inc.,Technology,Software - Infrastructure,United States,North America,0.02
+TKO.US,TKO,US,"TKO Group Holdings, Inc.",Communication Services,Entertainment,United States,North America,0.02
+TTD.US,TTD,US,Trade Desk Inc,Communication Services,Advertising Agencies,United States,North America,0.02
+JKHY.US,JKHY,US,Jack Henry & Associates Inc,Technology,Information Technology Services,United States,North America,0.02
+DPZ.US,DPZ,US,Domino's Pizza Inc Common Stock,Consumer Cyclical,Restaurants,United States,North America,0.02
+BBY.US,BBY,US,Best Buy Co. Inc,Consumer Cyclical,Specialty Retail,United States,North America,0.02
+BLDR.US,BLDR,US,Builders FirstSource Inc,Industrials,Building Products & Equipment,United States,North America,0.02
+LYB.US,LYB,US,LyondellBasell Industries NV,Basic Materials,Specialty Chemicals,United States,North America,0.02
+RVTY.US,RVTY,US,Revvity Inc.,Healthcare,Diagnostics & Research,United States,North America,0.02
+SWK.US,SWK,US,Stanley Black & Decker Inc,Industrials,Tools & Accessories,United States,North America,0.02
+IVZ.US,IVZ,US,Invesco Plc,Financial Services,Asset Management,United States,North America,0.02
+REG.US,REG,US,Regency Centers Corporation,Real Estate,REIT - Retail,United States,North America,0.02
+DOC.US,DOC,US,Healthpeak Properties Inc,Real Estate,REIT - Healthcare Facilities,United States,North America,0.02
+AIZ.US,AIZ,US,Assurant Inc,Financial Services,Insurance - Property & Casualty,United States,North America,0.02
+ZBRA.US,ZBRA,US,Zebra Technologies Corporation,Technology,Communication Equipment,United States,North America,0.02
+HAS.US,HAS,US,Hasbro Inc,Consumer Cyclical,Leisure,United States,North America,0.02
+HST.US,HST,US,Host Hotels & Resorts Inc,Real Estate,REIT - Hotel & Motel,United States,North America,0.02
+CPT.US,CPT,US,Camden Property Trust,Real Estate,REIT - Residential,United States,North America,0.02
+EPAM.US,EPAM,US,EPAM Systems Inc,Technology,Information Technology Services,United States,North America,0.02
+SOLV.US,SOLV,US,Solventum Corp.,Healthcare,Medical Instruments & Supplies,United States,North America,0.02
+PNW.US,PNW,US,Pinnacle West Capital Corp,Utilities,Utilities - Regulated Electric,United States,North America,0.02
+SJM.US,SJM,US,The J. M. Smucker Company,Consumer Defensive,Packaged Foods,United States,North America,0.02
+UDR.US,UDR,US,UDR Inc,Real Estate,REIT - Residential,United States,North America,0.02
+GL.US,GL,US,Globe Life Inc,Financial Services,Insurance - Life,United States,North America,0.02
+UHS.US,UHS,US,Universal Health Services Inc,Healthcare,Medical Care Facilities,United States,North America,0.02
+DAY.US,DAY,US,Dayforce Inc.,Technology,Software - Application,United States,North America,0.02
+ALGN.US,ALGN,US,Align Technology Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.02
+AES.US,AES,US,The AES Corporation,Utilities,Utilities - Diversified,United States,North America,0.02
+CRL.US,CRL,US,Charles River Laboratories,Healthcare,Diagnostics & Research,United States,North America,0.02
+BAX.US,BAX,US,Baxter International Inc,Healthcare,Medical Instruments & Supplies,United States,North America,0.02
+NWSA.US,NWSA,US,News Corp A,Communication Services,Entertainment,United States,North America,0.02
+NCLH.US,NCLH,US,Norwegian Cruise Line Holdings Ltd,Consumer Cyclical,Travel Services,United States,North America,0.02
+TECH.US,TECH,US,Bio-Techne Corp,Healthcare,Biotechnology,United States,North America,0.02
+GNRC.US,GNRC,US,Generac Holdings Inc,Industrials,Specialty Industrial Machinery,United States,North America,0.02
+FOX.US,FOX,US,Fox Corp Class B,Communication Services,Entertainment,United States,North America,0.02
+BXP.US,BXP,US,Boston Properties Inc,Real Estate,REIT - Office,United States,North America,0.02
+FDS.US,FDS,US,FactSet Research Systems Inc,Financial Services,Financial Data & Stock Exchanges,United States,North America,0.02
+APA.US,APA,US,APA Corporation,Energy,Oil & Gas E&P,United States,North America,0.02
+MOH.US,MOH,US,Molina Healthcare Inc,Healthcare,Healthcare Plans,United States,North America,0.02
+WYNN.US,WYNN,US,Wynn Resorts Limited,Consumer Cyclical,Resorts & Casinos,United States,North America,0.02
+CAG.US,CAG,US,ConAgra Foods Inc,Consumer Defensive,Packaged Foods,United States,North America,0.01
+MOS.US,MOS,US,The Mosaic Company,Basic Materials,Agricultural Inputs,United States,North America,0.01
+ARE.US,ARE,US,Alexandria Real Estate Equities Inc,Real Estate,REIT - Office,United States,North America,0.01
+POOL.US,POOL,US,Pool Corporation,Industrials,Industrial Distribution,United States,North America,0.01
+AOS.US,AOS,US,Smith AO Corporation,Industrials,Specialty Industrial Machinery,United States,North America,0.01
+SWKS.US,SWKS,US,Skyworks Solutions Inc,Technology,Semiconductors,United States,North America,0.01
+BEN.US,BEN,US,Franklin Resources Inc,Financial Services,Asset Management,United States,North America,0.01
+TAP.US,TAP,US,Molson Coors Brewing Co Class B,Consumer Defensive,Beverages - Brewers,United States,North America,0.01
+FRT.US,FRT,US,Federal Realty Investment Trust,Real Estate,REIT - Retail,United States,North America,0.01
+HSIC.US,HSIC,US,Henry Schein Inc,Healthcare,Medical Distribution,United States,North America,0.01
+MTCH.US,MTCH,US,Match Group Inc,Communication Services,Internet Content & Information,United States,North America,0.01
+ERIE.US,ERIE,US,Erie Indemnity Company,Financial Services,Insurance Brokers,United States,North America,0.01
+HRL.US,HRL,US,Hormel Foods Corporation,Consumer Defensive,Packaged Foods,United States,North America,0.01
+MGM.US,MGM,US,MGM Resorts International,Consumer Cyclical,Resorts & Casinos,United States,North America,0.01
+PAYC.US,PAYC,US,"Paycom Software, Inc.",Technology,Software - Application,United States,North America,0.01
+LW.US,LW,US,Lamb Weston Holdings Inc,Consumer Defensive,Packaged Foods,United States,North America,0.01
+CPB.US,CPB,US,Campbell’s Co,Consumer Defensive,Packaged Foods,United States,North America,0.01
+BF-B.US,BF-B,US,Brown-Forman Corporation,Consumer Defensive,Beverages - Wineries & Distilleries,United States,North America,0.01
+DVA.US,DVA,US,DaVita HealthCare Partners Inc,Healthcare,Medical Care Facilities,United States,North America,0.01
+NWS.US,NWS,US,News Corp B,Communication Services,Entertainment,United States,North America,0.01
+PSKY.US,PSKY,US,Paramount Skydance Corporation Class B Common Stock,Communication Services,Entertainment,United States,North America,0.01

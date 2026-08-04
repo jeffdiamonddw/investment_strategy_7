@@ -94,6 +94,10 @@ class SuppressOutput:
 
 def optimize(_params, df_features, current_price, holdings, budget, feature_weights, prev_sol=None, max_voo = None):
     
+    df_scores =pd.DataFrame(df_features.values/current_price.values.reshape(current_price.shape[0],1), index = df_features.index)
+    s_scores = pd.Series(np.matmul(df_scores.values, np.array(list(feature_weights.values())).reshape(len(feature_weights), 1)).flatten(), index = df_scores.index)
+
+
     logging.getLogger('pyomo.util.infeasible').setLevel(logging.INFO)
     budget = np.maximum(0, budget)
     
