@@ -173,7 +173,7 @@ if __name__ == "__main__":
     }
     
     
-    df_folds = pd.read_parquet('strategy/folds_3.parquet')
+    df_folds = pd.read_parquet('strategy/folds_1.parquet')
     
  
     
