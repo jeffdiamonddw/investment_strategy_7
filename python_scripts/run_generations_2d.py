@@ -226,8 +226,8 @@ def main():
     
     # Indices: 0-7: PCA, 8: Threshold, 9: Beta, 10-11: Decay, 12-15: Macro Weights
     xl= np.array([
-        -2, -2, -2, -2,  # Mom PCA
-        -2, -2, -2, -2,  # Qual PCA
+        0,0,0,0, # Mom PCA
+        0,0,0,0  # Qual PCA
         -2.0,            # Threshold (Index 8: expanded from 0.1)
         0.5,             # Beta (Index 9)
         -1, -1,          # Decays
@@ -237,8 +237,8 @@ def main():
     ])
 
     xu = np.array([
-        2, 2, 2, 2,      # Mom PCA
-        2, 2, 2, 2,      # Qual PCA
+        1,1,1,1,      # Mom PCA
+       1,1,1,1    # Qual PCA
         2.0,             # Threshold (Index 8: expanded from 0.9)
         15.0,            # Beta (Index 9: expanded from 2.0)
         1, 1,            # Decays

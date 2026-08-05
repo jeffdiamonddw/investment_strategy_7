@@ -71,7 +71,7 @@ if __name__ == "__main__":
     df = pd.DataFrame(results, columns = ['signal', 'alpha', 'ratio'])
     df = df.sort_values(by = 'ratio')
 
-    df_signal = df_macro.loc[:, df.signal]
+    df_signal = df_macro.loc[:, [col for col in df.signal.values if col.endswith('_0_1')]]
     df_signal.to_parquet('s3://jdinvestment/simulation_data/macro_signals.parquet')
 
 

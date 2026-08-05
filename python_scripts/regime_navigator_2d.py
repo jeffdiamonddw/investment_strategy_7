@@ -117,9 +117,11 @@ class RegimeNavigator2D(RegimeNavigator1D):
         df_qual_decay = pd.DataFrame(np.exp((- qual_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * qual_num_periods).astype(float)), index=s_risk_aversion.index, columns = self.qual_kit['columns'])
         
         
-        w_dict = {}
-        df_mom = pd.DataFrame({self.mom_kit['columns'][j]: [w_mom_vals[j]] for j in range(len(w_mom_vals))})
-        df_qual = pd.DataFrame({self.qual_kit['columns'][j]: [w_qual_vals[j]] for j in range(len(w_mom_vals))})
+        
+        mom_cols = ['dollar_ret_1p', 'dollar_ret_6p', 'dollar_ret_13p', 'dollar_ret_26p']
+        qual_cols = ['avg_eps_1q', 'avg_eps_2q', 'avg_eps_4q', 'avg_eps_8q']
+        df_mom = pd.DataFrame({mom_cols[j]: [w_mom_vals[j]] for j in range(len(w_mom_vals))})
+        df_qual = pd.DataFrame({qual_cols[j]: [w_qual_vals[j]] for j in range(len(w_mom_vals))})
         
         df_mom_weights = df_mom_decay.mul(df_mom.iloc[0], axis=1).mul(1 - s_quality_weight, axis=0)
         df_qual_weights = df_qual_decay.mul(df_qual.iloc[0], axis=1).mul(s_quality_weight, axis=0)
@@ -139,14 +141,10 @@ class RegimeNavigator2D(RegimeNavigator1D):
         x_numeric = x.X if hasattr(x, "X") else x
         sim_id = get_dna_hash(x_numeric)
         # CHANGE self.mom_kit to self.mom_kit
-        w_mom = self.mom_kit['scaler'].inverse_transform(
-            self.mom_kit['pca'].inverse_transform(x_numeric[0:4].reshape(1, -1))
-        ).flatten()
+        w_mom = x_numeric[:4]
         
         # CHANGE self.qual_kit to self.qual_kit
-        w_qual = self.qual_kit['scaler'].inverse_transform(
-            self.qual_kit['pca'].inverse_transform(x_numeric[4:8].reshape(1, -1))
-        ).flatten()
+        w_qual =x_numeric[5:9]
         w_mom, w_qual = np.clip(w_mom, 0, 1), np.clip(w_qual, 0, 1)
 
         opt_threshold = x_numeric[8]
@@ -203,7 +201,7 @@ if __name__ == "__main__":
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
     periods = {
-        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-06-06')},
+        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-09-01')},
     }
     
     
