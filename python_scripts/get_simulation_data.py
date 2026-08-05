@@ -211,12 +211,15 @@ def build_momentum(tickers, target_dates):
 import requests
 import io
 
+
+
+
 def build_quality(tickers, target_dates, da_mom):
     """
     Recreates Quality bands with logic-based branching:
     - Short ETFs: Use Price Proxy.
-    - Stocks: Fetch actual EPS from EODHD.
-    - Long ETFs: Fetch holdings and calculate weighted average EPS.
+    - Stocks: Fetch actual EPS from EODHD using filing/report dates.
+    - Long ETFs: Fetch holdings and calculate weighted average EPS using filing/report dates.
     """
     results = []
     print(f"Recreating Quality data for {len(tickers)} tickers...")
@@ -224,12 +227,7 @@ def build_quality(tickers, target_dates, da_mom):
     # Load metadata for branching logic
     ticker_meta = pd.read_csv(TICKER_FILE).set_index('symbol')
     
-
     for j, ticker in enumerate(tickers):
-
-        #try:
-            
-        
         # 1. Determine Logic Path from Metadata
         asset_type = ticker_meta.loc[ticker, 'asset_type'].upper()
         direction = ticker_meta.loc[ticker, 'direction'].upper()
@@ -246,49 +244,100 @@ def build_quality(tickers, target_dates, da_mom):
             for i, window in enumerate([1, 2, 4, 8]):
                 data[i] = 4 * pd.Series(raw_proxy.values).rolling(window=window, min_periods=1).mean().values
 
-        # PATH B: Stocks (Direct EPS)
+        # PATH B: Stocks (Direct EPS with Filing Date Alignment)
         elif asset_type == 'STOCK':
             url = f'https://eodhd.com/api/fundamentals/{ticker}.US?api_token={API_KEY}'
             resp = requests.get(url).json()
-            # Extract quarterly earnings and align to target_dates
             earnings = resp.get('Earnings', {}).get('History', {})
             if earnings:
-                eps_series = pd.DataFrame.from_dict(earnings, orient='index')
-                eps_series.index = pd.to_datetime(eps_series['date'])
-                aligned_eps = eps_series['epsActual'].reindex(target_dates, method='ffill').fillna(0)
+                eps_df = pd.DataFrame.from_dict(earnings, orient='index')
+                
+                # --- MODIFICATION START: POINT-IN-TIME FILING DATE HANDLING ---
+                # Explanation: Instead of aligning straight to the quarter's period-end 'date' 
+                # (which creates look-ahead bias), we check for EODHD's 'filing_date'. If a filing 
+                # date is missing, we apply a safety 45-day lag buffer after the period-end date 
+                # to simulate when the financials actually became publicly available.
+                if 'filing_date' in eps_df.columns:
+                    effective_dates = pd.to_datetime(eps_df['filing_date']).fillna(pd.to_datetime(eps_df['date']) + pd.Timedelta(days=45))
+                else:
+                    effective_dates = pd.to_datetime(eps_df['date']) + pd.Timedelta(days=45)
+                
+                eps_df['effective_date'] = effective_dates
+                eps_df['epsActual'] = pd.to_numeric(eps_df['epsActual'], errors='coerce').fillna(0)
+                
+                # Sort chronologically by the effective filing/availability date
+                eps_df = eps_df.sort_values('effective_date').dropna(subset=['effective_date'])
+                
+                # Use pandas merge_asof with direction='backward' to guarantee that for any given 
+                # simulation target date, we only pull earnings data whose effective filing date 
+                # has already passed (preventing future information leakage).
+                target_df = pd.DataFrame({'date': target_dates}).sort_values('date')
+                merged = pd.merge_asof(
+                    target_df, 
+                    eps_df[['effective_date', 'epsActual']], 
+                    left_on='date', 
+                    right_on='effective_date', 
+                    direction='backward'
+                )
+                merged['epsActual'] = merged['epsActual'].fillna(0)
+                
+                aligned_eps = pd.Series(merged['epsActual'].values, index=target_df['date']).reindex(target_dates)
+                # --- MODIFICATION END ---
+                
                 for i, window in enumerate([1, 2, 4, 8]):
                     data[i] = 4 * aligned_eps.rolling(window=window, min_periods=1).mean().values
             else:
                 raise ValueError("No EPS data found")
 
-        # PATH C: Long ETFs (Weighted Average of Holdings EPS)
+        # PATH C: Long ETFs (Weighted Average of Holdings EPS with Filing Date Alignment)
         elif asset_type == 'ETF' and direction == 'LONG':
             holdings_file = f'./holdings/{ticker}_holdings.csv'
             
             if os.path.exists(holdings_file):
-                # Read local CSV. Based on your snippet, we use 'Code' and 'Assets_%'
                 df_holdings = pd.read_csv(holdings_file)
                 
                 weighted_eps_sum = pd.Series(0.0, index=target_dates)
                 total_w = 0.0
                 
                 for _, row in df_holdings.iterrows():
-                    # Extract the symbol (CDE, FCX, etc.) and append .US if needed
                     h_raw_code = str(row['Code']).strip()
                     h_code = f"{h_raw_code}.US" if "." not in h_raw_code else h_raw_code
                     
-                    # Use 'Assets_%' column, converting to a decimal (e.g., 6.16 -> 0.0616)
                     h_weight = float(row['Assets_%']) / 100.0
                     
-                    # Fetch individual holding EPS from EODHD
                     h_url = f'https://eodhd.com/api/fundamentals/{h_code}?api_token={API_KEY}'
                     h_resp = requests.get(h_url).json()
                     h_hist = h_resp.get('Earnings', {}).get('History', {})
                     
                     if h_hist:
                         h_df = pd.DataFrame.from_dict(h_hist, orient='index')
-                        h_df.index = pd.to_datetime(h_df['date'])
-                        h_series = h_df['epsActual'].reindex(target_dates, method='ffill').fillna(0)
+                        
+                        # --- MODIFICATION START: HOLDINGS POINT-IN-TIME FILING DATE HANDLING ---
+                        # Explanation: Applied the exact same filing-date and backward-looking 
+                        # merge_asof logic to each underlying holding in long ETFs to ensure 
+                        # portfolio-level quality metrics are also free from look-ahead bias.
+                        if 'filing_date' in h_df.columns:
+                            h_effective_dates = pd.to_datetime(h_df['filing_date']).fillna(pd.to_datetime(h_df['date']) + pd.Timedelta(days=45))
+                        else:
+                            h_effective_dates = pd.to_datetime(h_df['date']) + pd.Timedelta(days=45)
+                            
+                        h_df['effective_date'] = h_effective_dates
+                        h_df['epsActual'] = pd.to_numeric(h_df['epsActual'], errors='coerce').fillna(0)
+                        h_df = h_df.sort_values('effective_date').dropna(subset=['effective_date'])
+                        
+                        target_df = pd.DataFrame({'date': target_dates}).sort_values('date')
+                        merged = pd.merge_asof(
+                            target_df, 
+                            h_df[['effective_date', 'epsActual']], 
+                            left_on='date', 
+                            right_on='effective_date', 
+                            direction='backward'
+                        )
+                        merged['epsActual'] = merged['epsActual'].fillna(0)
+                        
+                        h_series = pd.Series(merged['epsActual'].values, index=target_df['date']).reindex(target_dates)
+                        # --- MODIFICATION END ---
+                        
                         weighted_eps_sum += (h_series * h_weight)
                         total_w += h_weight
                 
@@ -296,11 +345,8 @@ def build_quality(tickers, target_dates, da_mom):
                     final_eps = weighted_eps_sum / total_w
                     for i, window in enumerate([1, 2, 4, 8]):
                         data[i] = 4 * final_eps.rolling(window=window, min_periods=1).mean().values
-                    success = True
 
         print('got quality data for {} {}/{}'.format(ticker, j+1, len(tickers)))
-
-        
 
         da = xr.DataArray(data[:, np.newaxis, :], 
                           coords={'band': QUAL_BANDS, 'symbol': [ticker], 'date': target_dates}, 

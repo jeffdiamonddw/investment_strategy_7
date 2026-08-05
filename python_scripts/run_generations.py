@@ -219,9 +219,9 @@ def main():
     image_arn = "129861351772.dkr.ecr.us-west-2.amazonaws.com/simulation:latest"
     
     df_initial = pd.read_parquet('sim_results/initial_pop_2d.parquet')
-    s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
-    if not s3_file_exists(s3_pop_file):
-        df_initial.to_parquet(s3_pop_file)
+    #s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
+    #if not s3_file_exists(s3_pop_file):
+    #    df_initial.to_parquet(s3_pop_file)
     num_vars = df_initial.shape[1]
     
     # Indices: 0-7: PCA, 8: Threshold, 9: Beta, 10-11: Decay, 12-15: Macro Weights
