@@ -110,16 +110,18 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         
         s_quality_weight = 1 / (1 + (-beta * (s_risk_aversion - threshold)).astype(float).apply(np.exp))
-        mom_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.mom_kit['columns']])
-        qual_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in self.qual_kit['columns']])
+
+        mom_cols = ['dollar_ret_1p', 'dollar_ret_6p', 'dollar_ret_13p', 'dollar_ret_26p']
+        qual_cols = ['avg_eps_1q', 'avg_eps_2q', 'avg_eps_4q', 'avg_eps_8q']
+        mom_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in mom_cols])
+        qual_num_periods = np.array([int(col.split('_')[-1][:-1]) for col in qual_cols])
         
         df_mom_decay = pd.DataFrame(np.exp((- mom_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * mom_num_periods).astype(float)), index=s_risk_aversion.index, columns = self.mom_kit['columns'])
         df_qual_decay = pd.DataFrame(np.exp((- qual_decay * (risk_aversion_mean - s_risk_aversion).values[:, None] * qual_num_periods).astype(float)), index=s_risk_aversion.index, columns = self.qual_kit['columns'])
         
         
         
-        mom_cols = ['dollar_ret_1p', 'dollar_ret_6p', 'dollar_ret_13p', 'dollar_ret_26p']
-        qual_cols = ['avg_eps_1q', 'avg_eps_2q', 'avg_eps_4q', 'avg_eps_8q']
+        
         df_mom = pd.DataFrame({mom_cols[j]: [w_mom_vals[j]] for j in range(len(w_mom_vals))})
         df_qual = pd.DataFrame({qual_cols[j]: [w_qual_vals[j]] for j in range(len(w_mom_vals))})
         
