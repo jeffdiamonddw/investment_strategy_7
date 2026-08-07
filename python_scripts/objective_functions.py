@@ -211,7 +211,7 @@ class WeightedRegretApplyer:
     df_agg["weight"] = (
         self.df_folds.end_date - self.df_folds.start_date
     ).dt.days.iloc[df_agg.index]
-    df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
+    #jeff      df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
     df_agg["weight"] /= df_agg["weight"].sum()
 
     df_agg["best"] = self.df_folds[self.regret_col].loc[df_agg.index]
@@ -269,7 +269,7 @@ class WeightedRegimeApplyer:
     df_agg["weight"] = (
         self.df_folds.end_date - self.df_folds.start_date
     ).dt.days.iloc[df_agg.index]
-    df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
+    #jeff df_agg = df_agg.loc[df_agg.isnull().sum(1) == 0]
 
     df_agg["weight"] /= df_agg["weight"].sum()
 
@@ -336,6 +336,8 @@ def weighted_quantile(quantile, values, weights):
     return value_at_quantile
 
 def weighted_mean(values, weights):
+    if values.notnull().sum() == 0:
+       return np.nan
     weighted_mean = (values * weights).sum() / weights.sum()
     return weighted_mean
 

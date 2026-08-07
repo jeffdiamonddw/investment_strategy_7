@@ -163,7 +163,7 @@ def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
     
 
 def get_objectives(s3_path, generation, obj_columns = ['train_mean_regret', 'train_regret_quantile']):
-    output_path = "{}/median_objectives/gen_{}/".format(s3_path, generation)
+    output_path = "{}/median_objectives/gen={}/".format(s3_path, generation)
     df = wr.df = wr.s3.read_parquet(
         path=output_path,
         dataset=True

@@ -195,7 +195,8 @@ if __name__ == "__main__":
 
     s3_path = args.s3_path
     generation = args.generation
-    task_index = int(os.environ.get('AWS_BATCH_JOB_ARRAY_INDEX', 0))
+    #task_index = int(os.environ.get('AWS_BATCH_JOB_ARRAY_INDEX', 0))
+
    
     
     logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
@@ -272,30 +273,36 @@ if __name__ == "__main__":
    
 
     regime_navigator = RegimeNavigator2D(**problem_args)
+    for task_index in range(1, 100):
+        s_task = pd.read_parquet("{}/populations/gen_{}.parquet".format(s3_path, generation)).iloc[task_index]
+        parameter_cols = [name for name in s_task.index if 'sim_id' not in name]
+        x = s_task.loc[parameter_cols].values
+        sim_id = get_dna_hash(x)
+        print('pre-time: {}'.format(time.time() - t1), flush = True)
+        
+        parent_sim_id = sim_id
+        perturbed_x = x
+        df_evaluations = pd.DataFrame()
+        history_file = "{}/holdings/sim_{}.parquet".format(s3_path, sim_id)
+    
+        df_history = pd.read_parquet(history_file)
+        df_history = df_history.reset_index(drop = True).set_index('date').drop('sim_id', axis = 1)
+        total_value_series = df_history.sum(axis = 1)
 
-    s_task = pd.read_parquet("{}/populations/gen_{}.parquet".format(s3_path, generation)).iloc[task_index]
-    parameter_cols = [name for name in s_task.index if 'sim_id' not in name]
-    x = s_task.loc[parameter_cols].values
-    sim_id = get_dna_hash(x)
-    print('pre-time: {}'.format(time.time() - t1), flush = True)
-    
-    parent_sim_id = sim_id
-    perturbed_x = x
-    df_evaluations = pd.DataFrame()
-    for sample in range(num_samples):
-        sim_id = get_dna_hash(perturbed_x)
-        df_history, total_value_series = regime_navigator.evaluate(perturbed_x)
-    
+        val_start_date = df_folds.loc[df_folds.fold_index.isin(args.val_folds), 'start_date'].min()
+
+        total_value_series.loc[total_value_series.index >= val_start_date] = np.nan
+
         logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
         my_boto3_session = boto3.Session()
         
-        wr.s3.to_parquet(
-                df=df_history,
-                path="{}/holdings/sim_{}.parquet".format(s3_path, sim_id),
-                dataset=False,
-                index = True,
-                boto3_session=my_boto3_session 
-        )
+        # wr.s3.to_parquet(
+        #         df=df_history,
+        #         path="{}/holdings/sim_{}.parquet".format(s3_path, sim_id),
+        #         dataset=False,
+        #         index = True,
+        #         boto3_session=my_boto3_session 
+        # )
         
         df_values = pd.DataFrame(total_value_series).transpose()
         df_values.index = [sim_id]
@@ -304,43 +311,45 @@ if __name__ == "__main__":
         df_values.columns = df_values.columns.astype(str)
 
 
-        wr.s3.to_parquet(
-                df=df_values,
-                path='{}/portfolio_values/sim_{}.parquet'.format(s3_path, sim_id),
-                dataset=False,
-                index = True,
-                boto3_session=my_boto3_session 
-        )
+        # wr.s3.to_parquet(
+        #         df=df_values,
+        #         path='{}/portfolio_values/sim_{}.parquet'.format(s3_path, sim_id),
+        #         dataset=False,
+        #         index = True,
+        #         boto3_session=my_boto3_session 
+        # )
 
         
         
         df_evaluation = apply_objectives(objective_functions_dict, total_value_series)
         df_evaluation['sim_id'] = sim_id
         df_evaluation['parent_sim_id'] = parent_sim_id
-        wr.s3.to_parquet(
-                df=df_evaluation,
-                path='{}/objectives/sim_{}.parquet'.format(s3_path, sim_id),
-                dataset=False,
-                index = True,
-                boto3_session=my_boto3_session 
-        )
+        # wr.s3.to_parquet(
+        #         df=df_evaluation,
+        #         path='{}/objectives/sim_{}.parquet'.format(s3_path, sim_id),
+        #         dataset=False,
+        #         index = True,
+        #         boto3_session=my_boto3_session 
+        # )
         df_evaluations = pd.concat([df_evaluations, df_evaluation])
 
         noise = np.random.normal(0, perturbation_cv * np.abs(x), size=x.shape)
         perturbed_x = x + noise
 
-    df_agg = df_evaluations[['mode', 'objective', 'value']].groupby(['mode', 'objective']).agg('median')
-    df_agg['sim_id'] = parent_sim_id
-    wr.s3.to_parquet(
-            df=df_agg,
-            path='{}/median_objectives/gen={}/sim_{}.parquet'.format(s3_path, generation, parent_sim_id),
-            dataset=False,
-            index = True,
-            boto3_session=my_boto3_session 
-    )
+        df_agg = df_evaluations[['mode', 'objective', 'value']].groupby(['mode', 'objective']).agg('median')
+        df_agg['sim_id'] = parent_sim_id
+        # wr.s3.to_parquet(
+        #         df=df_agg,
+        #         path='{}/median_objectives/gen_{}/sim_{}.parquet'.format(s3_path, generation, parent_sim_id),
+        #         dataset=False,
+        #         index = True,
+        #         boto3_session=my_boto3_session 
+    # )
+        df1 = df_agg.reset_index().set_index('mode').loc['train']
+        print(task_index, df1.value.isnull().sum())
 
 
-   
+
         
     
     

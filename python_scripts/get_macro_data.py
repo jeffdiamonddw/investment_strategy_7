@@ -10,19 +10,7 @@ START_DATE = '2004-01-01'
 END_DATE = datetime.now().strftime('%Y-%m-%d')
 ROTATION_DAYS = 28
 
-
 import xarray as xr
-import pandas as pd
-import numpy as np
-
-import xarray as xr
-import pandas as pd
-import numpy as np
-
-
-
-
-
 
 def fetch_vix(ticker):
     url = f"https://eodhd.com/api/eod/{ticker}.INDX?api_token={API_TOKEN}&fmt=json&from={START_DATE}"
@@ -89,8 +77,13 @@ fed_rate = fetch_fed_rate()
 vix = fetch_vix("VIX")
 vix3m = fetch_vix("VIX3M")
 
+# --- APPLY REPORTING & AVAILABILITY LAGS ---
+# Shift publication dates forward by 1 trading day so day t's data is only accessible on t+1
+fed_rate['date'] = fed_rate['date'] + timedelta(days=1)
+yields['date'] = yields['date'] + timedelta(days=1)
+
 # 2. MERGE INTO MASTER DATAFRAME
-print("Aligning continuous daily records...")
+print("Aligning continuous daily records with publication lags...")
 df_master = vix.merge(vix3m, on='date', how='outer')
 df_master = df_master.merge(yields, on='date', how='outer')
 df_master = df_master.merge(fed_rate, on='date', how='outer')
@@ -122,7 +115,6 @@ for sig in signals:
     # Component 3: Velocity (Order 1, Moment 1) -> 28-day relative momentum shift
     df_daily_features.loc[:, f'{sig}_1_1'] = df_daily_z[sig].diff(periods = 28).values
     
-    
 # 6. DOWN-SAMPLE TO 4-WEEK HEARTBEAT DATES
 print("Down-sampling processed features to 28-day heartbeats...")
 rotation_dates = []
@@ -147,9 +139,6 @@ for sig in signals:
     
     # Store zero-centered parameter mapping safely
     df_heartbeat.loc[:, f'{sig}_1_2'] = (raw_accel_series - expanding_median).values
-
-# --- REMOVED THE BREAKING END-OF-PIPE BLIND NORMALIZATION LOOP ---
-# Magnitudes are now dynamically preserved without future data leakage.
 
 # Save final structured dataset
 df_heartbeat = df_heartbeat.dropna().reset_index()
