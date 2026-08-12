@@ -132,10 +132,10 @@ class RegimeNavigator2D(RegimeNavigator1D):
         df_weights.to_csv('temp/weights.csv')
        #********************************************************************************************************************************* 
 
-        df_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
+        df_holdings, final_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
         
       
-        return df_holdings
+        return df_holdings, final_holdings
     
 
     def evaluate(self, x):
@@ -160,7 +160,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         df_sim = pd.DataFrame()
         for key in self.periods:
-            df_period = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings)
+            df_period, final_holdings = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings)
             df_sim = pd.concat([df_sim, df_period]).reset_index(drop=True)
         
         
@@ -170,7 +170,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         
         
-        return df_sim, total_value_series
+        return df_sim, final_holdings, total_value_series
         
         
 
@@ -180,7 +180,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
 
 if __name__ == "__main__":
     
-    num_samples = 3
+    num_samples = 1 #jeff
     perturbation_cv = .01
     
     t1 = time.time()
@@ -191,6 +191,7 @@ if __name__ == "__main__":
                         help='List of training fold integers (e.g., --train_fold 0 1 2)')
     parser.add_argument('--val_folds', type=int, nargs='+', default=[],
                         help='List of validation fold integers (e.g., --val_fold 3 4)')
+    parser.add_argument('--holdings', type = str, required=False)
     args = parser.parse_args()
 
     s3_path = args.s3_path
@@ -203,7 +204,7 @@ if __name__ == "__main__":
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
     periods = {
-        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-09-01')},
+        'train': {'train_start_date': pd.to_datetime('2023-01-01'), 'val_start_date': pd.to_datetime('2025-06-01'), 'end_date': pd.to_datetime('2026-09-01')},
     }
     
     
@@ -242,7 +243,9 @@ if __name__ == "__main__":
     objective_sense = {'regret_quantile': 'min', 'mean_regret': 'min'}
     
 
-    principal = [408000]
+    #principal = [23958.38]  
+    principal = [15312.67, 238478.05, 43828.5]
+    #principal = [297619.22]  #CAD [21312, 331911, 61000, 33345]
     
     
     params = {
@@ -253,7 +256,9 @@ if __name__ == "__main__":
     
 
    
-    holdings = None
+    holdings = args.holdings
+    if holdings is not None:
+        holdings = pd.read_parquet(holdings)
     
     problem_args = get_rn_problem_params(
         periods,
@@ -284,10 +289,12 @@ if __name__ == "__main__":
     df_evaluations = pd.DataFrame()
     for sample in range(num_samples):
         sim_id = get_dna_hash(perturbed_x)
-        df_history, total_value_series = regime_navigator.evaluate(perturbed_x)
+        df_history, final_holdings, total_value_series = regime_navigator.evaluate(perturbed_x)
     
         logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
         my_boto3_session = boto3.Session()
+
+        final_holdings.to_parquet("{}/final_holdings/sim_{}.parquet".format(s3_path, sim_id))
         
         wr.s3.to_parquet(
                 df=df_history,
