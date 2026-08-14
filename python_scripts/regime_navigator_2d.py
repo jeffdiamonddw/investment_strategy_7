@@ -204,7 +204,7 @@ if __name__ == "__main__":
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
     periods = {
-        'train': {'train_start_date': pd.to_datetime('2023-01-01'), 'val_start_date': pd.to_datetime('2025-06-01'), 'end_date': pd.to_datetime('2026-09-01')},
+        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-09-01')},
     }
     
     
@@ -292,7 +292,7 @@ if __name__ == "__main__":
         sim_id = get_dna_hash(perturbed_x)
         df_history, final_holdings, total_value_series, combined_holdings = regime_navigator.evaluate(perturbed_x)
 
-        combined_holdings.to_netcdf('sim_results/holdings_history.nc')
+        #combined_holdings.to_netcdf('sim_results/holdings_history.nc')
 
 
         logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
