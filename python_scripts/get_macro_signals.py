@@ -26,7 +26,7 @@ def get_clustering_ratio_expanding(signal_slice, df_regimes_slice, alpha):
     ratio = np.mean(intra_dists) / (mean_inter + 1e-9)
     return ratio
 
-if __name__ == "__main__":
+def get_macro_signals():
     print("Loading datasets...")
     df_macro = pd.read_parquet('s3://jdinvestment/simulation_data/macro_data.parquet')
     df_regimes = pd.read_parquet('strategy/semantic_regimes.parquet')

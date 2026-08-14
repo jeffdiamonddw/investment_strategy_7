@@ -132,10 +132,10 @@ class RegimeNavigator2D(RegimeNavigator1D):
         df_weights.to_csv('temp/weights.csv')
        #********************************************************************************************************************************* 
 
-        df_holdings, final_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
+        df_holdings, final_holdings, combined_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
         
       
-        return df_holdings, final_holdings
+        return df_holdings, final_holdings, combined_holdings
     
 
     def evaluate(self, x):
@@ -160,7 +160,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         df_sim = pd.DataFrame()
         for key in self.periods:
-            df_period, final_holdings = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings)
+            df_period, final_holdings, combined_holdings = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings)
             df_sim = pd.concat([df_sim, df_period]).reset_index(drop=True)
         
         
@@ -170,7 +170,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         
         
-        return df_sim, final_holdings, total_value_series
+        return df_sim, final_holdings, total_value_series, combined_holdings
         
         
 
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     }
     
     
-    df_folds = pd.read_parquet('strategy/folds_4.parquet')
+    df_folds = pd.read_parquet('strategy/folds_5.parquet')
     
  
     
@@ -246,6 +246,7 @@ if __name__ == "__main__":
     #principal = [23958.38]  
     principal = [15312.67, 238478.05, 43828.5]
     #principal = [297619.22]  #CAD [21312, 331911, 61000, 33345]
+    #principal = [33345]
     
     
     params = {
@@ -289,10 +290,15 @@ if __name__ == "__main__":
     df_evaluations = pd.DataFrame()
     for sample in range(num_samples):
         sim_id = get_dna_hash(perturbed_x)
-        df_history, final_holdings, total_value_series = regime_navigator.evaluate(perturbed_x)
-    
+        df_history, final_holdings, total_value_series, combined_holdings = regime_navigator.evaluate(perturbed_x)
+
+        combined_holdings.to_netcdf('sim_results/holdings_history.nc')
+
+
         logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
         my_boto3_session = boto3.Session()
+
+        df_holdings = df_history.set_index('date').iloc[:-1, :-1]
 
         final_holdings.to_parquet("{}/final_holdings/sim_{}.parquet".format(s3_path, sim_id))
         

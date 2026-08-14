@@ -218,7 +218,7 @@ def main():
     ]
     image_arn = "129861351772.dkr.ecr.us-west-2.amazonaws.com/simulation:latest"
     
-    df_initial = pd.read_parquet('s3://jdinvestment/2d_initial/populations/gen_0.parquet')
+    df_initial = pd.read_parquet('s3://jdinvestment/2d_train_to_2025/populations/gen_149.parquet')
     s3_pop_file = "{}/populations/gen_0.parquet".format(args.s3_path)
     if not s3_file_exists(s3_pop_file):
         df_initial.to_parquet(s3_pop_file)

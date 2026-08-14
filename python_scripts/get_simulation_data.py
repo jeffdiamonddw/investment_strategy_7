@@ -4,6 +4,9 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
+from get_macro_data import get_macro_data
+from get_macro_signals import get_macro_signals
+
 
 # Silence the internal yfinance Pandas4Warning
 warnings.filterwarnings("ignore", message=".*Timestamp.utcnow is deprecated.*")
@@ -433,6 +436,9 @@ def main():
         da_qual.to_netcdf(QUALITY_PATH)
 
     run_strict_alignment_check(da_mom, da_qual, csv_tickers)
+
+    get_macro_data()
+    get_macro_signals()
 
    
    

@@ -20,6 +20,7 @@ import pyomo.environ as pyo
 
 import pandas as pd
 import numpy as np
+import xarray as xr
 
 
 def allocate_stocks_heuristic(
@@ -515,6 +516,7 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
     df_holdings_shares = pd.DataFrame()
     last_val_start_date = time_tups[0][0]
     new_sol = None
+    all_holdings = {}
     for val_start_date, val_end_date in time_tups:
         
         if val_start_date > max(data_features.coords['date'].to_pandas()):
@@ -523,6 +525,7 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
         if val_end_date is None:
             holdings = holdings_start
         
+        all_holdings[val_start_date] = holdings
         holdings_shares = pd.DataFrame((holdings.sum(axis = 1))).transpose()
         holdings_shares.loc[:, 'date'] = val_start_date
         df_holdings_shares = pd.concat([df_holdings_shares, holdings_shares])
@@ -562,9 +565,17 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
         
     stagger_delay = (int(sim_id, 16) % 5000) / 1000.0
     time.sleep(stagger_delay)
+
+    holdings_arrays = []
+    for d, df in sorted(all_holdings.items()):
+        # Convert each pandas DataFrame to a 2D DataArray (stock x account)
+        da = xr.DataArray(df.values, dims=["symbol", "account"], coords=dict(symbol=df.index, account=df.columns))
+        holdings_arrays.append(da)
+
+    # Concatenate along a new 'date' dimension
+    combined_holdings = xr.concat(holdings_arrays, dim=pd.Index(all_holdings.keys(), name="date"))
     
-    
-    return df_holdings_history, final_holdings
+    return df_holdings_history, final_holdings, combined_holdings
 
 def get_gic_eps(data_gic):
     df_gic = data_gic.sel(symbol = 'GIC').to_pandas().transpose().iloc[:, 1:]
