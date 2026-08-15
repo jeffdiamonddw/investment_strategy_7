@@ -270,7 +270,7 @@ def main():
     
 
     
-    for gen in range(150):
+    for gen in range(1):
         
         
         

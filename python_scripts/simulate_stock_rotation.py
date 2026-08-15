@@ -471,6 +471,7 @@ def optimize(_params, df_features, current_price, _holdings, _budget, feature_we
     df_sol = df_sol.astype('float')
     df_sol.loc['GIC', :] = (params['budget'] - _investment - float(params['trade_fee'] * num_trades)).flatten()
     df_sol = pd.concat([df_sol, pd.DataFrame(0, index = drop_stock_list, columns = df_sol.columns)]).loc[holdings.index]
+    df_sol = df_sol.astype(int)
     
     initial_investment = _holdings.loc[_holdings.index != 'GIC'].values.sum()
     if initial_investment == 0:
