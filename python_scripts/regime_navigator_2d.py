@@ -180,7 +180,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
 
 if __name__ == "__main__":
     
-    num_samples = 1 #jeff
+    num_samples = 3
     perturbation_cv = .01
     
     t1 = time.time()

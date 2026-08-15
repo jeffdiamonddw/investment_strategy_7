@@ -9,40 +9,15 @@ Config.warnings['not_compiled'] = False
 
 Registering/Updating Job Definition: simulation-job-def...
 Submitting array job...
-Successfully submitted! Job ID: 7cb307d7-19b3-4c6f-8963-aead217ae3c6 for generation 0
+Successfully submitted! Job ID: 977b7b78-f32b-4de8-9f6a-e40c3892e139 for generation 0
+waiting for summary
 waiting for summary
 waiting for summary
 batch complete: (False, 0)
-waiting on batch 36.719987869262695 seconds, 0/215 complete
-waiting on batch 69.35599040985107 seconds, 0/215 complete
-waiting on batch 101.94892287254333 seconds, 4/215 complete
-waiting on batch 134.6066300868988 seconds, 174/215 complete
-completed Job ID: 7cb307d7-19b3-4c6f-8963-aead217ae3c6 for generation 0
-Traceback (most recent call last):
-  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 304, in <module>
-    main()
-  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 288, in main
-    F = master_problem.evaluate(pop.get("X"))
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 257, in evaluate
-    _out = self.do(X, return_values_of, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 299, in do
-    self._evaluate_vectorized(X, out, *args, **kwargs)
-  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 307, in _evaluate_vectorized
-    self._evaluate(X, out, *args, **kwargs)
-  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 195, in _evaluate
-    df_obj = get_objectives(self.s3_path, self.generation)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 167, in get_objectives
-    df = wr.df = wr.s3.read_parquet(
-                 ^^^^^^^^^^^^^^^^^^^
-  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_utils.py", line 178, in inner
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_config.py", line 732, in wrapper
-    return function(**args)
-           ^^^^^^^^^^^^^^^^
-  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/s3/_read_parquet.py", line 525, in read_parquet
-    raise exceptions.NoFilesFound(f"No files Found on: {path}.")
-awswrangler.exceptions.NoFilesFound: No files Found on: s3://jdinvestment/2d_val_6_months_1/median_objectives/gen=0/.
+waiting on batch 37.90996718406677 seconds, 0/215 complete
+waiting on batch 70.54427742958069 seconds, 0/215 complete
+waiting on batch 103.19540047645569 seconds, 0/215 complete
+waiting on batch 135.83324241638184 seconds, 0/215 complete
+waiting on batch 168.44761085510254 seconds, 124/215 complete
+waiting on batch 201.07355618476868 seconds, 215/215 complete
+completed Job ID: 977b7b78-f32b-4de8-9f6a-e40c3892e139 for generation 0
