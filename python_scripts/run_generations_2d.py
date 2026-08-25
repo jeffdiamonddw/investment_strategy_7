@@ -208,11 +208,10 @@ def main():
     parser.add_argument('--s3_path', required=True)
     parser.add_argument('--train_folds', type=int, nargs='+', default=[])
     parser.add_argument('--val_folds', type=int, nargs='+', default=[])
-    parser.add_argument('--folds', type = str, required=True)
     args = parser.parse_args()
 
-    df_folds = pd.read_parquet(args.folds)
-    df_folds.to_parquet('{}/folds.parquet'.format(args.s3_path))
+    df_folds = pd.read_parquet("{}/folds.parquet".format(args.s3_path))
+   
 
     with smart_open("{}/args.joblib".format(args.s3_path), 'wb') as fp:
         joblib.dump(vars(args), fp)
@@ -224,7 +223,7 @@ def main():
        'beta', 'mom_decay', 'qual_decay', 'risk_macro_weights_0',
        'risk_macro_weights_1', 'risk_macro_weights_2', 'risk_macro_weights_3',
        'temporal_macro_weights_0', 'temporal_macro_weights_1',
-       'temporal_macro_weights_2', 'temporal_macro_weights_3', 'max_voo'
+       'temporal_macro_weights_2', 'temporal_macro_weights_3', 'max_voo', 'max_frac'
     ]
     image_arn = "129861351772.dkr.ecr.us-west-2.amazonaws.com/simulation:latest"
     

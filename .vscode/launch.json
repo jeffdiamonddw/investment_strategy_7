@@ -12,7 +12,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["--s3_path", "s3://jdinvestment/2d_run_4",   "--generation", "149", "--train_folds", "0", "--val_folds", "1", "2"]
+            "args": ["--s3_path", "s3://jdinvestment/2d_3obj",  "--train_folds", "0", "--val_folds", "1", "2"]
         }
     ]
 }

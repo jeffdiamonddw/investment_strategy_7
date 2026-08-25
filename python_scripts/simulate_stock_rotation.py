@@ -510,7 +510,7 @@ def optimize(_params, df_features, _current_price, __holdings, _budget, feature_
         transaction_costs = _params['trade_fee'] * ((sold >0).sum(0) + (bought>0).sum(0))
         cash_made = np.floor(sold_revenue - bought_cost - transaction_costs).astype(int)
         df_allocation = _holdings + bought - sold
-        df_allocation.loc['CASH'] = _cash + cash_made
+        df_allocation.loc['CASH'] = np.floor(_cash + cash_made).astype(int)
         
         
         
@@ -542,7 +542,7 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
     
     if holdings is None:
         holdings = pd.DataFrame(0.0, index = df_price.index, columns = range(len(params['principal'])))
-        holdings.loc['CASH', :] = params['principal']
+        holdings.loc['CASH', :] = np.floor(params['principal']).astype(int)
     holdings_start = holdings.copy()
 
    
@@ -603,13 +603,13 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
                 pending_payed = {}
                 for account in holdings:
                     pending_payed[account] = df_payed.loc[df_payed.account == account, 'total'].sum()
-                    holdings.loc['CASH', account] += pending_payed[account]
+                    holdings.loc['CASH', account] += int(pending_payed[account])
                     
             stocks_held = holdings.index[holdings.sum(1) > 0]
             new_paid, df_pending = get_payed_dividends(df_dividend, holdings.loc[stocks_held], val_start_date, val_end_date)
             df_pending_dividends = pd.concat([df_pending_dividends, df_pending])
             for account in holdings:
-                 holdings.loc['CASH', account] += new_paid[account] 
+                 holdings.loc['CASH', account] += np.floor(new_paid[account]).astype(int) 
 
 
         if val_end_date is not None:
