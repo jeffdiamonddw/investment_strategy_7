@@ -158,8 +158,8 @@ class RegimeNavigator2D(RegimeNavigator1D):
         qual_decay = x_numeric[11]
         df_macro_weights = pd.DataFrame(x_numeric[12:20].reshape(2,4), index = ['risk_weights', 'temporal_weights'], columns = self.df_macro.columns)
         max_voo = x_numeric[20]
-        #max_frac = x_numeric[21]
-        max_frac = .05
+        max_frac = x_numeric[21]
+       # max_frac = .05
 
         
         
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     
     DATA_PATH = "s3://jdinvestment/simulation_data"
 
-    num_samples = 1
+    num_samples = 3
     perturbation_cv = .01
 
     
@@ -260,8 +260,8 @@ if __name__ == "__main__":
     #principal = [297619.22]  #CAD [21312, 331911, 61000, 33345]
     #principal = [280000]
     #principal = [237552.61, 43497.29]
-    principal = [24180.63]
-    principal = [sum([237552.61, 43497.29])]
+    #principal = [24180.63]
+    principal = [237552.61, 43497.29]
     #principal = [555999.79]
     
     
@@ -318,8 +318,8 @@ if __name__ == "__main__":
 
     
     #jeff temp
-    total_value_series = pd.read_parquet('temp/total_value_series.parquet')['value']
-    df_evaluation = apply_objectives(objective_functions_dict, total_value_series)
+    #total_value_series = pd.read_parquet('temp/total_value_series.parquet')['value']
+    #df_evaluation = apply_objectives(objective_functions_dict, total_value_series)
 
     print('pre-time: {}'.format(time.time() - t1), flush = True)
     
