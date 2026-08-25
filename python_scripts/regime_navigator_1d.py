@@ -284,7 +284,7 @@ def get_rn_problem_params(
         periods,
         momentum_file = "s3://jdinvestment//momentum.nc", 
         quality_file = "s3://jdinvestment/simulation_data/quality.nc",
-        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
+        bil_file = "s3://jdinvestment/simulation_data/bil_data.nc",
         macro_file = "simulation_data/macro_signals.parquet",
         manifold_file = "sim_results/manifold_triple_threat.csv",
         output_folder = None,

@@ -105,7 +105,7 @@ def allocate_stocks_heuristic(
 
 
 def solve_stock_allocation(
-    _S: pd.Series, _B: pd.Series, _P: pd.Series, _H: pd.DataFrame, M: float = 1000000.0, trade_cost = 7
+    __S: pd.Series, __B: pd.Series, __P: pd.Series, __H: pd.DataFrame, M: float = 1000000.0, trade_cost = 7
 ):
     """Solves the stock allocation MILP problem using Pyomo and CBC.
 
@@ -121,6 +121,13 @@ def solve_stock_allocation(
     - sold: pandas DataFrame of allocated sell shares 
     - bought: pandas DataFrame of allocated buy shares 
     """
+
+    
+
+    _S = __S.copy()
+    _B = __B.copy()
+    _P = __P.copy()
+    _H = __H.copy()
 
     out = {'S': _S, 'B':_B, 'P':_P, 'H': _H}
     with open('temp/allocation_test.joblib','wb') as fp:
@@ -160,6 +167,11 @@ def solve_stock_allocation(
                 num_trades+=1 
 
     keep = (_S.values>0) | (_B.values > 0)
+
+    if sum(keep) == 0:
+        bought = 0 * sold
+        return sold, bought
+
     H = _H.copy().loc[keep]
     P = _P.copy().loc[keep]
     S = _S.copy().loc[keep].astype(int)
@@ -371,13 +383,18 @@ class SuppressOutput:
 
 
 
-def optimize(_params, df_features, current_price, _holdings, _budget, feature_weights, prev_sol=None, max_voo = None):
+def optimize(_params, df_features, _current_price, __holdings, _budget, feature_weights, max_frac = .05, max_voo = None):
     
-    df_scores =pd.DataFrame(df_features.values/current_price.values.reshape(current_price.shape[0],1), index = df_features.index)
-    s_scores = pd.Series(np.matmul(df_scores.values, np.array(list(feature_weights.values())).reshape(len(feature_weights), 1)).flatten(), index = df_scores.index)
+    df_scores =pd.DataFrame(df_features.values/_current_price.values.reshape(_current_price.shape[0],1), index = df_features.index)
+    s_scores = pd.Series(np.matmul(df_scores.values, np.array(list(feature_weights.values())).reshape(len(feature_weights), 1)).flatten(), index = df_scores.index).sort_values(ascending = False)
+
+    _holdings = __holdings.loc[__holdings.index != 'CASH'].copy()
+    _cash = __holdings.loc['CASH']
+    current_price = pd.DataFrame(_current_price.loc[_current_price.index != 'CASH'])
 
     holdings = pd.DataFrame(_holdings.sum(axis = 1))
     budget = [sum(_budget)]
+    
 
     logging.getLogger('pyomo.util.infeasible').setLevel(logging.INFO)
     budget = np.maximum(0, budget)
@@ -387,8 +404,9 @@ def optimize(_params, df_features, current_price, _holdings, _budget, feature_we
     params['current_price'] = current_price
     params['holdings'] = holdings
     params['budget'] = budget
-    keep_stocks = (params['current_price'].values > params['min_price']).flatten() | (params['current_price'].index == 'GIC').flatten()
-    drop_stock_list = params['current_price'].index[~keep_stocks]
+    is_keep_stock = (current_price.values > params['min_price']).flatten() | (current_price.index == 'BIL').flatten()
+    keep_stocks = current_price.index[is_keep_stock]
+    drop_stock_list = sorted(list(set(current_price.index).difference(keep_stocks)))
     for key in ['current_price', 'feature_values', 'holdings']:
         params[key] = params[key].loc[keep_stocks]
 
@@ -423,7 +441,7 @@ def optimize(_params, df_features, current_price, _holdings, _budget, feature_we
        elif stock == 'VOO' and max_voo is not None:
            return sum(model.x[stock, a] * model.current_price[stock] for a in model.account) <= max_voo * sum(params['budget'])
        else:
-           return sum(model.x[stock, a] * model.current_price[stock] for a in model.account) <= params['max_frac'] * sum(params['budget'])
+           return sum(model.x[stock, a] * model.current_price[stock] for a in model.account) <= max_frac * sum(params['budget'])
     model.max_frac_constraint = pyo.Constraint(model.stock, rule = max_frac_constraint)
 
     def obj_expression(model):
@@ -449,6 +467,7 @@ def optimize(_params, df_features, current_price, _holdings, _budget, feature_we
     
     # --- PHASE 2 ---
     if obj_value < _params['obj_threshold']:
+        params['objective_sensitivity'] = .1
         threshold_value = (1 - params['objective_sensitivity']) * obj_value
         def obj_near_optimal_constraint(model):
             return - sum(model.feature_weight[w] * model.feature_values[s, w] * model.x[s,a] for w in model.feature for s in model.stock for a in model.account) <= threshold_value
@@ -466,26 +485,35 @@ def optimize(_params, df_features, current_price, _holdings, _budget, feature_we
     else:
         df_sol = pd.DataFrame(0, index = params['current_price'].index, columns = range(len(budget)))
 
-    _investment = np.matmul(pd.DataFrame(params['current_price']).loc[params['current_price'].index != 'GIC'].transpose().values, df_sol.loc[df_sol.index != 'GIC'].values)
+    _investment = np.matmul(pd.DataFrame(params['current_price']).loc[params['current_price'].index != 'CASH'].transpose().values, df_sol.loc[df_sol.index != 'CASH'].values)
     num_trades = (df_sol != params['holdings']).values.sum()
     df_sol = df_sol.astype('float')
-    df_sol.loc['GIC', :] = (params['budget'] - _investment - float(params['trade_fee'] * num_trades)).flatten()
+    df_sol.loc['CASH', :] = (params['budget'] - _investment - float(params['trade_fee'] * num_trades)).flatten()
     df_sol = pd.concat([df_sol, pd.DataFrame(0, index = drop_stock_list, columns = df_sol.columns)]).loc[holdings.index]
     df_sol = df_sol.astype(int)
     
-    initial_investment = _holdings.loc[_holdings.index != 'GIC'].values.sum()
+    initial_investment = _holdings.values.sum()
     if initial_investment == 0:
-        df_allocation = allocate_stocks_heuristic(df_sol[0], current_price, _budget)
-        num_trades = (df_allocation != _holdings).values.sum()
+        df_allocation = allocate_stocks_heuristic(df_sol[0], current_price.iloc[:,0], _budget)
+        num_trades = (df_allocation != _holdings).sum(0)
+        buy_cost = (df_allocation * current_price.values).sum(0)
+        df_allocation.loc['CASH'] = np.floor(
+            (_cash - buy_cost).sum() - params['trade_fee'] * num_trades
+        ).astype(int)
     else:
-        B = np.maximum(0, df_sol - holdings.sum(1).values.reshape(df_sol.shape[0],1))[0]  #what to buy
-        S = np.maximum(0, holdings.sum(1).values.reshape(df_sol.shape[0],1) - df_sol)[0] #what to sell
-        sold, bought = solve_stock_allocation(S, B, current_price, _holdings)
+        sum_holdings = holdings.sum(1).values.reshape(df_sol.shape[0],1)
+        B = np.maximum(0, df_sol - sum_holdings)  #what to buy
+        S = - np.minimum(0, df_sol - sum_holdings) #what to sell
+        sold, bought = solve_stock_allocation(S[0], B[0], current_price.iloc[:,0], _holdings)
+        sold_revenue = (sold * current_price.values.reshape(len(current_price),1)).values.sum(0)
+        bought_cost = (bought * current_price.values.reshape(len(current_price),1)).values.sum(0)
         transaction_costs = _params['trade_fee'] * ((sold >0).sum(0) + (bought>0).sum(0))
-        cash = ((sold  - bought).values * current_price.values.reshape(current_price.shape[0], 1)).sum(0) - transaction_costs
-        bought.loc['GIC'] += cash.values.astype(int)
+        cash_made = np.floor(sold_revenue - bought_cost - transaction_costs).astype(int)
         df_allocation = _holdings + bought - sold
-        num_trades = ((sold>0) | (bought > 0)).values.sum()
+        df_allocation.loc['CASH'] = _cash + cash_made
+        
+        
+        
         obj_value = None
         
     
@@ -498,93 +526,151 @@ def optimize(_params, df_features, current_price, _holdings, _budget, feature_we
         
         
         
-def simulate(df_price, _params, data_features, df_weights, period, sim_id = None, session = None, holdings = None, max_voo = None):
+def simulate(df_price, _params, data_features, df_weights, period, sim_id = None, session = None, holdings = None, max_frac = None, max_voo = None, df_dividend = None, now = False, hold = False):
     
+
+    df_pending_dividends = pd.DataFrame()
+
     params = _params.copy()
     params.update(period)
     val_start_dates = df_weights.index[:-1]
     val_end_dates = df_weights.index[1:]
     time_tups = list(zip(val_start_dates, val_end_dates)) + [(val_end_dates[-1], None)]
+
+    if now:
+        time_tups = time_tups[-1:]
     
     if holdings is None:
         holdings = pd.DataFrame(0.0, index = df_price.index, columns = range(len(params['principal'])))
-        holdings.loc['GIC', :] = params['principal']
+        holdings.loc['CASH', :] = params['principal']
     holdings_start = holdings.copy()
-    
+
+   
     
     history = []
     df_holdings_history = pd.DataFrame()
     df_holdings_shares = pd.DataFrame()
-    last_val_start_date = time_tups[0][0]
-    new_sol = None
-    all_holdings = {}
+    start_holdings = {}
     for val_start_date, val_end_date in time_tups:
         
         if val_start_date > max(data_features.coords['date'].to_pandas()):
             break
 
-        if val_end_date is None:
-            holdings = holdings_start
         
-        all_holdings[val_start_date] = holdings
+        last_price = df_price.loc[:, val_start_date].copy(); last_price.loc['CASH'] = 1
+        last_budget = (holdings.values * pd.DataFrame(last_price.loc[holdings.index]).fillna(0).values).sum(axis = 0)
+    
+        if now:
+            df_price_live = pd.read_parquet('live_quotes_cache.parquet').set_index('symbol')
+    
+            
+            live_sell_price = df_price_live['bid_price']; live_sell_price.loc['CASH'] = 1
+            live_buy_price = df_price_live['ask_price']; live_buy_price.loc['CASH'] = 1
+            live_budget = (holdings.values * pd.DataFrame(live_sell_price.loc[holdings.index]).fillna(0).values).sum(axis = 0)
+            
+            current_price = live_sell_price.loc[holdings.index]
+            budget = live_budget
+        else:
+            current_price =last_price
+            budget = last_budget
+            live_sell_price = live_buy_price = None
+            
+        
         holdings_shares = pd.DataFrame((holdings.sum(axis = 1))).transpose()
         holdings_shares.loc[:, 'date'] = val_start_date
         df_holdings_shares = pd.concat([df_holdings_shares, holdings_shares])
         
     
-        current_price = df_price.loc[:, val_start_date].copy(); current_price.loc['GIC'] = 1
-        budget = (holdings.values * pd.DataFrame(current_price).fillna(0).values).sum(axis = 0)
+        
+        
         df_features = data_features.sel(date = val_start_date).to_pandas().transpose()
         feature_weights = dict(df_weights.loc[val_start_date])
-        
-        holdings,   _, _  = optimize(params, df_features, current_price, holdings, budget, feature_weights, new_sol, max_voo = max_voo)
-        
+
         if val_end_date is None:
-            final_holdings = holdings
-
-        holdings_out = pd.DataFrame((holdings.sum(axis = 1).values * current_price)).transpose().reset_index().rename(columns = {'index': 'date'})
-        holdings_out.loc[:, 'sim_id'] = sim_id
-
-        df_holdings_history = pd.concat([df_holdings_history, holdings_out])
+            proposed_holdings, num_trades, obj_value = optimize(params, df_features, current_price, holdings_start, budget, feature_weights, max_voo = max_voo, max_frac = max_frac)
+            
+        old_value = (holdings * current_price.values.reshape(len(current_price),1)).values.sum()
         
-        
-
-        if val_end_date in data_features.date:
-            gic_multiplier = 1 + np.array(data_features.sel(symbol = 'GIC', date = val_end_date, band = 'dollar_ret_1p'))
-        else:
-            gic_multiplier = 1 + np.array(data_features.sel(symbol = 'GIC', date = val_start_date, band = 'dollar_ret_1p'))
-
-        stocks = sorted(list(set(holdings.index).difference(['GIC'])))
-        v_start = (holdings.loc[stocks] * df_price.loc[stocks, [val_start_date]].values).sum(axis=0) + holdings.loc['GIC']
+        if not hold:
+            holdings,   _, _  = optimize(params, df_features, current_price, holdings, budget, feature_weights, max_voo = max_voo, max_frac = max_frac)
 
         if val_end_date is not None:
-            v_end = (holdings.loc[stocks] * df_price.loc[stocks, [val_end_date]].values).sum(axis=0) + gic_multiplier * holdings.loc['GIC']
-            history.append((val_start_date, val_end_date, v_start.sum(), v_end.sum()))
-            gic_frac = holdings.loc['GIC'].values.sum()/v_start.sum()
-            voo_frac = holdings.loc['VOO'].values.sum()/v_start.sum()
-            print(sim_id, val_start_date, val_end_date, v_start.sum(), v_end.sum(), gic_frac, voo_frac, flush = True)
+
+            if df_pending_dividends.shape[0] > 0:
+                is_payed = (df_pending_dividends.payment_date >= val_start_date) & (df_pending_dividends.payment_date <= val_end_date)
+                df_payed = df_pending_dividends.loc[is_payed]
+                df_pending_dividends = df_pending_dividends.loc[~is_payed]
+                pending_payed = {}
+                for account in holdings:
+                    pending_payed[account] = df_payed.loc[df_payed.account == account, 'total'].sum()
+                    holdings.loc['CASH', account] += pending_payed[account]
+                    
+            stocks_held = holdings.index[holdings.sum(1) > 0]
+            new_paid, df_pending = get_payed_dividends(df_dividend, holdings.loc[stocks_held], val_start_date, val_end_date)
+            df_pending_dividends = pd.concat([df_pending_dividends, df_pending])
+            for account in holdings:
+                 holdings.loc['CASH', account] += new_paid[account] 
+
+
+        if val_end_date is not None:
+            
+            new_price = df_price.loc[:, val_end_date].copy(); new_price.loc['CASH'] = 1
+
+            new_value = (holdings * new_price.values.reshape(len(current_price),1)).values.sum() 
+            cash_value = holdings.loc['CASH'].sum()
+
+            print(val_start_date, val_end_date, old_value, new_value, cash_value/new_value)
+        
+        if val_end_date is None:
+            
+
+            if now:
+                df_buy = np.maximum(proposed_holdings - holdings_start,0)
+                df_sell = - np.minimum(proposed_holdings - holdings_start, 0)
+                num_trades = (df_buy.loc[df_buy.index != 'CASH'] > 0).values.sum(0) + (df_sell.loc[df_sell.index != 'CASH'] > 0).values.sum(0)
+                sell_revenue = np.nansum(df_sell.values * live_sell_price.loc[df_sell.index].values.reshape(len(live_sell_price),1), axis = 0)
+                buy_cost = np.nansum(proposed_holdings.values * pd.DataFrame(live_buy_price.loc[holdings.index]).fillna(0).values, axis =0)
+                proposed_holdings.loc['CASH'] = np.floor(sell_revenue - buy_cost - 6.95 * num_trades).astype(int)
+            else:
+                proposed_holdings = holdings
+            
+
+        holdings_add = pd.DataFrame((holdings.sum(axis = 1).values * current_price)).transpose().reset_index().rename(columns = {'index': 'date'})
+        holdings_add.loc[:, 'sim_id'] = sim_id
+
+        df_holdings_history = pd.concat([df_holdings_history, holdings_add])
+        start_holdings[val_start_date] = holdings
+        
+
+        
+
+        
+
+        if val_end_date is not None:
+            history.append((val_start_date, val_end_date, old_value, new_value))
+            
         
     stagger_delay = (int(sim_id, 16) % 5000) / 1000.0
     time.sleep(stagger_delay)
 
-    holdings_arrays = []
-    for d, df in sorted(all_holdings.items()):
+    share_holdings_arrays = []
+    for d, df in sorted(start_holdings.items()):
         # Convert each pandas DataFrame to a 2D DataArray (stock x account)
         da = xr.DataArray(df.values, dims=["symbol", "account"], coords=dict(symbol=df.index, account=df.columns))
-        holdings_arrays.append(da)
+        share_holdings_arrays.append(da)
 
     # Concatenate along a new 'date' dimension
-    combined_holdings = xr.concat(holdings_arrays, dim=pd.Index(all_holdings.keys(), name="date"))
+    data_share_holdings = xr.concat(share_holdings_arrays, dim=pd.Index(start_holdings.keys(), name="date"))
     
-    return df_holdings_history, final_holdings, combined_holdings
+    return df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price
 
-def get_gic_eps(data_gic):
-    df_gic = data_gic.sel(symbol = 'GIC').to_pandas().transpose().iloc[:, 1:]
-    df_gic['avg_eps_1q'] = (1 + df_gic.dollar_ret_1p)**((365/4)/(28))-1
-    df_gic['avg_eps_2q'] = (1 + df_gic.dollar_ret_6p)**((365/2)/(6*28))-1
-    df_gic['avg_eps_4q'] = (1 + df_gic.dollar_ret_13p)**(365/(13*28))-1
-    df_gic['avg_eps_8q'] = (1 + df_gic.dollar_ret_26p)**((2*365)/(26*28))-1
-    return df_gic[[c for c in df_gic.columns if 'eps' in c]].stack().to_xarray().expand_dims(symbol=['GIC']).transpose('band','symbol','date')
+def get_bil_eps(data_bil):
+    df_bil = data_bil.sel(symbol = 'BIL').to_pandas().transpose().iloc[:, 1:]
+    df_bil['avg_eps_1q'] = (1 + df_bil.dollar_ret_1p)**((365/4)/(28))-1
+    df_bil['avg_eps_2q'] = (1 + df_bil.dollar_ret_6p)**((365/2)/(6*28))-1
+    df_bil['avg_eps_4q'] = (1 + df_bil.dollar_ret_13p)**(365/(13*28))-1
+    df_bil['avg_eps_8q'] = (1 + df_bil.dollar_ret_26p)**((2*365)/(26*28))-1
+    return df_bil[[c for c in df_bil.columns if 'eps' in c]].stack().to_xarray().expand_dims(symbol=['BIL']).transpose('band','symbol','date')
 
 def interpolate_to_4week_grid(da, anchor_date):
     days = (pd.to_datetime(da.date) - pd.to_datetime(anchor_date)).days
@@ -592,6 +678,27 @@ def interpolate_to_4week_grid(da, anchor_date):
     new_coords = np.arange(int(days.min()//28)*28, int(days.max()//28+1)*28, 28)
     da_interp = da_numeric.interp(date=new_coords, method="linear")
     return da_interp.assign_coords(date=pd.to_datetime(anchor_date) + pd.to_timedelta(da_interp.date.values, unit='D'))
+
+
+def get_payed_dividends(df_dividend, holdings, start_date, end_date):
+
+    payed = {}
+    df_pending = pd.DataFrame()
+    for account in holdings.columns:
+        stocks_held = holdings.index[holdings[account] > 0]
+        df = df_dividend.copy().loc[df_dividend.ticker.isin(stocks_held) & (df_dividend.ex_dividend_date >= start_date) & (df_dividend.ex_dividend_date <= end_date)]
+        dividends_payed = df.loc[(df.payment_date >= start_date) & (df.payment_date <= end_date)].copy()
+        dividends_payed['holdings'] = holdings.loc[dividends_payed.ticker, account].copy().values
+        dividends_payed['total'] = dividends_payed.amount * dividends_payed.holdings
+        payed[account] = dividends_payed.total.sum()
+
+        dividends_pending = df.loc[(df.payment_date > end_date)].copy()
+        dividends_pending['holdings'] = holdings.loc[dividends_pending.ticker, account].copy().values
+        dividends_pending['total'] = dividends_pending.amount * dividends_pending.holdings
+        dividends_pending['account'] = account
+        df_pending = pd.concat([df_pending, dividends_pending])
+    return payed, df_pending
+
 
 # --- Main Cluster Exploration Script ---
 

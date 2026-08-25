@@ -61,11 +61,13 @@ def calculate_cash_dividends(holdings_df, dividends_df):
 
 if __name__ == '__main__':
 
-  data_hist = xr.open_dataarray('sim_results/holdings_history.nc')
+  data_hist = xr.open_dataarray('sim_results/holdings.nc')
   df_div = pd.read_parquet('simulation_data/dividends.parquet')
 
   div_list = []
   for account in list(data_hist.account.values):
     div_list += [calculate_cash_dividends(data_hist.sel(account = account).to_pandas(), df_div).total_dividends.sum()]
+
+  zzz=1
 
   

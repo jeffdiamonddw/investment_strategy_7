@@ -22,7 +22,7 @@ from pymoo.core.population import Population
 
 from regime_navigator_1d import get_rn_problem_params
 from simulate_stock_rotation import simulate
-from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives
+from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives, RegretPercentile, FoldPercentile
 from regime_navigator_1d import get_rn_problem_params, RegimeNavigator1D
 from utils import get_dna_hash, save_to_zarr
 
@@ -73,7 +73,10 @@ class RegimeNavigator2D(RegimeNavigator1D):
             output_folder, 
             holdings=None,
             objective_functions_dict = None,
-            objective_sense = None
+            objective_sense = None,
+            df_dividend = None,
+            now = False,
+            hold = False
         ):
         
        self.__dict__.update({k: v for k, v in locals().items() if k != 'self'})
@@ -83,7 +86,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
        
 
 
-    def run_simulation(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, df_macro_weights, max_voo, period_key, sim_id, session=None, holdings=None):
+    def run_simulation(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, df_macro_weights, max_voo, period_key, sim_id, session=None, holdings=None, max_frac = None):
         
         
         macro_weights_risk = df_macro_weights.values.flatten()[:4]
@@ -132,10 +135,10 @@ class RegimeNavigator2D(RegimeNavigator1D):
         df_weights.to_csv('temp/weights.csv')
        #********************************************************************************************************************************* 
 
-        df_holdings, final_holdings, combined_holdings = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings)
+        df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings, df_dividend = self.df_dividend, now = self.now, hold = self.hold, max_frac = max_frac)
         
       
-        return df_holdings, final_holdings, combined_holdings
+        return df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price
     
 
     def evaluate(self, x):
@@ -155,12 +158,14 @@ class RegimeNavigator2D(RegimeNavigator1D):
         qual_decay = x_numeric[11]
         df_macro_weights = pd.DataFrame(x_numeric[12:20].reshape(2,4), index = ['risk_weights', 'temporal_weights'], columns = self.df_macro.columns)
         max_voo = x_numeric[20]
+        #max_frac = x_numeric[21]
+        max_frac = .05
 
         
         
         df_sim = pd.DataFrame()
         for key in self.periods:
-            df_period, final_holdings, combined_holdings = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings)
+            df_period, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings, max_frac = max_frac)
             df_sim = pd.concat([df_sim, df_period]).reset_index(drop=True)
         
         
@@ -170,7 +175,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         
         
-        return df_sim, final_holdings, total_value_series, combined_holdings
+        return df_sim, proposed_holdings, total_value_series, data_share_holdings, live_sell_price, live_buy_price
         
         
 
@@ -180,8 +185,11 @@ class RegimeNavigator2D(RegimeNavigator1D):
 
 if __name__ == "__main__":
     
-    num_samples = 3
+    DATA_PATH = "s3://jdinvestment/simulation_data"
+
+    num_samples = 1
     perturbation_cv = .01
+
     
     t1 = time.time()
     parser = argparse.ArgumentParser()
@@ -192,6 +200,10 @@ if __name__ == "__main__":
     parser.add_argument('--val_folds', type=int, nargs='+', default=[],
                         help='List of validation fold integers (e.g., --val_fold 3 4)')
     parser.add_argument('--holdings', type = str, required=False)
+    parser.add_argument('--now', action='store_true', help='runs optimization for next time period')
+    parser.add_argument('--hold', action='store_true', help='runs simulation just holding existing holdings')
+    
+
     args = parser.parse_args()
 
     s3_path = args.s3_path
@@ -208,8 +220,8 @@ if __name__ == "__main__":
     }
     
     
-    df_folds = pd.read_parquet('strategy/folds_5.parquet')
-    
+    df_folds = pd.read_parquet("{}/folds.parquet".format(s3_path))
+  
  
     
     df_train_folds = df_folds.loc[df_folds.fold_index.isin(args.train_folds)]
@@ -244,14 +256,18 @@ if __name__ == "__main__":
     
 
     #principal = [23958.38]  
-    principal = [sum([15312.67, 238478.05, 43828.5])]
+    #principal = [sum([15312.67, 238478.05]), 43828.5]
     #principal = [297619.22]  #CAD [21312, 331911, 61000, 33345]
-    #principal = [33345]
+    #principal = [280000]
+    #principal = [237552.61, 43497.29]
+    principal = [24180.63]
+    principal = [sum([237552.61, 43497.29])]
+    #principal = [555999.79]
     
     
     params = {
             'principal': principal, 'max_frac': .05, 'feature_horizon_weeks': 104,
-            'min_price': 5, 'trade_fee': 7, 'objective_sensitivity': 0.144, 'obj_threshold': 0,
+            'min_price': 5, 'trade_fee': 7, 'objective_sensitivity': 0.01, 'obj_threshold': 0,
             'start_date': pd.to_datetime('Jan 1, 2005'), 'end_date': pd.Timestamp.now()
         }
     
@@ -263,19 +279,24 @@ if __name__ == "__main__":
     
     problem_args = get_rn_problem_params(
         periods,
-        momentum_file = "s3://jdinvestment/simulation_data/momentum.nc", 
-        quality_file = "s3://jdinvestment/simulation_data/quality.nc",
-        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
-        macro_file = "s3://jdinvestment/simulation_data/macro_signals.parquet",
+        momentum_file = "{}/momentum.nc".format(DATA_PATH), 
+        quality_file = "{}/quality.nc".format(DATA_PATH),
+        bil_file = "{}/bil_data.nc".format(DATA_PATH),
+        macro_file = "s3://jdinvestment/simulation_data/macro_signals.parquet".format(DATA_PATH),
         manifold_file = "s3://jdinvestment/sim_results/manifold_triple_threat.csv",
         output_folder = None,
         params = params,
         holdings = holdings
 
 
-    )  
+    ) 
+
+
     
-   
+    
+    
+    problem_args['now'] = args.now
+    problem_args['hold'] = args.hold
 
     regime_navigator = RegimeNavigator2D(**problem_args)
 
@@ -283,6 +304,23 @@ if __name__ == "__main__":
     parameter_cols = [name for name in s_task.index if 'sim_id' not in name]
     x = s_task.loc[parameter_cols].values
     sim_id = get_dna_hash(x)
+
+   
+
+    #add percentile of 28-day regret as objective
+    s_voo_pct_change = problem_args['df_price'].loc['VOO'].pct_change()
+    s_voo_pct_change.index = pd.to_datetime(s_voo_pct_change.index)
+    objective_functions_dict['train']['28_day_regret'] = lambda s_val: RegretPercentile(s_voo_pct_change, df_folds, args.train_folds, quantile = .9)(s_val.pct_change())
+    objective_functions_dict['train']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.train_folds, quantile = 1/13)(s_val.pct_change())
+    objective_functions_dict['val']['28_day_regret'] = lambda s_val: RegretPercentile(s_voo_pct_change, df_folds, args.val_folds, quantile = .9)(s_val.pct_change())
+    objective_functions_dict['val']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.val_folds, quantile = 1/13)(s_val.pct_change())
+    objective_sense['28_day_regret'] = 'min'
+
+    
+    #jeff temp
+    total_value_series = pd.read_parquet('temp/total_value_series.parquet')['value']
+    df_evaluation = apply_objectives(objective_functions_dict, total_value_series)
+
     print('pre-time: {}'.format(time.time() - t1), flush = True)
     
     parent_sim_id = sim_id
@@ -290,9 +328,12 @@ if __name__ == "__main__":
     df_evaluations = pd.DataFrame()
     for sample in range(num_samples):
         sim_id = get_dna_hash(perturbed_x)
-        df_history, final_holdings, total_value_series, combined_holdings = regime_navigator.evaluate(perturbed_x)
+        df_history, proposed_holdings, total_value_series, data_share_holdings, live_sell_price, live_buy_price = regime_navigator.evaluate(perturbed_x)
 
-        #combined_holdings.to_netcdf('sim_results/holdings_history.nc')
+        tvs = total_value_series
+        num_years = (tvs.index[-1] - tvs.index[0]).days/365.25
+        rtn = (tvs.iloc[-1]/tvs.iloc[0])**(1/num_years)-1
+        print('rtn {}:'.format(rtn))
 
 
         logging.getLogger('botocore.credentials').setLevel(logging.WARNING)
@@ -300,7 +341,7 @@ if __name__ == "__main__":
 
         df_holdings = df_history.set_index('date').iloc[:-1, :-1]
 
-        final_holdings.to_parquet("{}/final_holdings/sim_{}.parquet".format(s3_path, sim_id))
+        proposed_holdings.to_parquet("{}/proposed_holdings/sim_{}.parquet".format(s3_path, sim_id))
         
         wr.s3.to_parquet(
                 df=df_history,

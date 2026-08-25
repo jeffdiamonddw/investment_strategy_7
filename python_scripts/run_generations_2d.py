@@ -8,6 +8,8 @@ import time
 import numpy as np
 from pymoo.core.problem import Problem
 import awswrangler as wr
+import joblib
+from smart_open import open as smart_open
 
 from utils import get_dna_hash
 from pymoo.util.display.multi import MultiObjectiveOutput
@@ -206,7 +208,15 @@ def main():
     parser.add_argument('--s3_path', required=True)
     parser.add_argument('--train_folds', type=int, nargs='+', default=[])
     parser.add_argument('--val_folds', type=int, nargs='+', default=[])
+    parser.add_argument('--folds', type = str, required=True)
     args = parser.parse_args()
+
+    df_folds = pd.read_parquet(args.folds)
+    df_folds.to_parquet('{}/folds.parquet'.format(args.s3_path))
+
+    with smart_open("{}/args.joblib".format(args.s3_path), 'wb') as fp:
+        joblib.dump(vars(args), fp)
+
 
     param_names = [
         'dollar_ret_1p', 'dollar_ret_6p', 'dollar_ret_13p', 'dollar_ret_26p',
@@ -233,7 +243,7 @@ def main():
         -1, -1,          # Decays
         -1, -1, -1, -1,   # risk Macro Weights
         -1, -1, -1, -1,  # temporal Macro Weights
-        .05              #max_voo
+        .05, .05              #max_voo, max_frac
     ])
 
     xu = np.array([
@@ -244,7 +254,7 @@ def main():
         1, 1,            # Decays
         1, 1, 1, 1,       # risk Macro Weights
         1, 1, 1, 1,       # temporal Macro Weights
-        .6                 #max_voo
+        .6, .1                 #max_voo, max_frac
     ])
 
 
@@ -270,7 +280,7 @@ def main():
     
 
     
-    for gen in range(50):
+    for gen in range(100):
         
         
         

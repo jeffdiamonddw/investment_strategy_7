@@ -6,6 +6,7 @@ APO,stock,long,Asset Management (Apollo),0.6,0.4
 APP,stock,long,Technology (Applovin),0.8,0.2
 ARES,stock,long,Asset Management / Credit,0.5,0.5
 AZO,stock,long,Consumer Cyclical (AutoZone),0.4,0.6
+BIL,etf,long,Short-Term U.S. Treasuries,0.1,0.9
 BKNG,stock,long,Consumer Cyclical (Booking),0.5,0.5
 BRK-B,stock,long,Financials (Berkshire Hathaway),0.3,0.7
 BTAL,etf,short/trend,Market Neutral (Short High Beta),,

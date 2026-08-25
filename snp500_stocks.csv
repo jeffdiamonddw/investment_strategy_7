@@ -1,0 +1,434 @@
+asset_type,direction,sector_strategy,momentum_weight,quality_weight
+stock,long,Healthcare (A),0.3,0.7
+stock,long,Industrials (AAL),0.2,0.8
+stock,long,Technology (AAPL),0.3,0.7
+stock,long,Healthcare (ABBV),0.4,0.6
+stock,long,Consumer Discretionary (ABNB),0.4,0.6
+stock,long,Healthcare (ABT),0.6,0.4
+stock,long,Technology (ADBE),0.6,0.4
+stock,long,Technology (ADI),0.3,0.7
+stock,long,Consumer Defensive (ADM),0.5,0.5
+stock,long,Technology (ADSK),0.7,0.3
+stock,long,Utilities (AEE),0.2,0.8
+stock,long,Utilities (AEP),0.6,0.4
+stock,long,Utilities (AES),0.3,0.7
+stock,long,Financials (AFL),0.5,0.5
+stock,long,Financials (AIG),0.5,0.5
+stock,long,Financials (AJG),0.2,0.8
+stock,long,Technology (AKAM),0.3,0.7
+stock,long,Materials (ALB),0.3,0.7
+stock,long,Health Care (ALGN),0.3,0.7
+stock,long,Financials (ALL),0.6,0.4
+stock,long,Industrials (ALLE),0.6,0.4
+stock,long,Technology (AMAT),0.5,0.5
+stock,long,Materials (AMCR),0.5,0.5
+stock,long,Technology (AMD),0.3,0.7
+stock,long,Industrials (AME),0.3,0.7
+stock,long,Healthcare (AMGN),0.7,0.3
+stock,long,Financials (AMP),0.4,0.6
+stock,long,Real Estate (AMT),0.3,0.7
+stock,long,Consumer Cyclical (AMZN),0.2,0.8
+stock,long,Technology (ANSS),0.5,0.5
+stock,long,Financials (AON),0.2,0.8
+stock,long,Industrials (AOS),0.6,0.4
+stock,long,Energy (APA),0.7,0.3
+stock,long,Materials (APD),0.6,0.4
+stock,long,Real Estate (ARE),0.7,0.3
+stock,long,Utilities (ATO),0.7,0.3
+stock,long,Real Estate (AVB),0.7,0.3
+stock,long,Technology (AVGO),0.3,0.7
+stock,long,Materials (AVY),0.5,0.5
+stock,long,Utilities (AWK),0.6,0.4
+stock,long,Financials (AXP),0.5,0.5
+stock,long,Consumer Cyclical (AZO),0.6,0.4
+stock,long,Industrials (BA),0.3,0.7
+stock,long,Financials (BAC),0.5,0.5
+stock,long,Materials (BALL),0.6,0.4
+stock,long,Healthcare (BAX),0.3,0.7
+stock,long,Consumer Cyclical (BBY),0.6,0.4
+stock,long,Healthcare (BDX),0.3,0.7
+stock,long,Financials (BEN),0.5,0.5
+stock,long,Consumer Staples (BF.B),0.7,0.3
+stock,long,Consumer Defensive (BG),0.5,0.5
+stock,long,Healthcare (BIO),0.6,0.4
+stock,long,Financials (BK),0.3,0.7
+stock,long,Consumer Cyclical (BKNG),0.5,0.5
+stock,long,Energy (BKR),0.4,0.6
+stock,long,Financials (BLK),0.5,0.5
+stock,long,Healthcare (BMY),0.4,0.6
+stock,long,Financials (BRK-B),0.2,0.8
+stock,long,Financials (BRK.B),0.5,0.5
+stock,long,Financials (BRO),0.7,0.3
+stock,long,Healthcare (BSX),0.6,0.4
+stock,long,Real Estate (BXP),0.3,0.7
+stock,long,Financials (C),0.3,0.7
+stock,long,Consumer Defensive (CAG),0.4,0.6
+stock,long,Industrials (CAT),0.4,0.6
+stock,long,Financials (CB),0.6,0.4
+stock,long,Real Estate (CBRE),0.4,0.6
+stock,long,Real Estate (CCI),0.3,0.7
+stock,long,Consumer Discretionary (CCL),0.2,0.8
+stock,long,Technology (CDNS),0.7,0.3
+stock,long,Materials (CE),0.2,0.8
+stock,long,Materials (CF),0.2,0.8
+stock,long,Financials (CFG),0.3,0.7
+stock,long,Consumer Staples (CHD),0.6,0.4
+stock,long,Industrials (CHRW),0.5,0.5
+stock,long,Communication Services (CHTR),0.2,0.8
+stock,long,Healthcare (CI),0.7,0.3
+stock,long,Financials (CINF),0.4,0.6
+stock,long,Consumer Defensive (CL),0.4,0.6
+stock,long,Consumer Staples (CLX),0.3,0.7
+stock,long,Communication Services (CMCSA),0.3,0.7
+stock,long,Financials (CME),0.4,0.6
+stock,long,Consumer Discretionary (CMG),0.5,0.5
+stock,long,Industrials (CMI),0.5,0.5
+stock,long,Utilities (CMS),0.5,0.5
+stock,long,Health Care (CNC),0.5,0.5
+stock,long,Utilities (CNP),0.7,0.3
+stock,long,Financials (COF),0.5,0.5
+stock,long,Healthcare (COO),0.3,0.7
+stock,long,Energy (COP),0.4,0.6
+stock,long,Healthcare (COR),0.6,0.4
+stock,long,Consumer Defensive (COST),0.3,0.7
+stock,long,Consumer Defensive (CPB),0.4,0.6
+stock,long,Industrials (CPRT),0.6,0.4
+stock,long,Real Estate (CPT),0.2,0.8
+stock,long,Healthcare (CRL),0.4,0.6
+stock,long,Technology (CRM),0.4,0.6
+stock,long,Industrials (CSGP),0.5,0.5
+stock,long,Industrials (CSX),0.7,0.3
+stock,long,Industrials (CTAS),0.7,0.3
+stock,long,Energy (CTRA),0.6,0.4
+stock,long,Materials (CTVA),0.3,0.7
+stock,long,Healthcare (CVS),0.5,0.5
+stock,long,Energy (CVX),0.7,0.3
+stock,long,Consumer Cyclical (CZR),0.3,0.7
+stock,long,Utilities (D),0.2,0.8
+stock,long,Industrials (DAL),0.4,0.6
+stock,long,Materials (DD),0.7,0.3
+stock,long,Industrials (DE),0.3,0.7
+stock,long,Financials (DFS),0.3,0.7
+stock,long,Healthcare (DGX),0.6,0.4
+stock,long,Consumer Cyclical (DHI),0.5,0.5
+stock,long,Healthcare (DHR),0.2,0.8
+stock,long,Communication Services (DIS),0.3,0.7
+stock,long,Real Estate (DLR),0.7,0.3
+stock,long,Real Estate (DOC),0.5,0.5
+stock,long,Industrials (DOV),0.4,0.6
+stock,long,Materials (DOW),0.3,0.7
+stock,long,Consumer Discretionary (DPZ),0.4,0.6
+stock,long,Consumer Discretionary (DRI),0.4,0.6
+stock,long,Utilities (DTE),0.2,0.8
+stock,long,Utilities (DUK),0.2,0.8
+stock,long,Healthcare (DVA),0.4,0.6
+stock,long,Energy (DVN),0.6,0.4
+stock,long,Healthcare (DXCM),0.5,0.5
+stock,long,Communication Services (EA),0.7,0.3
+stock,long,Consumer Discretionary (EBAY),0.7,0.3
+stock,long,Materials (ECL),0.4,0.6
+stock,long,Utilities (ED),0.5,0.5
+stock,long,Industrials (EFX),0.6,0.4
+stock,long,Financials (EG),0.5,0.5
+stock,long,Consumer Defensive (EL),0.6,0.4
+stock,long,Healthcare (ELV),0.2,0.8
+stock,long,Industrials (EMN),0.5,0.5
+stock,long,Industrials (EMR),0.6,0.4
+stock,long,Technology (ENPH),0.3,0.7
+stock,long,Energy (EOG),0.3,0.7
+stock,long,Real Estate (EQIX),0.5,0.5
+stock,long,Real Estate (EQR),0.3,0.7
+stock,long,Utilities (ES),0.4,0.6
+stock,long,Real Estate (ESS),0.6,0.4
+stock,long,Industrials (ETN),0.6,0.4
+stock,long,Utilities (ETR),0.5,0.5
+stock,long,Consumer Cyclical (ETSY),0.7,0.3
+stock,long,Utilities (EVRG),0.5,0.5
+stock,long,Healthcare (EW),0.4,0.6
+stock,long,Health Care (EXAS),0.6,0.4
+stock,long,Utilities (EXC),0.4,0.6
+stock,long,Industrials (EXPD),0.6,0.4
+stock,long,Consumer Cyclical (EXPE),0.4,0.6
+stock,long,Real Estate (EXR),0.3,0.7
+stock,long,Consumer Cyclical (F),0.4,0.6
+stock,long,Energy (FANG),0.5,0.5
+stock,long,Industrials (FAST),0.3,0.7
+stock,long,Materials (FCX),0.3,0.7
+stock,long,Financials (FDS),0.4,0.6
+stock,long,Utilities (FE),0.5,0.5
+stock,long,Financials (FIS),0.4,0.6
+stock,long,Financials (FISV),0.5,0.5
+stock,long,Financials (FITB),0.6,0.4
+stock,long,Materials (FMC),0.6,0.4
+stock,long,Real Estate (FRT),0.6,0.4
+stock,long,Technology (FSLR),0.5,0.5
+stock,long,Technology (FTNT),0.3,0.7
+stock,long,Industrials (GD),0.6,0.4
+stock,long,Technology (GDDY),0.3,0.7
+stock,long,Industrials (GE),0.4,0.6
+stock,long,Healthcare (GEHC),0.7,0.3
+stock,long,Technology (GEN),0.7,0.3
+stock,long,Healthcare (GILD),0.3,0.7
+stock,long,Consumer Defensive (GIS),0.3,0.7
+stock,long,Financials (GL),0.5,0.5
+stock,long,Technology (GLW),0.6,0.4
+stock,long,Consumer Cyclical (GM),0.6,0.4
+stock,long,Communication Services (GOOG),0.7,0.3
+stock,long,Communication Services (GOOGL),0.5,0.5
+stock,long,Consumer Cyclical (GPC),0.7,0.3
+stock,long,Financials (GPN),0.5,0.5
+stock,long,Financials (GS),0.4,0.6
+stock,long,Industrials (GWW),0.2,0.8
+stock,long,Energy (HAL),0.6,0.4
+stock,long,Consumer Cyclical (HAS),0.5,0.5
+stock,long,Financials (HBAN),0.2,0.8
+stock,long,Healthcare (HCA),0.5,0.5
+stock,long,Consumer Cyclical (HD),0.4,0.6
+stock,long,Industrials (HEI),0.4,0.6
+stock,long,Energy (HES),0.4,0.6
+stock,long,Financials (HIG),0.3,0.7
+stock,long,Industrials (HII),0.6,0.4
+stock,long,Consumer Cyclical (HLT),0.2,0.8
+stock,long,Healthcare (HOLX),0.5,0.5
+stock,long,Industrials (HON),0.6,0.4
+stock,long,Consumer Defensive (HRL),0.4,0.6
+stock,long,Healthcare (HSIC),0.7,0.3
+stock,long,Real Estate (HST),0.3,0.7
+stock,long,Consumer Defensive (HSY),0.6,0.4
+stock,long,Healthcare (HUM),0.2,0.8
+stock,long,Technology (IBM),0.5,0.5
+stock,long,Financials (ICE),0.5,0.5
+stock,long,Health Care (IDEXX),0.6,0.4
+stock,long,Healthcare (IDXX),0.2,0.8
+stock,long,Industrials (IEX),0.4,0.6
+stock,long,Materials (IFF),0.5,0.5
+stock,long,Health Care (INCY),0.5,0.5
+stock,long,Technology (INTC),0.5,0.5
+stock,long,Real Estate (INVH),0.5,0.5
+stock,long,Materials (IP),0.4,0.6
+stock,long,Communication Services (IPG),0.6,0.4
+stock,long,Health Care (IQV),0.6,0.4
+stock,long,Real Estate (IRM),0.5,0.5
+stock,long,Healthcare (ISRG),0.3,0.7
+stock,long,Industrials (ITW),0.2,0.8
+stock,long,Financials (IVZ),0.5,0.5
+stock,long,Healthcare (Incyte),0.5,0.5
+stock,long,Industrials (JBHT),0.3,0.7
+stock,long,Industrials (JBL),0.7,0.3
+stock,long,Industrials (JCI),0.6,0.4
+stock,long,Financials (JKHY),0.7,0.3
+stock,long,Healthcare (JNJ),0.4,0.6
+stock,long,Financials (JPM),0.4,0.6
+stock,long,Consumer Defensive (K),0.5,0.5
+stock,long,Consumer Defensive (KDP),0.5,0.5
+stock,long,Financials (KEY),0.2,0.8
+stock,long,Consumer Defensive (KHC),0.5,0.5
+stock,long,Real Estate (KIM),0.4,0.6
+stock,long,Technology (KLAC),0.3,0.7
+stock,long,Consumer Staples (KMB),0.5,0.5
+stock,long,Energy (KMI),0.3,0.7
+stock,long,Consumer Defensive (KO),0.4,0.6
+stock,long,Consumer Staples (KR),0.6,0.4
+stock,long,Financials (L),0.6,0.4
+stock,long,Industrials (LDOS),0.7,0.3
+stock,long,Consumer Cyclical (LEN),0.2,0.8
+stock,long,Consumer Cyclical (LEN.B),0.5,0.5
+stock,long,Healthcare (LH),0.6,0.4
+stock,long,Industrials (LHX),0.2,0.8
+stock,long,Materials (LIN),0.6,0.4
+stock,long,Consumer Cyclical (LKQ),0.7,0.3
+stock,long,Healthcare (LLY),0.4,0.6
+stock,long,Industrials (LMT),0.4,0.6
+stock,long,Utilities (LNT),0.5,0.5
+stock,long,Consumer Cyclical (LOW),0.5,0.5
+stock,long,Technology (LRCX),0.3,0.7
+stock,long,Industrials (LUV),0.2,0.8
+stock,long,Consumer Defensive (LW),0.3,0.7
+stock,long,Communication Services (LYV),0.3,0.7
+stock,long,Financials (MA),0.4,0.6
+stock,long,Real Estate (MAA),0.3,0.7
+stock,long,Consumer Cyclical (MAR),0.3,0.7
+stock,long,Industrials (MAS),0.2,0.8
+stock,long,Consumer Cyclical (MCD),0.5,0.5
+stock,long,Healthcare (MCK),0.4,0.6
+stock,long,Financials (MCO),0.7,0.3
+stock,long,Consumer Defensive (MDLZ),0.6,0.4
+stock,long,Healthcare (MDT),0.4,0.6
+stock,long,Financials (MET),0.4,0.6
+stock,long,Communication Services (META),0.3,0.7
+stock,long,Consumer Cyclical (MGM),0.3,0.7
+stock,long,Consumer Staples (MKC),0.7,0.3
+stock,long,Financials (MKTX),0.6,0.4
+stock,long,Industrials (MLM),0.2,0.8
+stock,long,Financials (MMC),0.2,0.8
+stock,long,Industrials (MMM),0.3,0.7
+stock,long,Consumer Defensive (MO),0.5,0.5
+stock,long,Materials (MOS),0.4,0.6
+stock,long,Energy (MPC),0.3,0.7
+stock,long,Healthcare (MRK),0.4,0.6
+stock,long,Energy (MRO),0.6,0.4
+stock,long,Financials (MS),0.7,0.3
+stock,long,Financials (MSCI),0.6,0.4
+stock,long,Technology (MSFT),0.5,0.5
+stock,long,Technology (MSI),0.2,0.8
+stock,long,Financials (MTB),0.4,0.6
+stock,long,Healthcare (MTD),0.4,0.6
+stock,long,Technology (MU),0.6,0.4
+stock,long,Consumer Discretionary (NCLH),0.2,0.8
+stock,long,Financials (NDAQ),0.6,0.4
+stock,long,Industrials (NDSN),0.6,0.4
+stock,long,Utilities (NEE),0.4,0.6
+stock,long,Materials (NEM),0.7,0.3
+stock,long,Communication Services (NFLX),0.5,0.5
+stock,long,Utilities (NI),0.3,0.7
+stock,long,Consumer Cyclical (NKE),0.5,0.5
+stock,long,Industrials (NOC),0.5,0.5
+stock,long,Technology (NOW),0.3,0.7
+stock,long,Industrials (NSC),0.3,0.7
+stock,long,Financials (NTAP),0.7,0.3
+stock,long,Financials (NTRS),0.5,0.5
+stock,long,Materials (NUE),0.3,0.7
+stock,long,Technology (NVDA),0.6,0.4
+stock,long,Consumer Cyclical (NVR),0.7,0.3
+stock,long,Communication Services (NWS),0.4,0.6
+stock,long,Communication Services (NWSA),0.5,0.5
+stock,long,Real Estate (O),0.2,0.8
+stock,long,Industrials (ODFL),0.4,0.6
+stock,long,Communication Services (OMC),0.6,0.4
+stock,long,Technology (ORCL),0.3,0.7
+stock,long,Consumer Cyclical (ORLY),0.2,0.8
+stock,long,Energy (OXY),0.4,0.6
+stock,long,Technology (PANW),0.4,0.6
+stock,long,Communication Services (PARA),0.3,0.7
+stock,long,Financials (PAYC),0.6,0.4
+stock,long,Industrials (PAYX),0.5,0.5
+stock,long,Industrials (PCAR),0.4,0.6
+stock,long,Utilities (PCG),0.2,0.8
+stock,long,Utilities (PEG),0.5,0.5
+stock,long,Consumer Defensive (PEP),0.5,0.5
+stock,long,Healthcare (PFE),0.3,0.7
+stock,long,Financials (PFG),0.7,0.3
+stock,long,Consumer Defensive (PG),0.4,0.6
+stock,long,Financials (PGR),0.3,0.7
+stock,long,Industrials (PH),0.4,0.6
+stock,long,Consumer Cyclical (PHM),0.3,0.7
+stock,long,Materials (PKG),0.5,0.5
+stock,long,Healthcare (PKI),0.5,0.5
+stock,long,Real Estate (PLD),0.7,0.3
+stock,long,Consumer Defensive (PM),0.3,0.7
+stock,long,Financials (PNC),0.4,0.6
+stock,long,Industrials (PNR),0.5,0.5
+stock,long,Utilities (PNW),0.6,0.4
+stock,long,Healthcare (PODD),0.2,0.8
+stock,long,Consumer Discretionary (POOL),0.7,0.3
+stock,long,Utilities (POR),0.3,0.7
+stock,long,Materials (PPG),0.2,0.8
+stock,long,Utilities (PPL),0.3,0.7
+stock,long,Financials (PRU),0.6,0.4
+stock,long,Real Estate (PSA),0.3,0.7
+stock,long,Energy (PSX),0.4,0.6
+stock,long,Technology (PTC),0.6,0.4
+stock,long,Consumer Cyclical (PVH),0.7,0.3
+stock,long,Industrials (PWR),0.7,0.3
+stock,long,Energy (PXD),0.3,0.7
+stock,long,Technology (QCOM),0.6,0.4
+stock,long,Technology (QRVO),0.2,0.8
+stock,long,Consumer Discretionary (RCL),0.5,0.5
+stock,long,Financials (RE),0.7,0.3
+stock,long,Real Estate (REG),0.4,0.6
+stock,long,Healthcare (REGN),0.5,0.5
+stock,long,Financials (RF),0.5,0.5
+stock,long,Financials (RJF),0.6,0.4
+stock,long,Consumer Cyclical (RL),0.6,0.4
+stock,long,Healthcare (RMD),0.4,0.6
+stock,long,Industrials (ROK),0.5,0.5
+stock,long,Technology (ROP),0.4,0.6
+stock,long,Consumer Cyclical (ROST),0.5,0.5
+stock,long,Industrials (RSG),0.6,0.4
+stock,long,Industrials (RTX),0.4,0.6
+stock,long,Real Estate (SBAC),0.2,0.8
+stock,long,Consumer Cyclical (SBUX),0.3,0.7
+stock,long,Technology (SEDG),0.2,0.8
+stock,long,Materials (SEE),0.4,0.6
+stock,long,Financials (SHW),0.6,0.4
+stock,long,Consumer Defensive (SJM),0.4,0.6
+stock,long,Energy (SLB),0.2,0.8
+stock,long,Real Estate (SLG),0.3,0.7
+stock,long,Industrials (SNA),0.3,0.7
+stock,long,Technology (SNPS),0.4,0.6
+stock,long,Utilities (SO),0.6,0.4
+stock,long,Real Estate (SPG),0.7,0.3
+stock,long,Financials (SPGI),0.2,0.8
+stock,long,Utilities (SRE),0.6,0.4
+stock,long,Healthcare (STE),0.6,0.4
+stock,long,Financials (STT),0.4,0.6
+stock,long,Consumer Defensive (STZ),0.3,0.7
+stock,long,Industrials (SWK),0.4,0.6
+stock,long,Technology (SWKS),0.3,0.7
+stock,long,Financials (SYF),0.4,0.6
+stock,long,Healthcare (SYK),0.6,0.4
+stock,long,Consumer Staples (SYY),0.4,0.6
+stock,long,Communication Services (T),0.4,0.6
+stock,long,Consumer Defensive (TAP),0.5,0.5
+stock,long,Industrials (TDG),0.6,0.4
+stock,long,Healthcare (TECH),0.4,0.6
+stock,long,Technology (TEL),0.3,0.7
+stock,long,Financials (TFC),0.7,0.3
+stock,long,Consumer Defensive (TGT),0.7,0.3
+stock,long,Consumer Cyclical (TJX),0.2,0.8
+stock,long,Healthcare (TMO),0.3,0.7
+stock,long,Communication Services (TMUS),0.5,0.5
+stock,long,Consumer Cyclical (TPR),0.7,0.3
+stock,long,Energy (TRGP),0.7,0.3
+stock,long,Technology (TRMB),0.7,0.3
+stock,long,Financials (TROW),0.6,0.4
+stock,long,Financials (TRV),0.6,0.4
+stock,long,Consumer Cyclical (TSCO),0.7,0.3
+stock,long,Consumer Cyclical (TSLA),0.6,0.4
+stock,long,Consumer Defensive (TSN),0.5,0.5
+stock,long,Industrials (TT),0.6,0.4
+stock,long,Communication Services (TTWO),0.5,0.5
+stock,long,Technology (TXN),0.6,0.4
+stock,long,Industrials (TXT),0.2,0.8
+stock,long,Technology (TYL),0.6,0.4
+stock,long,Industrials (UAL),0.2,0.8
+stock,long,Real Estate (UDR),0.7,0.3
+stock,long,Healthcare (UHS),0.3,0.7
+stock,long,Consumer Cyclical (ULTA),0.6,0.4
+stock,long,Healthcare (UNH),0.6,0.4
+stock,long,Industrials (UNP),0.6,0.4
+stock,long,Industrials (UPS),0.5,0.5
+stock,long,Industrials (URI),0.3,0.7
+stock,long,Financials (USB),0.4,0.6
+stock,long,Financials (V),0.6,0.4
+stock,long,Real Estate (VICI),0.6,0.4
+stock,long,Energy (VLO),0.5,0.5
+stock,long,Industrials (VMC),0.6,0.4
+stock,long,Real Estate (VNO),0.3,0.7
+stock,long,Industrials (VRSK),0.6,0.4
+stock,long,Healthcare (VRTX),0.3,0.7
+stock,long,Healthcare (VTRS),0.3,0.7
+stock,long,Communication Services (VZ),0.5,0.5
+stock,long,Industrials (WAB),0.7,0.3
+stock,long,Healthcare (WAT),0.2,0.8
+stock,long,Communication Services (WBD),0.4,0.6
+stock,long,Utilities (WEC),0.4,0.6
+stock,long,Real Estate (WELL),0.7,0.3
+stock,long,Financials (WFC),0.3,0.7
+stock,long,Consumer Discretionary (WHR),0.3,0.7
+stock,long,Industrials (WM),0.4,0.6
+stock,long,Energy (WMB),0.7,0.3
+stock,long,Consumer Defensive (WMT),0.5,0.5
+stock,long,Financials (WRB),0.5,0.5
+stock,long,Materials (WRK),0.4,0.6
+stock,long,Real Estate (WY),0.7,0.3
+stock,long,Consumer Cyclical (WYNN),0.6,0.4
+stock,long,Utilities (XEL),0.5,0.5
+stock,long,Energy (XOM),0.5,0.5
+stock,long,Healthcare (XRAY),0.4,0.6
+stock,long,Industrials (XYL),0.5,0.5
+stock,long,Consumer Cyclical (YUM),0.3,0.7
+stock,long,Healthcare (ZBH),0.2,0.8
+stock,long,Financials (ZION),0.2,0.8
+stock,long,Healthcare (ZTS),0.7,0.3
+asset_type,direction,sector_strategy,momentum_weight,quality_weight

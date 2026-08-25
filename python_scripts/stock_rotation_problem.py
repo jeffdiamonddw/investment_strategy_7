@@ -80,7 +80,7 @@ from pymoo.core.problem import Problem
 
 
 # Internal Logic Imports
-from simulate_stock_rotation import get_gic_eps, simulate
+from simulate_stock_rotation import get_bil_eps, simulate
 
 import awswrangler as wr
 import fsspec
@@ -302,9 +302,11 @@ def get_sr_problem_params(
         periods,
         momentum_file = "s3://jdinvestment/simulation_data/momentum.nc", 
         quality_file = "s3://jdinvestment/simulation_data/quality.nc",
-        gic_file = "s3://jdinvestment/simulation_data/gic_data.nc",
+        bil_file = "s3://jdinvestment/simulation_data/bil_data.nc",
+        dividend_file = 's3://jdinvestment/simulation_data/dividends.parquet',
         params = None,
-        output_folder = None
+        output_folder = None,
+        holdings = None
         
 
 
@@ -315,12 +317,29 @@ def get_sr_problem_params(
     with smart_open(quality_file, 'rb') as fp:
         da_qual = xr.open_dataset(fp).to_array().squeeze()
     _data_features = xr.concat([da_mom, da_qual], dim='band')
-    with smart_open(gic_file, 'rb') as fp:
-        da_mom_gic = xr.open_dataarray(fp)
-    da_qual_gic = get_gic_eps(da_mom_gic)
-    data_features = xr.concat([_data_features, xr.concat([da_mom_gic, da_qual_gic], dim='band')], dim='symbol', join = 'inner').drop_sel(band = 'price_end')
+    with smart_open(bil_file, 'rb') as fp:
+        da_mom_bil = xr.open_dataarray(fp)
+    da_qual_bil = get_bil_eps(da_mom_bil)
+    da_bil = xr.concat([da_mom_bil, da_qual_bil], dim='band')
+
+    dates = _data_features.coords['date']
+    bands = _data_features.coords['band']
+    da_cash = xr.DataArray(np.zeros((len(bands), 1, len(dates))), coords = {'band': bands, 'symbol': ['CASH'], 'date': dates})
+    da_cash.loc[dict(band='price_end')] = 1.0
+
     
-    df_price = da_mom.sel(band='price_end').to_pandas()
+
+    
+    data_features = _data_features.sel(symbol = [str(s) for s in np.array(_data_features.coords['symbol']) if s != "BIL"])
+    data_features = xr.concat([data_features, da_bil], dim='symbol', join = 'inner')
+    data_features = xr.concat([data_features, da_cash], dim = 'symbol', join = 'inner')
+
+    df_price = _data_features.sel(band = 'price_end').to_pandas()
+    df_price.loc['CASH', :] = 1
+    
+    data_features = data_features.drop_sel(band = 'price_end')
+  
+    
     
     
     
@@ -335,10 +354,11 @@ def get_sr_problem_params(
     
     
 
-
+    df_dividend = pd.read_parquet(dividend_file)
     
-    problem_args = (data_features, df_price, params, periods, output_folder)
-    arg_names = ('data_features', 'df_price', 'params', 'periods', 'output_folder')
+    
+    problem_args = (data_features, df_price, params, periods, output_folder, df_dividend, holdings)
+    arg_names = ('data_features', 'df_price', 'params', 'periods', 'output_folder', 'df_dividend', 'holdings')
     
     return dict(zip(arg_names, problem_args))
 

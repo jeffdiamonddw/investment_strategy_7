@@ -3,8 +3,6 @@ import warnings
 import numpy as np
 import pandas as pd
 import xarray as xr
-import requests
-import io
 
 from get_macro_data import get_macro_data
 from get_macro_signals import get_macro_signals
@@ -13,14 +11,12 @@ from get_macro_signals import get_macro_signals
 # Silence the internal yfinance Pandas4Warning
 warnings.filterwarnings("ignore", message=".*Timestamp.utcnow is deprecated.*")
 
-OUTPUT_DIR = "simulation_data"
-TICKER_FILE = 'strategy/multi_dim_stock_list.csv'
-
 # --- CONFIGURATION ---
+ # Replace 'YOUR_API_KEY' with your actual EODHD API key
 API_KEY = '693327461e9541.04731237' 
-MOMENTUM_PATH = '{}/momentum.nc'.format(OUTPUT_DIR)
-QUALITY_PATH = '{}/quality.nc'.format(OUTPUT_DIR)
-DIVIDEND_PATH = '{}/dividend.parquet'.format(OUTPUT_DIR)
+TICKER_FILE = 'strategy/multi_dim_stock_list.csv'
+MOMENTUM_PATH = 'simulation_data/momentum.nc'
+QUALITY_PATH = 'simulation_data/quality.nc'
 PIN_DATE = '2005-09-05'
 DAYS_INTERVAL = 28
 
@@ -36,24 +32,24 @@ LEVERAGE_MAP = {
 
 
 
-def create_bil_dataarray(df: pd.DataFrame) -> xr.DataArray:
+def create_gic_dataarray(df: pd.DataFrame) -> xr.DataArray:
     """
-    Constructs an xarray DataArray from an BIL/T-Bill rate dataframe, converting growth 
+    Constructs an xarray DataArray from a GIC dataframe, converting growth 
     factors into annualized dollar profit per share assuming a current price of $1.
     
     Args:
-        df: DataFrame with datetime index and 'bil_rate' column (annualized percentage yield).
+        df: DataFrame with datetime index and 'gic' column (annual rate).
     """
-    # 1. Calculate the periodic growth factor (28 days) using the floating T-Bill rate
+    # 1. Calculate the periodic growth factor (28 days)
     df = df.copy()
-    df['growth_factor'] = (1 + .01 * df['bil_rate']) ** (28 / 365)
+    df['growth_factor'] = (1 + .01 * df['gic']) ** (28 / 365)
     
     # 2. Define the windows for trailing returns
     windows = [1, 6, 13, 26]
     
     # 3. Initialize the DataArray with dimensions
     bands = ['price_end'] + [f'dollar_ret_{w}p' for w in windows]
-    symbols = ['BIL']
+    symbols = ['GIC']
     dates = np.array(df.index)
     
     # Initialize with NaNs
@@ -64,53 +60,71 @@ def create_bil_dataarray(df: pd.DataFrame) -> xr.DataArray:
     )
     
     # 4. Fill 'price_end' with 1.0
-    da.loc[dict(band='price_end')] = df.close
+    da.loc[dict(band='price_end')] = 1.0
     
     # 5. Calculate annualized dollar profit per share assuming current price = 1.0
+    # For a GIC, the current price is always 1.0 (no capital depreciation/appreciation from face value).
+    # Therefore, pct_change over window w is simply (trailing_accumulated_factor - 1).
     for i, w in enumerate(windows, start=1):
         trailing_factor = (
             df['growth_factor']
             .rolling(window=w)
             .apply(lambda x: x.prod(), raw=True)
         )
-        annualized_return = ((trailing_factor ** (1 / (((w * 28) / 365.0)))) - 1) 
+        pct_change = trailing_factor - 1
+        num_years = (w * 28) / 365.0
+        
+        # Applying the same annualized profit formula with p_current = 1.0:
+        # annualized_profit = P_current * (((pct_change + 1) ** (1 / num_years)) - 1) / (pct_change + 1)
+        # Since trailing_factor = (pct_change + 1), this simplifies cleanly to:
+        annualized_return = ((trailing_factor ** (1 / num_years)) - 1) 
         
         da.loc[dict(band=f'dollar_ret_{w}p')] = annualized_return
         
     return da
 
 
-def get_us_treasury_simulation_data(start_date='2005-01-01'):
+def get_boc_simulation_data_2026(start_date='2005-01-01'):
     """
-    Pulls the U.S. 3-Month Treasury Bill Secondary Market Rate (DTB3) directly from FRED.
+    Pulls Bank Rate and 1-Year GIC directly from the BoC Valet API.
+    Bypasses group-level 404 errors by requesting specific series.
     """
-    url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DTB3"
+    # Vectors: V80691310 (Bank Rate), V80691339 (1-Year GIC)
+    series_ids = "V80691310,V80691339"
+    url = f"https://www.bankofcanada.ca/valet/observations/{series_ids}/csv?start_date={start_date}"
     
     try:
-        print("Requesting US 3-Month T-Bill rate (DTB3) from FRED...")
+        print(f"Requesting series {series_ids} from Bank of Canada...")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         
-        df = pd.read_csv(io.StringIO(response.text), index_col='observation_date', parse_dates=True)
-        df = df.rename(columns={'DTB3': 'RATE'})
+        # BoC CSVs include metadata at the top. We split to find the data table.
+        lines = response.text.splitlines()
+        data_start = next(i for i, line in enumerate(lines) if line.startswith('"date"'))
         
-        # FRED DTB3 uses '.' for missing values during holidays/weekends
-        df['RATE'] = pd.to_numeric(df['RATE'], errors='coerce')
-        df = df.ffill().bfill()
-
-        url = f'https://eodhd.com/api/eod/BIL.US?api_token={API_KEY}&fmt=csv&from={start_date}'
-        response = requests.get(url, timeout=10)
-        df1 = pd.read_csv(io.StringIO(response.text), index_col='Date', parse_dates=True)
-        # Use 'Close' (raw) instead of 'Adjusted_close' to retain the sawtooth interest drops
-        df['close'] = df1['Close']
+        # Read data and clean column names
+        df = pd.read_csv(io.StringIO("\n".join(lines[data_start:])))
+        df.columns = [c.strip('"') for c in df.columns]
+        df = df.rename(columns={'date': 'REF_DATE'})
         
-        df = df[df.index >= start_date]
-        print(f"Success! US T-Bill data retrieved up to {df.index.max().date()}")
-        return df
+        # Melt to match your simulation's expected [REF_DATE, VECTOR, VALUE] format
+        df_melted = df.melt(id_vars=['REF_DATE'], var_name='VECTOR', value_name='VALUE')
+        
+        # Standardize Vector IDs to lowercase for your existing logic
+        df_melted['VECTOR'] = df_melted['VECTOR'].str.lower()
+        df_melted['REF_DATE'] = pd.to_datetime(df_melted['REF_DATE'])
+        
+        print(f"Success! Data retrieved up to {df_melted['REF_DATE'].max().date()}")
+        return df_melted.sort_values(['VECTOR', 'REF_DATE']).reset_index(drop=True)
 
     except Exception as e:
-        print(f"FRED Direct Retrieval Failed: {e}")
+        print(f"BoC Direct Retrieval Failed: {e}")
         return pd.DataFrame()
+
+
+
+
+
 
 
 def run_strict_alignment_check(da_mom, da_qual, csv_tickers):
@@ -140,7 +154,10 @@ def run_strict_alignment_check(da_mom, da_qual, csv_tickers):
 
 # --- 2. CORE MOMENTUM BUILDER ---
 
-def build_momentum(tickers, target_dates, da_mom=None):
+import requests
+import io
+
+def build_momentum(tickers, target_dates, da_mom):
     """Downloads price data and calculates returns for all CSV tickers using EODHD."""
     print(f"Downloading Momentum data for {len(tickers)} tickers from EODHD...")
 
@@ -149,8 +166,12 @@ def build_momentum(tickers, target_dates, da_mom=None):
     else:
         full_data = np.zeros((len(MOM_BANDS), len(tickers), len(target_dates) + da_mom.sizes['date']))
     
+   
+    
     for j, ticker in enumerate(tickers):
         try:
+            # EODHD End-of-Day API URL
+            # US tickers use the .US exchange suffix; adjust if your CSV includes exchanges
             url = f'https://eodhd.com/api/eod/{ticker}.US?api_token={API_KEY}&fmt=csv&from={PIN_DATE}'
             
             response = requests.get(url)
@@ -158,22 +179,29 @@ def build_momentum(tickers, target_dates, da_mom=None):
                 print(f"    ! Failed to fetch {ticker} (Status: {response.status_code})")
                 continue
             
+            # Read CSV response
             df = pd.read_csv(io.StringIO(response.text), index_col='Date', parse_dates=True)
             
+            # EODHD 'Adjusted_close' handles splits and dividends automatically
             if 'Adjusted_close' not in df.columns:
                 print(f"    ! Adjusted data missing for {ticker}")
                 continue
                 
+            # Alignment and cleaning using your existing logic
+            
             series_new = df['Adjusted_close'].reindex(target_dates, method='ffill').ffill().bfill()
             if da_mom is not None:
-                series_old = da_mom.sel(band='price_end', symbol=ticker).to_pandas()
+                series_old = da_mom.sel(band = 'price_end', symbol = ticker).to_pandas()
                 series = pd.concat([series_old, series_new])
             else:
                 series = series_new
 
+            # --- SURGICAL REPAIR FOR SPLIT ANOMALIES ---
+            # Even with quality data, clipping remains a safety protocol
             ratios = series / series.shift(1)
             series = series.mask((ratios > 5.0) | (ratios < 0.2)).ffill()
             
+            # Explicit cast to float for NumPy assignment
             full_data[0, j, :] = series.values.astype(float)
             
             for i, window in enumerate([1, 6, 13, 26], start=1):
@@ -189,22 +217,37 @@ def build_momentum(tickers, target_dates, da_mom=None):
             print(f"    ! Error processing {ticker}: {e}")
             continue
 
-    return xr.DataArray(full_data[:, :, -len(target_dates):], coords={'band': MOM_BANDS, 'symbol': tickers, 'date': target_dates}, dims=['band', 'symbol', 'date'])
+    return xr.DataArray(full_data[:,:, -len(target_dates):], coords={'band': MOM_BANDS, 'symbol': tickers, 'date': target_dates}, dims=['band', 'symbol', 'date'])
 
 # --- 3. INTEGRATED QUALITY BUILDER ---
 
+import requests
+import io
+
+
+
+
 def build_quality(tickers, target_dates, da_mom):
+    """
+    Recreates Quality bands with logic-based branching:
+    - Short ETFs: Use Price Proxy.
+    - Stocks: Fetch actual EPS from EODHD using filing/report dates.
+    - Long ETFs: Fetch holdings and calculate weighted average EPS using filing/report dates.
+    """
     results = []
     print(f"Recreating Quality data for {len(tickers)} tickers...")
     
+    # Load metadata for branching logic
     ticker_meta = pd.read_csv(TICKER_FILE).set_index('symbol')
     
     for j, ticker in enumerate(tickers):
+        # 1. Determine Logic Path from Metadata
         asset_type = ticker_meta.loc[ticker, 'asset_type'].upper()
         direction = ticker_meta.loc[ticker, 'direction'].upper()
         
         data = np.zeros((4, len(target_dates)))
 
+        # PATH A: Short ETFs (Price Proxy Only)
         if asset_type == 'ETF' and direction == 'SHORT':
             leverage = LEVERAGE_MAP.get(ticker, -1.0)
             p_etf = da_mom.sel(symbol=ticker, band='price_end')
@@ -214,6 +257,7 @@ def build_quality(tickers, target_dates, da_mom):
             for i, window in enumerate([1, 2, 4, 8]):
                 data[i] = 4 * pd.Series(raw_proxy.values).rolling(window=window, min_periods=1).mean().values
 
+        # PATH B: Stocks (Direct EPS with Filing Date Alignment)
         elif asset_type == 'STOCK':
             url = f'https://eodhd.com/api/fundamentals/{ticker}.US?api_token={API_KEY}'
             resp = requests.get(url).json()
@@ -221,6 +265,11 @@ def build_quality(tickers, target_dates, da_mom):
             if earnings:
                 eps_df = pd.DataFrame.from_dict(earnings, orient='index')
                 
+                # --- MODIFICATION START: POINT-IN-TIME FILING DATE HANDLING ---
+                # Explanation: Instead of aligning straight to the quarter's period-end 'date' 
+                # (which creates look-ahead bias), we check for EODHD's 'filing_date'. If a filing 
+                # date is missing, we apply a safety 45-day lag buffer after the period-end date 
+                # to simulate when the financials actually became publicly available.
                 if 'filing_date' in eps_df.columns:
                     effective_dates = pd.to_datetime(eps_df['filing_date']).fillna(pd.to_datetime(eps_df['date']) + pd.Timedelta(days=45))
                 else:
@@ -228,8 +277,13 @@ def build_quality(tickers, target_dates, da_mom):
                 
                 eps_df['effective_date'] = effective_dates
                 eps_df['epsActual'] = pd.to_numeric(eps_df['epsActual'], errors='coerce').fillna(0)
+                
+                # Sort chronologically by the effective filing/availability date
                 eps_df = eps_df.sort_values('effective_date').dropna(subset=['effective_date'])
                 
+                # Use pandas merge_asof with direction='backward' to guarantee that for any given 
+                # simulation target date, we only pull earnings data whose effective filing date 
+                # has already passed (preventing future information leakage).
                 target_df = pd.DataFrame({'date': target_dates}).sort_values('date')
                 merged = pd.merge_asof(
                     target_df, 
@@ -241,12 +295,14 @@ def build_quality(tickers, target_dates, da_mom):
                 merged['epsActual'] = merged['epsActual'].fillna(0)
                 
                 aligned_eps = pd.Series(merged['epsActual'].values, index=target_df['date']).reindex(target_dates)
+                # --- MODIFICATION END ---
                 
                 for i, window in enumerate([1, 2, 4, 8]):
                     data[i] = 4 * aligned_eps.rolling(window=window, min_periods=1).mean().values
             else:
                 raise ValueError("No EPS data found")
 
+        # PATH C: Long ETFs (Weighted Average of Holdings EPS with Filing Date Alignment)
         elif asset_type == 'ETF' and direction == 'LONG':
             holdings_file = f'./holdings/{ticker}_holdings.csv'
             
@@ -269,6 +325,10 @@ def build_quality(tickers, target_dates, da_mom):
                     if h_hist:
                         h_df = pd.DataFrame.from_dict(h_hist, orient='index')
                         
+                        # --- MODIFICATION START: HOLDINGS POINT-IN-TIME FILING DATE HANDLING ---
+                        # Explanation: Applied the exact same filing-date and backward-looking 
+                        # merge_asof logic to each underlying holding in long ETFs to ensure 
+                        # portfolio-level quality metrics are also free from look-ahead bias.
                         if 'filing_date' in h_df.columns:
                             h_effective_dates = pd.to_datetime(h_df['filing_date']).fillna(pd.to_datetime(h_df['date']) + pd.Timedelta(days=45))
                         else:
@@ -289,6 +349,7 @@ def build_quality(tickers, target_dates, da_mom):
                         merged['epsActual'] = merged['epsActual'].fillna(0)
                         
                         h_series = pd.Series(merged['epsActual'].values, index=target_df['date']).reindex(target_dates)
+                        # --- MODIFICATION END ---
                         
                         weighted_eps_sum += (h_series * h_weight)
                         total_w += h_weight
@@ -308,107 +369,64 @@ def build_quality(tickers, target_dates, da_mom):
     return xr.concat(results, dim='symbol')
 
 
-def get_bil_data():
-    df_rate = get_us_treasury_simulation_data()
+def get_gic_data():
+    df_gic = get_boc_simulation_data_2026()
 
-    price_data = xr.open_dataarray('{}/momentum.nc'.format(OUTPUT_DIR))
+    # 2. Pivot data (v80691310 = Bank Rate, v80691339 = 1-year GIC)
+    pivot_df = df_gic.pivot(index='REF_DATE', columns='VECTOR', values='VALUE')
+    pivot_df = pivot_df.rename(columns={
+        'v80691310': 'Bank_Rate',
+        'v80691339': 'GIC_1_Year'
+    })
+
+    # 3. Create 4-week intervals starting March 31, 2005
+    price_data = xr.open_dataarray('simulation_data/momentum.nc')
     date_range = np.array(price_data.date)
-    processed_df = df_rate.reindex(df_rate.index.union(date_range)).ffill().reindex(date_range)
+    processed_df = pivot_df.reindex(pivot_df.index.union(date_range)).ffill().reindex(date_range)
 
-    # Map BIL yield directly from the 3-month T-bill rate minus a small expense ratio drag (~0.07%)
-    processed_df['bil_rate'] = processed_df['RATE'] - 0.07
+    # 4. Updated Approximation for Cashable GIC
+    # Formula: Midpoint between Bank Rate and 1-Year GIC minus 0.35%
+    # This results in a current value of 2.00% (based on 2.25% Bank and 2.45% GIC)
+    processed_df['gic'] = ((processed_df['Bank_Rate'] + processed_df['GIC_1_Year']) / 2) - 0.35
 
-    da = create_bil_dataarray(processed_df)
+    da = create_gic_dataarray(processed_df)
     return da
-
-
-def get_dividends_df(tickers, start_date, end_date, api_token=API_KEY):
-  """Fetches historical dividend data for a list of tickers from EODHD
-
-  within a specified date range and returns a combined Pandas DataFrame.
-  """
-  all_dividends = []
-
-  i = -1
-  for ticker in tickers:
-    i+=1
-    print("{}/{}".format(i, len(tickers)))
-    url = f"https://eodhd.com/api/div/{ticker}"
-    params = {
-        "api_token": api_token,
-        "from": start_date,
-        "to": end_date,
-        "fmt": "json",
-    }
-
-    response = requests.get(url, params=params)
-    if response.status_code == 200:
-      data = response.json()
-      if isinstance(data, list):
-        for div in data:
-          all_dividends.append({
-              "ticker": ticker.upper(),
-              "ex_dividend_date": div.get("date"),
-              "payment_date": div.get("paymentDate"),
-              "amount": div.get("value"),
-          })
-
-  df = pd.DataFrame(all_dividends)
-
-  if not df.empty:
-    df["ex_dividend_date"] = pd.to_datetime(
-        df["ex_dividend_date"], errors="coerce"
-    )
-    df["payment_date"] = pd.to_datetime(df["payment_date"], errors="coerce")
-    df = df.sort_values(by=["ex_dividend_date", "ticker"]).reset_index(drop=True)
-
-  return df
     
 # --- 4. MAIN ENTRY POINT ---
 
 def main():
-
-
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs('simulation_data', exist_ok=True)
+    # for path in [MOMENTUM_PATH, QUALITY_PATH]:
+    #     if os.path.exists(path):
+    #         os.remove(path)
 
     csv_tickers = sorted(pd.read_csv(TICKER_FILE)['symbol'].unique().tolist())
     
+    # Modern Pandas handling to avoid Timestamp.utcnow warnings
     now_utc = pd.Timestamp.now(tz='UTC').tz_localize(None) 
     target_dates = pd.date_range(start=PIN_DATE, end=now_utc, freq=f'{DAYS_INTERVAL}D')
 
-    if os.path.isfile(DIVIDEND_PATH):
-        df_dividends = pd.read_parquet(DIVIDEND_PATH)
-        new_tickers = sorted(list(set(csv_tickers).difference(df_dividends.ticker)))
-        start_date = df_dividends.ex_dividend_date.max()
-        end_date = pd.Timestamp.now(tz='UTC').tz_localize(None)
-        if end_date > start_date:
-            df_add = get_dividends_df(csv_tickers, start_date, end_date, api_token=API_KEY)
-            df_dividends = pd.concat([df_dividends, df_add])
-        if len(new_tickers) > 0:
-            start_date = df_dividends.ex_dividend_date.min()
-            df_add = get_dividends_df(new_tickers, start_date, end_date, api_token=API_KEY)
-            df_dividends = pd.concat([df_dividends, df_add])
-    else:
-        df_dividends = get_dividends_df(csv_tickers, PIN_DATE, now_utc, api_token=API_KEY)
-    df_dividends.to_parquet(DIVIDEND_PATH)
 
+   
 
     if os.path.isfile(MOMENTUM_PATH):
         da_mom = xr.open_dataarray(MOMENTUM_PATH)
         new_target_dates = sorted(list(set(target_dates).difference(np.array(da_mom.date))))
         if len(new_target_dates) > 0:
             da_new_dates = build_momentum(np.array(da_mom.symbol), new_target_dates, da_mom)
-            da_mom = xr.concat([da_mom, da_new_dates], dim='date')
+            da_mom = xr.concat([da_mom, da_new_dates], dim = 'date')
         new_tickers = sorted(list(set(csv_tickers).difference(np.array(da_mom.symbol))))
         if len(new_tickers) > 0:
             da_new_tickers = build_momentum(new_tickers, target_dates)
-            da_mom = xr.concat([da_mom, da_new_tickers], dim='symbol')
+            da_mom = xr.concat([da_mom, da_new_tickers], dim = 'symbol')
         if len(new_target_dates) > 0 or len(new_tickers) > 0:
             da_mom.to_netcdf(MOMENTUM_PATH)
     else:   
         da_mom = build_momentum(csv_tickers, target_dates)
         da_mom.to_netcdf(MOMENTUM_PATH)
 
+    da_gic = get_gic_data()
+    da_gic.to_netcdf('simulation_data/gic_data.nc')
     
     
     if os.path.isfile(QUALITY_PATH):
@@ -416,25 +434,30 @@ def main():
         new_target_dates = sorted(list(set(target_dates).difference(np.array(da_qual.date))))
         if len(new_target_dates) > 0:
             da_new_dates = build_quality(np.array(da_qual.symbol), new_target_dates, da_mom)
-            da_qual = xr.concat([da_qual, da_new_dates], dim='date')
+            da_qual = xr.concat([da_qual, da_new_dates], dim = 'date')
         new_tickers = sorted(list(set(csv_tickers).difference(np.array(da_qual.symbol))))
         if len(new_tickers) > 0:
             da_new_tickers = build_quality(new_tickers, target_dates, da_mom)
-            da_qual = xr.concat([da_qual, da_new_tickers], dim='symbol')
+            da_qual = xr.concat([da_qual, da_new_tickers], dim = 'symbol')
         if len(new_target_dates) > 0 or len(new_tickers) > 0:
             da_qual.to_netcdf(QUALITY_PATH)
     else:
         da_qual = build_quality(csv_tickers, target_dates, da_mom)
         da_qual.to_netcdf(QUALITY_PATH)
 
-    da_bil = get_bil_data()
-    da_bil.to_netcdf('{}/bil_data.nc'.format(OUTPUT_DIR))
-
     run_strict_alignment_check(da_mom, da_qual, csv_tickers)
 
     get_macro_data()
     get_macro_signals()
 
+   
+   
+
+   
+
+
+
+    
     print("Full rebuild complete and verified.")
 
 if __name__ == "__main__":
