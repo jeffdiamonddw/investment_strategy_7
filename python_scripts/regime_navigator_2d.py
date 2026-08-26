@@ -21,7 +21,7 @@ from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.population import Population
 
 from regime_navigator_1d import get_rn_problem_params
-from simulate_stock_rotation import simulate
+from simulate_stock_rotation import simulate, get_proposal
 from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives, RegretPercentile, FoldPercentile
 from regime_navigator_1d import get_rn_problem_params, RegimeNavigator1D
 from utils import get_dna_hash, save_to_zarr
@@ -86,7 +86,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
        
 
 
-    def run_simulation(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, df_macro_weights, max_voo, period_key, sim_id, session=None, holdings=None, max_frac = None):
+    def get_simulation_args(self, w_mom_vals, w_qual_vals, threshold, beta, mom_decay, qual_decay, df_macro_weights, max_voo, sim_id, holdings, max_frac):
         
         
         macro_weights_risk = df_macro_weights.values.flatten()[:4]
@@ -94,7 +94,7 @@ class RegimeNavigator2D(RegimeNavigator1D):
         
         macro_weights_risk /= macro_weights_risk.sum()
         macro_weights_temporal /= macro_weights_temporal.sum()
-        period = self.periods[period_key]
+        period = self.periods
         
         keep_date = (period['val_start_date'] <= self.df_macro.index) & (self.df_macro.index <= period['end_date'])
         df_macro = self.df_macro.loc[keep_date]
@@ -135,10 +135,88 @@ class RegimeNavigator2D(RegimeNavigator1D):
         df_weights.to_csv('temp/weights.csv')
        #********************************************************************************************************************************* 
 
-        df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = simulate(self.df_price, self.params, self.data_features, df_weights, period,  sim_id, session = session, holdings = holdings, df_dividend = self.df_dividend, now = self.now, hold = self.hold, max_frac = max_frac)
+        simulate_args = {
+            'df_price' : self.df_price, 
+            '_params': self.params, 
+            'data_features': self.data_features, 
+            'df_weights': df_weights, 
+            'period': period, 
+            'sim_id': sim_id , 
+            'holdings': holdings, 
+            'max_frac': max_frac, 
+            'max_voo' : max_voo, 
+            'df_dividend': self.df_dividend , 
+            'now': self.now , 
+            'hold': self.hold 
+
+        }
+        return simulate_args
+
+    
+    def get_proposal(self, w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, sim_id, holdings, max_frac):
+
+        simulation_args = self.get_simulation_args(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, sim_id, holdings, max_frac)
+        holdings_start = None
+        df_price = simulation_args['df_price']
+        params = simulation_args['params']
+        data_features = simulation_args['data_features']
+        df_features = data_features.isel(date = -1).to_pandas().transpose()
+        feature_weights = dict(simulation_args['df_weights'].iloc[-1])
+        max_voo = simulation_args['max_voo']
+        max_frac = simulation_args['max_frac']
+        proposed_holdings = get_proposal(self, holdings_start, df_price, params, df_features, feature_weights, max_voo, max_frac)
+        return proposed_holdings
+
+
+
+    def run_simulation(self, w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, sim_id, holdings, max_frac):
+            
         
+            simulation_args = self.get_simulation_args(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, sim_id, holdings, max_frac)
+            df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = simulate(**simulation_args)
       
-        return df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price
+            return df_holdings_history, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price
+
+
+
+    def translate_params(self, x):
+         
+        x_numeric = x.X if hasattr(x, "X") else x
+        sim_id = get_dna_hash(x_numeric)
+        # CHANGE self.mom_kit to self.mom_kit
+        w_mom = x_numeric[:4]
+        
+        # CHANGE self.qual_kit to self.qual_kit
+        w_qual =x_numeric[5:9]
+        w_mom, w_qual = np.clip(w_mom, 0, 1), np.clip(w_qual, 0, 1)
+
+        opt_threshold = x_numeric[8]
+        opt_beta = x_numeric[9]
+        mom_decay = x_numeric[10]
+        qual_decay = x_numeric[11]
+        df_macro_weights = pd.DataFrame(x_numeric[12:20].reshape(2,4), index = ['risk_weights', 'temporal_weights'], columns = self.df_macro.columns)
+        max_voo = x_numeric[20]
+        if len(x_numeric) >= 22:
+            max_frac = x_numeric[21]
+        else:
+            max_frac = .05
+        # max_frac = .05
+        
+        sim_params = {
+            'w_mom': w_mom, 
+            'w_qual': w_qual, 
+            'opt_threshold': opt_threshold, 
+            'opt_beta': opt_beta, 
+            'mom_decay': mom_decay, 
+            'qual_decay': qual_decay, 
+            'df_macro_weights': df_macro_weights, 
+            'max_voo': max_voo, 
+            'sim_id': sim_id,  
+            'max_frac': max_frac
+        }
+
+        return sim_params
+
     
 
     def evaluate(self, x):
@@ -158,15 +236,20 @@ class RegimeNavigator2D(RegimeNavigator1D):
         qual_decay = x_numeric[11]
         df_macro_weights = pd.DataFrame(x_numeric[12:20].reshape(2,4), index = ['risk_weights', 'temporal_weights'], columns = self.df_macro.columns)
         max_voo = x_numeric[20]
-        max_frac = x_numeric[21]
-       # max_frac = .05
+        if len(x_numeric) >= 22:
+            max_frac = x_numeric[21]
+        else:
+            max_frac = .05
+       
 
         
         
-        df_sim = pd.DataFrame()
-        for key in self.periods:
-            df_period, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, holdings = self.holdings, max_frac = max_frac)
-            df_sim = pd.concat([df_sim, df_period]).reset_index(drop=True)
+        sim_params = self.translate_params(x)
+        sim_params['holdings'] = self.holdings
+        df_sim, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = self.run_simulation(**sim_params)
+        #df_sim, proposed_holdings, data_share_holdings, live_sell_price, live_buy_price = \
+        #        self.run_simulation(w_mom, w_qual, opt_threshold, opt_beta, mom_decay, qual_decay, df_macro_weights, max_voo, key, sim_id, self.holdings, max_frac)
+
         
         
         
@@ -185,9 +268,9 @@ class RegimeNavigator2D(RegimeNavigator1D):
 
 if __name__ == "__main__":
     
-    DATA_PATH = "s3://jdinvestment/simulation_data"
+    DATA_PATH = "s3://jdinvestment/simulation_data_533"
 
-    num_samples = 3
+    num_samples = 1
     perturbation_cv = .01
 
     
@@ -215,9 +298,8 @@ if __name__ == "__main__":
     my_boto3_session = boto3.Session()
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
-    periods = {
-        'train': {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-09-01')},
-    }
+    periods = {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2022-01-01'), 'end_date': pd.to_datetime('2026-09-01')}
+    
     
     
     df_folds = pd.read_parquet("{}/folds.parquet".format(s3_path))
@@ -278,7 +360,6 @@ if __name__ == "__main__":
         holdings = pd.read_parquet(holdings)
     
     problem_args = get_rn_problem_params(
-        periods,
         momentum_file = "{}/momentum.nc".format(DATA_PATH), 
         quality_file = "{}/quality.nc".format(DATA_PATH),
         bil_file = "{}/bil_data.nc".format(DATA_PATH),
@@ -294,7 +375,7 @@ if __name__ == "__main__":
 
     
     
-    
+    problem_args['periods'] = periods
     problem_args['now'] = args.now
     problem_args['hold'] = args.hold
 

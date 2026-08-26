@@ -22,6 +22,8 @@ import pandas as pd
 import numpy as np
 import xarray as xr
 
+from live_update_listener import get_last_close
+
 
 def allocate_stocks_heuristic(
     B: pd.Series, P: pd.Series, account_values: list
@@ -522,7 +524,19 @@ def optimize(_params, df_features, _current_price, __holdings, _budget, feature_
 
 
 
-        
+def get_proposal(holdings_start, df_price, params, df_features, feature_weights, max_voo, max_frac):
+
+    if holdings_start is None:
+        holdings_start = pd.DataFrame(0.0, index = df_price.index, columns = range(len(params['principal'])))
+        holdings_start.loc['CASH', :] = np.floor(params['principal']).astype(int)
+
+
+    tickers = [s for s in holdings_start.index if s != 'CASH']
+    price_start = get_last_close(tickers)
+    price_start.loc['CASH'] = 1
+    budget_start = (holdings_start * price_start.values.reshape(len(price_start), 1)).sum(0)
+    proposed_holdings, _ , _= optimize(params, df_features, price_start, holdings_start, budget_start, feature_weights, max_voo = max_voo, max_frac = max_frac)  
+    return proposed_holdings      
         
         
         
@@ -556,11 +570,20 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
         if val_start_date > max(data_features.coords['date'].to_pandas()):
             break
 
+        df_features = data_features.sel(date = val_start_date).to_pandas().transpose()
+        feature_weights = dict(df_weights.loc[val_start_date])
         
         last_price = df_price.loc[:, val_start_date].copy(); last_price.loc['CASH'] = 1
         last_budget = (holdings.values * pd.DataFrame(last_price.loc[holdings.index]).fillna(0).values).sum(axis = 0)
     
         if now:
+            tickers = [s for s in holdings_start.index if s != 'CASH']
+            price_start = get_last_close(tickers)
+            price_start.loc['CASH'] = 1
+            budget_start = (holdings_start * price_start.values.reshape(len(price_start), 1)).sum(0)
+            proposed_holdings, num_trades, obj_value = optimize(params, df_features, price_start, holdings_start, budget_start, feature_weights, max_voo = max_voo, max_frac = max_frac)
+
+
             df_price_live = pd.read_parquet('live_quotes_cache.parquet').set_index('symbol')
     
             
@@ -583,11 +606,10 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
     
         
         
-        df_features = data_features.sel(date = val_start_date).to_pandas().transpose()
-        feature_weights = dict(df_weights.loc[val_start_date])
+        
 
-        if val_end_date is None:
-            proposed_holdings, num_trades, obj_value = optimize(params, df_features, current_price, holdings_start, budget, feature_weights, max_voo = max_voo, max_frac = max_frac)
+      
+            
             
         old_value = (holdings * current_price.values.reshape(len(current_price),1)).values.sum()
         

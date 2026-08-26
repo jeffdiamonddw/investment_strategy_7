@@ -299,7 +299,6 @@ class StockRotationProblem(Problem):
 
 
 def get_sr_problem_params(
-        periods,
         momentum_file = "s3://jdinvestment/simulation_data/momentum.nc", 
         quality_file = "s3://jdinvestment/simulation_data/quality.nc",
         bil_file = "s3://jdinvestment/simulation_data/bil_data.nc",
@@ -357,8 +356,8 @@ def get_sr_problem_params(
     df_dividend = pd.read_parquet(dividend_file)
     
     
-    problem_args = (data_features, df_price, params, periods, output_folder, df_dividend, holdings)
-    arg_names = ('data_features', 'df_price', 'params', 'periods', 'output_folder', 'df_dividend', 'holdings')
+    problem_args = (data_features, df_price, params, output_folder, df_dividend, holdings)
+    arg_names = ('data_features', 'df_price', 'params','output_folder', 'df_dividend', 'holdings')
     
     return dict(zip(arg_names, problem_args))
 

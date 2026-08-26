@@ -281,7 +281,6 @@ def align_dataframe_to_dates(df, target_dates, max_days=7):
     return df_final[valid_mask.values]
 
 def get_rn_problem_params(
-        periods,
         momentum_file = "s3://jdinvestment//momentum.nc", 
         quality_file = "s3://jdinvestment/simulation_data/quality.nc",
         bil_file = "s3://jdinvestment/simulation_data/bil_data.nc",
