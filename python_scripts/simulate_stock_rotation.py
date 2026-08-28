@@ -468,8 +468,9 @@ def optimize(_params, df_features, _current_price, __holdings, _budget, feature_
     obj_value = pyo.value(model.OBJ)
     
     # --- PHASE 2 ---
+    df_sol = var_to_pivot_table(model.x).loc[params['current_price'].index, :]
     if obj_value < _params['obj_threshold']:
-        params['objective_sensitivity'] = .1
+        params['objective_sensitivity'] = .001
         threshold_value = (1 - params['objective_sensitivity']) * obj_value
         def obj_near_optimal_constraint(model):
             return - sum(model.feature_weight[w] * model.feature_values[s, w] * model.x[s,a] for w in model.feature for s in model.stock for a in model.account) <= threshold_value
@@ -500,7 +501,7 @@ def optimize(_params, df_features, _current_price, __holdings, _budget, feature_
         num_trades = (df_allocation != _holdings).sum(0)
         buy_cost = (df_allocation * current_price.values).sum(0)
         df_allocation.loc['CASH'] = np.floor(
-            (_cash - buy_cost).sum() - params['trade_fee'] * num_trades
+            (_cash - buy_cost) - params['trade_fee'] * num_trades
         ).astype(int)
     else:
         sum_holdings = holdings.sum(1).values.reshape(df_sol.shape[0],1)
@@ -518,24 +519,28 @@ def optimize(_params, df_features, _current_price, __holdings, _budget, feature_
         
         obj_value = None
         
-    
     return df_allocation, num_trades * params['trade_fee'], obj_value
 
 
 
 
-def get_proposal(holdings_start, df_price, params, df_features, feature_weights, max_voo, max_frac):
+def get_proposal(holdings_start, params, df_features, feature_weights, max_voo, max_frac, live_price = None):
 
-    if holdings_start is None:
-        holdings_start = pd.DataFrame(0.0, index = df_price.index, columns = range(len(params['principal'])))
-        holdings_start.loc['CASH', :] = np.floor(params['principal']).astype(int)
+    
 
 
-    tickers = [s for s in holdings_start.index if s != 'CASH']
-    price_start = get_last_close(tickers)
-    price_start.loc['CASH'] = 1
+    if live_price is None:
+        tickers = [s for s in holdings_start.index if s != 'CASH']
+        price_start = get_last_close(tickers)
+        price_start.loc['CASH'] = 1
+    else:
+        price_start = live_price
+        holdings_start = holdings_start.loc[price_start.index]
+        df_features = df_features.loc[price_start.index]
     budget_start = (holdings_start * price_start.values.reshape(len(price_start), 1)).sum(0)
     proposed_holdings, _ , _= optimize(params, df_features, price_start, holdings_start, budget_start, feature_weights, max_voo = max_voo, max_frac = max_frac)  
+    
+        
     return proposed_holdings      
         
         

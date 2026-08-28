@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import json
 import os
@@ -7,6 +8,7 @@ import pandas as pd
 import requests
 import websockets
 from datetime import datetime
+import numpy as np
 
 PARQUET_FILE = "live_quotes_cache.parquet"
 API_TOKEN = '693327461e9541.04731237'
@@ -392,10 +394,14 @@ def start_background_daemon(tickers):
 
 # --- Main Daemon Execution ---
 if __name__ == "__main__":
-    try:
-        raw_symbols = pd.read_csv('strategy/multi_dim_stock_list.csv').symbol.tolist()
-    except Exception:
-        raw_symbols = ["AAPL", "MSFT", "XLG"]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--s3_path', required=True)
+    args = parser.parse_args()
+
+    df_holdings = pd.read_parquet("{}/proposed_holdings.parquet".format(args.s3_path))
+    df_holdings = df_holdings.loc[df_holdings.sum(1) > 0]
+    df_holdings = df_holdings.loc[df_holdings.index != 'CASH']
+    raw_symbols = list(np.array(df_holdings.index))
 
     log_with_time(f"[DAEMON] Starting live quote daemon for {len(raw_symbols)} symbols...")
     
