@@ -1,4 +1,5 @@
 sim_results/
 simulation_data/
-raw_cache
+raw_cache/
 simulation_data_533/
+simulation_data_save/
