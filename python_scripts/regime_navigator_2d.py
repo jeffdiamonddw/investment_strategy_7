@@ -331,7 +331,7 @@ if __name__ == "__main__":
     
     DATA_PATH = "s3://jdinvestment/simulation_data_533"
 
-    num_samples = 1
+    num_samples = 3
     perturbation_cv = .01
 
     
