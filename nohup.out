@@ -1,0 +1,51 @@
+nohup: ignoring input
+
+Compiled modules for significant speedup can not be used!
+https://pymoo.org/installation.html#installation
+
+To disable this warning:
+from pymoo.config import Config
+Config.warnings['not_compiled'] = False
+
+output already exists for generation 0
+Registering/Updating Job Definition: simulation-job-def...
+Submitting array job...
+Successfully submitted! Job ID: 94640981-be52-458a-9714-3aca549ba193 for generation 1
+waiting for summary
+waiting for summary
+waiting for summary
+batch complete: (False, 0)
+waiting on batch 37.93601322174072 seconds, 0/215 complete
+waiting on batch 70.61094737052917 seconds, 0/215 complete
+waiting on batch 103.3176383972168 seconds, 0/215 complete
+waiting on batch 136.06923651695251 seconds, 104/215 complete
+waiting on batch 168.75318312644958 seconds, 215/215 complete
+completed Job ID: 94640981-be52-458a-9714-3aca549ba193 for generation 1
+Traceback (most recent call last):
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 312, in <module>
+    main()
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 296, in main
+    F = master_problem.evaluate(pop.get("X"))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 257, in evaluate
+    _out = self.do(X, return_values_of, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 299, in do
+    self._evaluate_vectorized(X, out, *args, **kwargs)
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 307, in _evaluate_vectorized
+    self._evaluate(X, out, *args, **kwargs)
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 197, in _evaluate
+    df_obj = get_objectives(self.s3_path, self.generation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 169, in get_objectives
+    df = wr.df = wr.s3.read_parquet(
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_utils.py", line 178, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_config.py", line 732, in wrapper
+    return function(**args)
+           ^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/s3/_read_parquet.py", line 525, in read_parquet
+    raise exceptions.NoFilesFound(f"No files Found on: {path}.")
+awswrangler.exceptions.NoFilesFound: No files Found on: s3://jdinvestment/2d_4obj/median_objectives/gen=1/.
