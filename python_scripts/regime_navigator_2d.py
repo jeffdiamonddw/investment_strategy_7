@@ -459,6 +459,7 @@ if __name__ == "__main__":
     objective_functions_dict['val']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.val_folds, quantile = 1/13)(s_val.pct_change())
     objective_functions_dict['val']['drawdown'] =  lambda s_val: FoldApplyer(df_folds, args.val_folds, myfunc = worst_annual_drawdown_integral)(s_val)
     objective_sense['28_day_regret'] = 'min'
+    objective_sense['drawdown'] = 'min'
 
     
     #jeff temp
