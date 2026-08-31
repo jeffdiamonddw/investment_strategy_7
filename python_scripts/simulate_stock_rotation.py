@@ -387,7 +387,12 @@ class SuppressOutput:
 
 def optimize(_params, df_features, _current_price, __holdings, _budget, feature_weights, max_frac = .05, max_voo = None):
     
-    df_scores =pd.DataFrame(df_features.values/_current_price.values.reshape(_current_price.shape[0],1), index = df_features.index)
+    #jeff temp
+   
+    df_scores =pd.DataFrame(df_features.values/_current_price.loc[df_features.index].values.reshape(_current_price.shape[0],1), index = df_features.index)
+    df_scores.to_parquet('temp/df_scores.parquet')
+    pd.DataFrame(_current_price.loc[df_features.index]).to_parquet('current_price.parquet')
+    pd.DataFrame(pd.Series(feature_weights)).to_parquet('temp/feature_weights.parquet')
     s_scores = pd.Series(np.matmul(df_scores.values, np.array(list(feature_weights.values())).reshape(len(feature_weights), 1)).flatten(), index = df_scores.index).sort_values(ascending = False)
 
     _holdings = __holdings.loc[__holdings.index != 'CASH'].copy()
@@ -518,7 +523,9 @@ def optimize(_params, df_features, _current_price, __holdings, _budget, feature_
         
         
         obj_value = None
-        
+    #jeff temp
+    df_allocation.to_parquet('temp/df_allocation.parquet')    
+
     return df_allocation, num_trades * params['trade_fee'], obj_value
 
 
@@ -647,6 +654,7 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
             cash_value = holdings.loc['CASH'].sum()
 
             print(val_start_date, val_end_date, old_value, new_value, cash_value/new_value)
+
         
         if val_end_date is None:
             
@@ -675,6 +683,9 @@ def simulate(df_price, _params, data_features, df_weights, period, sim_id = None
 
         if val_end_date is not None:
             history.append((val_start_date, val_end_date, old_value, new_value))
+            
+
+        
             
         
     stagger_delay = (int(sim_id, 16) % 5000) / 1000.0

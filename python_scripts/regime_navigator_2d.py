@@ -22,7 +22,7 @@ from pymoo.core.population import Population
 
 from regime_navigator_1d import get_rn_problem_params
 from simulate_stock_rotation import simulate, get_proposal, optimize
-from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives, RegretPercentile, FoldPercentile
+from objective_functions import mean_annualized_return, weighted_quantile, weighted_mean, WeightedRegretApplyer, WeightedRegimeApplyer, apply_objectives, RegretPercentile, FoldPercentile, FoldApplyer, worst_annual_drawdown_integral
 from regime_navigator_1d import get_rn_problem_params, RegimeNavigator1D
 from utils import get_dna_hash, save_to_zarr
 
@@ -360,7 +360,7 @@ if __name__ == "__main__":
     my_boto3_session = boto3.Session()
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
-    periods = {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2022-01-01'), 'end_date': pd.to_datetime('2026-09-01')}
+    periods = {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-10-01')}
     
     
     
@@ -384,7 +384,7 @@ if __name__ == "__main__":
             'regret_quantile': WeightedRegretApplyer(df_train_folds, agg_func, weighting_func_quantile, 'voo_return', 'max'),
             'mean_regret' : WeightedRegretApplyer(df_train_folds, agg_func, weighted_mean, 'voo_return', 'max'),
             'quantile': WeightedRegimeApplyer(df_train_folds, agg_func, weighting_func_quantile),
-            'mean': WeightedRegimeApplyer(df_train_folds, agg_func, weighted_mean)
+            'mean': WeightedRegimeApplyer(df_train_folds, agg_func, weighted_mean),
         },
         'val': {
             'regret_quantile': WeightedRegretApplyer(df_val_folds, agg_func, weighting_func_quantile, 'voo_return', 'max'),
@@ -454,8 +454,10 @@ if __name__ == "__main__":
     s_voo_pct_change.index = pd.to_datetime(s_voo_pct_change.index)
     objective_functions_dict['train']['28_day_regret'] = lambda s_val: RegretPercentile(s_voo_pct_change, df_folds, args.train_folds, quantile = .9)(s_val.pct_change())
     objective_functions_dict['train']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.train_folds, quantile = 1/13)(s_val.pct_change())
+    objective_functions_dict['train']['drawdown'] = lambda s_val: FoldApplyer(df_folds, args.train_folds, myfunc = worst_annual_drawdown_integral)(s_val)
     objective_functions_dict['val']['28_day_regret'] = lambda s_val: RegretPercentile(s_voo_pct_change, df_folds, args.val_folds, quantile = .9)(s_val.pct_change())
     objective_functions_dict['val']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.val_folds, quantile = 1/13)(s_val.pct_change())
+    objective_functions_dict['val']['drawdown'] =  lambda s_val: FoldApplyer(df_folds, args.val_folds, myfunc = worst_annual_drawdown_integral)(s_val)
     objective_sense['28_day_regret'] = 'min'
 
     

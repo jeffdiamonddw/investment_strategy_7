@@ -15,6 +15,16 @@ def mean_annual_drawdown_integral(start_date, end_date, total_value_series):
     df2 = df[['year', 'value']].groupby('year').agg(lambda x: np.maximum(0, x.values[0] - x.values).sum()/(len(x) * x.values[0]))
     return df2['value'].mean()
 
+def worst_annual_drawdown_integral(start_date, end_date, total_value_series):
+    if start_date is None:
+       start_date = total_value_series.index[0]
+    if end_date is None:
+       end_date = total_value_series.index[-1]
+    df = total_value_series.loc[(total_value_series.index >= start_date) & (total_value_series.index <= end_date)].reset_index()
+    df['year'] = df.date.dt.year
+    df2 = df[['year', 'value']].groupby('year').agg(lambda x: np.maximum(0, x.values[0] - x.values).sum()/(len(x) * x.values[0]))
+    return df2['value'].max()
+
 
 def mean_drawdown(start_date, end_date, total_value_series):
     tvs = total_value_series.loc[(total_value_series.index >= start_date) & (total_value_series.index <= end_date)]
@@ -323,6 +333,16 @@ class FoldPercentile:
     def __call__(self, s_values):
         s_val = get_elements_by_folds(self.df_fold, self.folds, s_values)
         return s_val.quantile(self.quantile)
+
+class FoldApplyer:
+    def __init__(self, df_fold, folds, myfunc):
+         self.df_fold = df_fold
+         self.folds = folds
+         self.myfunc = myfunc
+   
+    def __call__(self, s_values):
+        s_val = get_elements_by_folds(self.df_fold, self.folds, s_values)
+        return self.myfunc(None, None, s_val)
        
 
 
