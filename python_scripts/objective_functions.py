@@ -32,6 +32,10 @@ def mean_drawdown(start_date, end_date, total_value_series):
     return result
 
 def mean_annualized_return(start_date, end_date, total_value_series):
+    if start_date is None:
+        start_date = total_value_series.index[0]
+    if end_date is None:
+        end_date = total_value_series.index[-1]
     tvs = total_value_series.loc[(total_value_series.index >= start_date) & (total_value_series.index <= end_date)]
     if len(tvs) < 2:
         return np.nan

@@ -9,33 +9,47 @@ Config.warnings['not_compiled'] = False
 
 Registering/Updating Job Definition: simulation-job-def...
 Submitting array job...
-Successfully submitted! Job ID: 68c9ace9-0577-4854-8e2e-34a46d967fd5 for generation 0
+Successfully submitted! Job ID: 5ff61142-a6e7-4dd1-b198-ad16e310c456 for generation 0
 waiting for summary
 waiting for summary
 batch complete: (False, 0)
-waiting on batch 36.657270431518555 seconds, 0/62 complete
-waiting on batch 69.33692908287048 seconds, 0/62 complete
-waiting on batch 102.01433229446411 seconds, 0/62 complete
-waiting on batch 134.69271087646484 seconds, 0/62 complete
-waiting on batch 167.36614155769348 seconds, 0/62 complete
-waiting on batch 200.07698893547058 seconds, 0/62 complete
-waiting on batch 232.73893070220947 seconds, 0/62 complete
-waiting on batch 265.4672179222107 seconds, 0/62 complete
-waiting on batch 298.16895866394043 seconds, 0/62 complete
-waiting on batch 330.8611123561859 seconds, 0/62 complete
-waiting on batch 363.50666975975037 seconds, 0/62 complete
-waiting on batch 396.1781418323517 seconds, 0/62 complete
-waiting on batch 428.87671732902527 seconds, 0/62 complete
-waiting on batch 461.51836490631104 seconds, 0/62 complete
-waiting on batch 494.184109210968 seconds, 1/62 complete
-waiting on batch 526.9547734260559 seconds, 37/62 complete
-waiting on batch 559.6691379547119 seconds, 37/62 complete
-waiting on batch 592.3357577323914 seconds, 41/62 complete
-waiting on batch 625.0476636886597 seconds, 42/62 complete
-waiting on batch 657.7019488811493 seconds, 46/62 complete
-waiting on batch 690.4360129833221 seconds, 46/62 complete
-waiting on batch 723.0722427368164 seconds, 46/62 complete
-waiting on batch 755.770421743393 seconds, 46/62 complete
-waiting on batch 788.4286847114563 seconds, 57/62 complete
-waiting on batch 821.0908331871033 seconds, 62/62 complete
-completed Job ID: 68c9ace9-0577-4854-8e2e-34a46d967fd5 for generation 0
+waiting on batch 36.648069858551025 seconds, 0/62 complete
+waiting on batch 69.3294186592102 seconds, 0/62 complete
+waiting on batch 101.96411657333374 seconds, 0/62 complete
+waiting on batch 134.63632345199585 seconds, 0/62 complete
+waiting on batch 167.36962461471558 seconds, 0/62 complete
+waiting on batch 200.05770134925842 seconds, 0/62 complete
+waiting on batch 232.70073914527893 seconds, 35/62 complete
+waiting on batch 265.4084177017212 seconds, 41/62 complete
+waiting on batch 298.06066513061523 seconds, 41/62 complete
+waiting on batch 330.75950598716736 seconds, 41/62 complete
+waiting on batch 364.8854269981384 seconds, 62/62 complete
+completed Job ID: 5ff61142-a6e7-4dd1-b198-ad16e310c456 for generation 0
+Traceback (most recent call last):
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 312, in <module>
+    main()
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 296, in main
+    F = master_problem.evaluate(pop.get("X"))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 257, in evaluate
+    _out = self.do(X, return_values_of, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 299, in do
+    self._evaluate_vectorized(X, out, *args, **kwargs)
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/pymoo/core/problem.py", line 307, in _evaluate_vectorized
+    self._evaluate(X, out, *args, **kwargs)
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 197, in _evaluate
+    df_obj = get_objectives(self.s3_path, self.generation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/code/investment_strategy_7/python_scripts/run_generations_2d.py", line 169, in get_objectives
+    df = wr.df = wr.s3.read_parquet(
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_utils.py", line 178, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/_config.py", line 732, in wrapper
+    return function(**args)
+           ^^^^^^^^^^^^^^^^
+  File "/home/jdiamond/.local/lib/python3.12/site-packages/awswrangler/s3/_read_parquet.py", line 525, in read_parquet
+    raise exceptions.NoFilesFound(f"No files Found on: {path}.")
+awswrangler.exceptions.NoFilesFound: No files Found on: s3://jdinvestment/2d_4obj_3_val/median_objectives/gen=0/.
