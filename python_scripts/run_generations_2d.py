@@ -125,7 +125,7 @@ def run_batch_array(image_arn, s3_path, generation, train_folds, val_folds):
             containerProperties={
                 'image': image_arn,
                 'vcpus': 1,
-                'memory': 1024,
+                'memory': 2048,
                 'jobRoleArn': 'arn:aws:iam::129861351772:role/ecsTaskExecutionRole',
                 'executionRoleArn': 'arn:aws:iam::129861351772:role/ecsTaskExecutionRole',
                 
@@ -278,7 +278,7 @@ def main():
     
 
     
-    for gen in range(100):
+    for gen in range(1):
         
         
         

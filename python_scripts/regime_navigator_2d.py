@@ -360,7 +360,7 @@ if __name__ == "__main__":
     my_boto3_session = boto3.Session()
     s3 = s3fs.S3FileSystem(session=my_boto3_session)
 
-    periods = {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2008-01-01'), 'end_date': pd.to_datetime('2026-10-01')}
+    periods = {'train_start_date': pd.to_datetime('2006-01-01'), 'val_start_date': pd.to_datetime('2021-01-01'), 'end_date': pd.to_datetime('2026-10-01')}
     
     
     
