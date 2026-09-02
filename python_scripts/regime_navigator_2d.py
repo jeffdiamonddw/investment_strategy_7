@@ -454,12 +454,15 @@ if __name__ == "__main__":
     s_voo_pct_change.index = pd.to_datetime(s_voo_pct_change.index)
     objective_functions_dict['train']['28_day_regret'] = lambda s_val: RegretPercentile(s_voo_pct_change, df_folds, args.train_folds, quantile = .9)(s_val.pct_change())
     objective_functions_dict['train']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.train_folds, quantile = 1/13)(s_val.pct_change())
-    objective_functions_dict['train']['drawdown'] = lambda s_val: FoldApplyer(df_folds, args.train_folds, myfunc = worst_annual_drawdown_integral)(s_val)
+    objective_functions_dict['train']['drawdown'] = lambda s_val: FoldApplyer(df_folds, args.train_folds, myfunc =  worst_annual_drawdown_integral)(s_val)
+    objective_functions_dict['train']['ann_rtn'] = lambda s_val: FoldApplyer(df_folds, args.train_folds, myfunc = mean_annualized_return)(s_val)
     objective_functions_dict['val']['28_day_regret'] = lambda s_val: RegretPercentile(s_voo_pct_change, df_folds, args.val_folds, quantile = .9)(s_val.pct_change())
     objective_functions_dict['val']['28_day_percentile'] = lambda s_val: FoldPercentile(df_folds, args.val_folds, quantile = 1/13)(s_val.pct_change())
     objective_functions_dict['val']['drawdown'] =  lambda s_val: FoldApplyer(df_folds, args.val_folds, myfunc = worst_annual_drawdown_integral)(s_val)
+    objective_functions_dict['val']['ann_rtn'] =  lambda s_val: FoldApplyer(df_folds, args.val_folds, myfunc = mean_annualized_return)(s_val)
     objective_sense['28_day_regret'] = 'min'
     objective_sense['drawdown'] = 'min'
+    
 
     
     #jeff temp

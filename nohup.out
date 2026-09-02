@@ -9,22 +9,33 @@ Config.warnings['not_compiled'] = False
 
 Registering/Updating Job Definition: simulation-job-def...
 Submitting array job...
-Successfully submitted! Job ID: 10cb2636-0428-444a-8c58-09749cbadf08 for generation 0
+Successfully submitted! Job ID: 68c9ace9-0577-4854-8e2e-34a46d967fd5 for generation 0
 waiting for summary
 waiting for summary
 batch complete: (False, 0)
-waiting on batch 36.70325541496277 seconds, 0/62 complete
-waiting on batch 69.37774205207825 seconds, 0/62 complete
-waiting on batch 102.41100883483887 seconds, 0/62 complete
-waiting on batch 135.10810232162476 seconds, 0/62 complete
-waiting on batch 167.83417892456055 seconds, 0/62 complete
-waiting on batch 200.65864968299866 seconds, 0/62 complete
-waiting on batch 233.39116215705872 seconds, 0/62 complete
-waiting on batch 266.6523325443268 seconds, 22/62 complete
-waiting on batch 299.4652361869812 seconds, 24/62 complete
-waiting on batch 332.1627218723297 seconds, 24/62 complete
-waiting on batch 364.89278054237366 seconds, 60/62 complete
-waiting on batch 397.5585608482361 seconds, 60/62 complete
-waiting on batch 430.2454631328583 seconds, 60/62 complete
-waiting on batch 462.91060733795166 seconds, 62/62 complete
-completed Job ID: 10cb2636-0428-444a-8c58-09749cbadf08 for generation 0
+waiting on batch 36.657270431518555 seconds, 0/62 complete
+waiting on batch 69.33692908287048 seconds, 0/62 complete
+waiting on batch 102.01433229446411 seconds, 0/62 complete
+waiting on batch 134.69271087646484 seconds, 0/62 complete
+waiting on batch 167.36614155769348 seconds, 0/62 complete
+waiting on batch 200.07698893547058 seconds, 0/62 complete
+waiting on batch 232.73893070220947 seconds, 0/62 complete
+waiting on batch 265.4672179222107 seconds, 0/62 complete
+waiting on batch 298.16895866394043 seconds, 0/62 complete
+waiting on batch 330.8611123561859 seconds, 0/62 complete
+waiting on batch 363.50666975975037 seconds, 0/62 complete
+waiting on batch 396.1781418323517 seconds, 0/62 complete
+waiting on batch 428.87671732902527 seconds, 0/62 complete
+waiting on batch 461.51836490631104 seconds, 0/62 complete
+waiting on batch 494.184109210968 seconds, 1/62 complete
+waiting on batch 526.9547734260559 seconds, 37/62 complete
+waiting on batch 559.6691379547119 seconds, 37/62 complete
+waiting on batch 592.3357577323914 seconds, 41/62 complete
+waiting on batch 625.0476636886597 seconds, 42/62 complete
+waiting on batch 657.7019488811493 seconds, 46/62 complete
+waiting on batch 690.4360129833221 seconds, 46/62 complete
+waiting on batch 723.0722427368164 seconds, 46/62 complete
+waiting on batch 755.770421743393 seconds, 46/62 complete
+waiting on batch 788.4286847114563 seconds, 57/62 complete
+waiting on batch 821.0908331871033 seconds, 62/62 complete
+completed Job ID: 68c9ace9-0577-4854-8e2e-34a46d967fd5 for generation 0
